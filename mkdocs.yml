@@ -1,0 +1,219 @@
+site_name: FYA·心愿所往
+site_url: https://121rh.com/
+site_author: FYA
+site_description: >-
+  专注于java开发、SpringMVC、Mybatis、Maven... .
+copyright: Copyright &copy; 2022-2023  FYA·心愿所往 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">黑ICP备17009103号-1</a>
+# 源码地址
+repo_url: https://github.com/121rh/121rh.github.io
+repo_name: 121rh
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/images/logo.png
+  favicon: assets/images/favicon.png
+  language: en
+  # 网站字体
+  icon:
+    repo: fontawesome/brands/github
+    tags:
+      html: fontawesome/brands/html5
+      js: fontawesome/brands/js
+      css: fontawesome/brands/css3
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep orange # 使用root自定义 # 算了deep orange还挺好看的
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - content.code.annotate
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+
+plugins:
+  - search
+  - autolinks #自动链接插件
+  - tags:
+      tags_file: tags.md #呈现标签指数
+      #index_page: tags.md #“索引”页面
+      #insert: top #显示文章的标签 top or bottom
+  - blogging:
+      features:
+        tags: {}
+      theme:
+        name: card #悬停效果的卡片
+        options: # 添加“继续阅读”按钮。
+          # `true` 如果按钮显示为纯文本
+          # `false` 如果显示为矩形按钮，则不存在
+          plain_button: true
+          # 替换“继续阅读”
+          label: Read
+      dirs: # 要包含的目录
+        - ds
+        - app
+        - web
+        - pc
+  - git-revision-date-localized: #显示页面最后一次 git 修改的日期
+      type: datetime
+      timezone: Asia/Shanghai
+      enable_creation_date: true
+      exclude:
+        - comments.md
+  - rss:
+      abstract_chars_count: 160 # -1 for full content
+      categories:
+        - tags
+      comments_path: "#__comments"
+      date_from_meta:
+        as_creation: "date"
+        as_update: false
+        datetime_format: "%Y-%m-%d %H:%M"
+      enabled: true
+      feed_ttl: 1440
+      image: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/128px-Feed-icon.svg.png
+      length: 20
+      pretty_print: false
+      match_path: ".*"
+      url_parameters:
+        utm_source: "documentation"
+        utm_medium: "RSS"
+        utm_campaign: "feed-syndication"
+
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+    actions:
+      - accept
+      - manage
+  tags:
+    HTML5: html
+    JavaScript: js
+    CSS: css
+  social:
+    - icon: fontawesome/solid/rss
+      link: https://121rh.com/feed_rss_updated.xml
+      name: RSS订阅
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:<fyabwz@126.com>
+      name: 发送邮件
+    - icon: fontawesome/brands/github
+      link: https://gitee.com/fya666
+      name: gitee地址
+    - icon: fontawesome/brands/weibo
+      link: https://weibo.com/fyawbz
+      name: VB联系我哟
+    - icon: fontawesome/brands/qq
+      link: tencent://message/?Menu=yes&uin=1434090053&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45
+      name: QQ联系我哟
+    - icon: fontawesome/brands/weixin
+      link: /life/weixin/
+      name: VX联系我哟
+  #vssue: FYA
+  #generator: false
+
+extra_css:
+  - https://qiniu.121rh.com/css/extra.css
+  - https://qiniu.121rh.com/css/video-js.min.css
+  - https://qiniu.121rh.com/css/video.css
+  - https://qiniu.121rh.com/css/vssue.css
+  - https://qiniu.121rh.com/css/vssue.min.css
+
+extra_javascript:
+  - https://js.121rh.com/js/extra.js
+  - https://js.121rh.com/js/video.min.js
+  - https://js.121rh.com/js/vue.js
+  - https://js.121rh.com/js/time.js
+  #- https://js.121rh.com/js/mouse.js
+  - https://js.121rh.com/js/console.js
+  #- https://js.121rh.com/js/fireworks.js
+  - https://js.121rh.com/js/anime.min.js
+  - https://js.121rh.com/js/jquery-3.3.1.min.js
+  - https://js.121rh.com/js/G-CHY1TBZZVW.js
+  - https://js.121rh.com/js/G-NRCPMZGDT9.js
+  - http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+
+markdown_extensions:
+  - abbr
+  - attr_list
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - tables
+  - footnotes
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: 121rh
+      repo: 121rh
+  - pymdownx.smartsymbols
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - md_in_html
+  - meta
+  - def_list
+  - toc:
+      permalink: 🔱 # ⚓︎ #🐟  # 显示锚点
+      slugify: !!python/name:pymdownx.slugs.uslugify # 显示一些Unicode的标识符
+
+
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - 主页: index.md
+  - 标签云: tags.md
+  - 生活: life/index.md
+  - 算法: algs/index.md
+  - 后端: app/index.md
+  - 前端: web/index.md
+  - 计算机: pc/index.md

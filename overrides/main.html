@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+<!-- 包含文档头中的元标记 -->
+{% block site_meta %}
+  {{ super() }}
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" charset="UTF-8">
+    <meta name="baidu-site-verification" content="code-VSU9zlmT1E">
+<!--添加部分-start-->
+<script>
+  document.addEventListener('visibilitychange',function(){
+      if( document.visibilityState == 'hidden' ){
+      normal_title = document.title;
+      document.title = 'ヽ(●-`Д´-)ノ你丑你就走！';
+      }else{
+      document.title = 'ヾ(Ő∀Ő3)ノ你帅就回来！';
+      setTimeout(function(){
+          document.title = normal_title;
+      }, 1200)
+      }
+  });
+  </script>
+<!--添加部分-end-->
+{% endblock %}
+
+<!-- 包含页面的页面内容和目录。 -->
+{% block content %}
+  {{ super() }}
+{% endblock %}
+
+<!-- 包含样式表的链接标记 -->
+{% block styles %}
+  {{ super() }}
+{% endblock %}
+
+<!-- 包含页眉中包含的JavaScript库（jQuery等） -->
+{% block libs %}
+  {{ super() }}
+{% endblock %}
+
+<!-- 包含应在页面加载后执行的JavaScript脚本 -->
+{% block scripts %}
+  {{ super() }}
+{% endblock %}
+
+<!-- 包含分析脚本 -->
+{% block analytics %}
+  {{ super() }}
+{% endblock %}
+
+<!-- 中的空块，用于插入自定义标记/脚本/等 -->
+{% block extrahead %}
+  {{ super() }}
+{% endblock %}
+
+
+<!-- 包含页脚 -->
+{% block footer %}
+{{ super() }}
+{% endblock %}
