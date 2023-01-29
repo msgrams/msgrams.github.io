@@ -6,6 +6,12 @@ comments: true
 
 【注】...从[“标签云”](tags)中查看文章更直接，简洁....
 
+
+??? 笔记
+    === "内存DB"
+     [Redis整理!](app/redis/redisTidy/)
+
+
 <img src=https://api.yimian.xyz/img?type=wallpaper>
 
 
