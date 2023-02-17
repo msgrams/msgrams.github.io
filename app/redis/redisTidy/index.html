@@ -506,6 +506,54 @@
     二、安装
   </a>
   
+    <nav class="md-nav" aria-label="二、安装">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#环境" class="md-nav__link">
+    环境
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make报错" class="md-nav__link">
+    make报错
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#成功编译" class="md-nav__link">
+    成功编译
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#安装" class="md-nav__link">
+    安装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#添加环境变量" class="md-nav__link">
+    添加环境变量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#启动并连接" class="md-nav__link">
+    启动并连接
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -565,6 +613,7 @@
 <p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209222723.png" />
 <img alt="" src="Redis整理_20230209222722114.png" /></p>
 <h2 id="二安装">二、安装<a class="headerlink" href="#二安装" title="Permanent link">🔱</a></h2>
+<h3 id="环境">环境<a class="headerlink" href="#环境" title="Permanent link">🔱</a></h3>
 <ul>
 <li>centos 7</li>
 <li>redis官方 6.X    <a href="http://download.redis.io/releases/redis-6.0.6.tar.gz">redis-6.0.6.tar.gz</a></li>
@@ -581,8 +630,8 @@
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>yum -y install gcc gcc-c++ kernel-devel
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>make
 </code></pre></div>
-<p>make报错
-<img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209233256.png" /></p>
+<h3 id="make报错">make报错<a class="headerlink" href="#make报错" title="Permanent link">🔱</a></h3>
+<p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209233256.png" /></p>
 <p>解决办法（升级gcc)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>yum -y install centos-release-scl
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils
@@ -595,24 +644,24 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>make distclean
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>make
 </code></pre></div></p>
-<p>成功安装
-<img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209233559.png" /></p>
+<h3 id="成功编译">成功编译<a class="headerlink" href="#成功编译" title="Permanent link">🔱</a></h3>
+<p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209233559.png" /></p>
 <p>cd src 目录
 <img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209233805.png" /></p>
-<p>安装
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 默认安装</span>
+<h3 id="安装">安装<a class="headerlink" href="#安装" title="Permanent link">🔱</a></h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 默认安装</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>make install
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 自定义安装</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>make install <span class="nv">PREFIX</span><span class="o">=</span>/usr/local/redis
 </code></pre></div>
 <img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209234120.png" /></p>
-<p>添加环境变量
+<h3 id="添加环境变量">添加环境变量<a class="headerlink" href="#添加环境变量" title="Permanent link">🔱</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>vi /etc/profile
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">export</span> <span class="nv">REDIS_HOME</span><span class="o">=</span>/usr/local/redis
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$REDIS_HOME</span>/bin
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nb">source</span> /etc/profile
-</code></pre></div></p>
+</code></pre></div>
 <p>install_server.sh 可以执行一次或多次
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span> ~/soft/redis-6.0.6/utils/
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>./install_server.sh
@@ -623,12 +672,12 @@
 <p>查看redis进程
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ps -ef <span class="p">|</span> grep redis
 </code></pre></div></p>
-<p>启动并连接
+<h3 id="启动并连接">启动并连接<a class="headerlink" href="#启动并连接" title="Permanent link">🔱</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 启动</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>./redis-server
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1">#连接</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>./redis-cli -p <span class="m">6379</span>
-</code></pre></div></p>
+</code></pre></div>
 <p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230209235747.png" /></p>
 
   <!--
@@ -662,7 +711,7 @@
       
       <br />
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">January 30, 2023 00:07:06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 10, 2023 00:13:48</span>
     <!-- mkdocs-git-revision-date-plugin -->
     
   </small>
