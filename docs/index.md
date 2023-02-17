@@ -4,12 +4,11 @@ comments: true
  
 # Home
 
-【注】...从[“标签云”](tags)中查看文章更直接，简洁....
-
-
-??? 笔记
-    === "内存DB"
-     [Redis整理!](app/redis/redisTidy/)
+??? 2023年2月
+    === "内存数据库"
+        [Redis整理!](app/redis/redisTidy/)
+    === "搭建bitwarden密码库"
+        [安装Bitwarden](pc/raspberry/bitwarden/)
 
 
 <img src=https://api.yimian.xyz/img?type=wallpaper>

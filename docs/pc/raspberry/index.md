@@ -6,3 +6,4 @@ description: 文章索引
 # 树莓派
 
 - [安装OMV](InstallOMV)
+- [安装Bitwarden](bitwarden.md)

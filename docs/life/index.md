@@ -12,7 +12,7 @@
 
 - [TG图床](https://tgimg.121rh.com/)
 - [Github加速器](https://github.121rh.com/)
-- [GD网盘](https://drive.121rh.com/)
+- [GD网盘](https://drive.121rh.com/)  用户名&密码=admin
 
 
 - 【2023年1月11日】发现留言板**Livere**(来必力)显示不出来，不知道被墙了还是DNS被污染了，总之不好使了。

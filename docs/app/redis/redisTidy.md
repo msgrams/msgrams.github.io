@@ -43,6 +43,8 @@ Redis内置 replication、LuaScripting、Transaction、persistence(磁盘持久�
 
 ## 二、安装
 
+### 环境
+
 - centos 7
 - redis官方 6.X    [redis-6.0.6.tar.gz](http://download.redis.io/releases/redis-6.0.6.tar.gz)
 
@@ -60,7 +62,7 @@ yum -y install gcc gcc-c++ kernel-devel
 make
 ```
 
-make报错
+### make报错
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230209233256.png)
 
 解决办法（升级gcc)
@@ -79,13 +81,13 @@ make distclean
 make
 ```
 
-成功安装
+### 成功编译
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230209233559.png)
 
 cd src 目录
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230209233805.png)
 
-安装
+### 安装
 ```sh
 # 默认安装
 make install
@@ -94,7 +96,7 @@ make install PREFIX=/usr/local/redis
 ```
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230209234120.png)
 
-添加环境变量
+### 添加环境变量
 ```sh
 vi /etc/profile
 export REDIS_HOME=/usr/local/redis
@@ -117,7 +119,7 @@ cd ~/soft/redis-6.0.6/utils/
 ps -ef | grep redis
 ```
 
-启动并连接
+### 启动并连接
 ```sh
 # 启动
 ./redis-server
