@@ -5,8 +5,8 @@ site_description: >-
   专注于java开发、SpringMVC、Mybatis、Maven... .
 copyright: Copyright &copy; 2022-2023  FYA·心愿所往 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">黑ICP备17009103号-1</a>
 # 源码地址
-repo_url: https://github.com/121rh/121rh.github.io
-repo_name: 121rh
+repo_url: https://github.com/msgrams/msgrams.github.io
+repo_name: msgrams
 edit_uri: edit/main/docs/
 
 theme:
@@ -190,8 +190,8 @@ markdown_extensions:
   - pymdownx.tilde
   - pymdownx.magiclink:
       repo_url_shorthand: true
-      user: 121rh
-      repo: 121rh
+      user: msgrams
+      repo: msgrams
   - pymdownx.smartsymbols
   - pymdownx.betterem:
       smart_enable: all
