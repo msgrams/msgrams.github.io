@@ -438,5 +438,13 @@ docker run -p 9002:80 --name nginx -v /home/nginx/conf/nginx.conf:/etc/nginx/ngi
 docker restart nginx
 ```
 
+## 七、Chrome插件无法登陆等问题
 
+网友留言
+1. 好像是老版本的服务端与新版本的插件不兼容，老版本的服务端被弃用了，所以要么用回老版本插件，要么更新服务端，但是大部分人用的docker镜像，服务端更新应该没那么快吧
+2. 最新版无法登录的问题，如果用的是docker部署, 可以直接下载vaultwarden/server 1.27.0版本的，不要直接下载vaultwarden/server latest版本的， latest不知道是缓存还是什么原因，下载下来之后一直是1.23.1版本的， 这个版本还是21年发布的。想要确定版本的话docker启动的时候日志会打印版本号
+
+![弃用通知](http://imgsrc.baidu.com/forum/pic/item/521d20ca39dbb6fdbc95d5e34c24ab18952b3775.jpg)
+
+使用Docker拉取镜像，bitwarden指定版本号 V1.27.0 ，不指明版本号，就下载老版本[Bitwarden-2022.10.1](https://github.com/bitwarden/clients/releases/tag/browser-v2022.10.1) 插件（包括 android版、chrome插件、firefox插件）
 
