@@ -4,7 +4,6 @@ description: Install RaspberrySystems & Bitwarden & Docker & Nginx & Deployment 
 tags:
   - raspberry
 ---
-
 ## 一、安装系统
 
 ### 安装老版系统(新版本系统此方法失败)
@@ -100,6 +99,7 @@ deb-src http://mirrors.aliyun.com/debian/ bullseye-backports main non-free contr
 ```sh
 sudo vi /etc/apt/sources.list.d/raspi.list
 ```
+
 注释原有内容，新增
 
 ```sh
@@ -305,51 +305,7 @@ OpenSSL version: OpenSSL 1.1.1n  15 Mar 2022
 ```
 
 
-## 四、Bitwarden安装【成功】
-
-[bitwarden-vaultwarden-docker搭建](https://blog.csdn.net/dyq94310/article/details/120250963)
-
-### 安装bitwardenr密码管理程序
-
-下载镜像
-```sh
-docker pull vaultwarden/server:1.27.0
-```
-
-创建密码保存
-```sh
-sudo mkdir /srv/bitwarden
-sudo chmod go-rwx /srv/bitwarden
-```
-
-启动bitwarden
-```sh
-sudo docker run -d --name bitwarden -v /srv/bitwarden:/data -e WEBSOCKET_ENABLED=true -p 127.:80 -p 3012:3012 --restart on-failure vaultwarden/server:1.27.0
-```
-
-	-d 在后台运行
-	
-	-v 卷/srv/bitwarden 映射 docker镜像的/data，保证数据不丢失
-	
-	-e WEBSOCKET_ENABLED 开启websocket 需要使用websocket
-	
-	-p 端口映射 8080 是主程序的端口，3012是ws的端口
-	
-	–restart on-failure 在容器非正常退出时，重启
-
-
-
-## 五、利用CF打洞，内网http映射公网https
-
-### Public Hostname Page
-
-Edit public hostname for DemoTunnels
-
-![image.png](https://qiniu.121rh.com/obsidian/img/20230216230532.png)
-![](安装bitwarden_20230216230531660.png)
-
-
-## 六、安装Nginx
+## 四、安装Nginx
 
 
 拉取nginx
@@ -359,7 +315,7 @@ docker pull nginx #拉取最新版本
 
 创建Nginx配置文件 
 
-启动前需要先创建Nginx外部挂载的配置文件（ /home/nginx/conf/nginx.conf）
+启动前需要先创建Nginx外部挂载的配置文件（ /home/pi/soft/nginx/conf）
 之所以要先创建 , 是因为Nginx本身容器只存在/etc/nginx 目录 , 本身就不创建 nginx.conf 文件
 当服务器和容器都不存在 nginx.conf 文件时, 执行启动命令的时候 docker会将nginx.conf 作为目录创建 , 这并不是我们想要的结果 。
 
@@ -438,15 +394,104 @@ docker run -p 9002:80 --name nginx -v /home/nginx/conf/nginx.conf:/etc/nginx/ngi
 docker restart nginx
 ```
 
+
+## 五、Bitwarden安装【成功】
+
+[bitwarden-vaultwarden-docker搭建](https://blog.csdn.net/dyq94310/article/details/120250963)
+
+### 安装bitwardenr密码管理程序
+
+下载镜像
+```sh
+docker pull vaultwarden/server:1.27.0
+```
+
+创建密码保存
+```sh
+sudo mkdir /srv/bitwarden
+sudo chmod go-rwx /srv/bitwarden
+```
+
+启动bitwarden
+```sh
+sudo docker run -d --name bitwarden -v /srv/bitwarden:/data -e WEBSOCKET_ENABLED=true -p 127.:80 -p 3012:3012 --restart on-failure vaultwarden/server:1.27.0
+```
+
+	-d 在后台运行
+	
+	-v 卷/srv/bitwarden 映射 docker镜像的/data，保证数据不丢失
+	
+	-e WEBSOCKET_ENABLED 开启websocket 需要使用websocket
+	
+	-p 端口映射 8080 是主程序的端口，3012是ws的端口
+	
+	–restart on-failure 在容器非正常退出时，重启
+
+
+
+## 六、利用CF打洞，内网http映射公网https
+
+### Public Hostname Page
+
+### 给隧道起个名字 
+
+根据要连接的网络使用描述性名称。建议仅为每个网络创建一个隧道。
+
+### 选择您的环境
+
+Choose an operating system: 选择操作系统：
+
+Debian
+
+Choose an architecture: 选择一种体系结构：
+
+arm64-bit
+
+###  安装和运行连接器
+
+要将隧道连接到Cloudflare，请将以下命令之一复制粘贴到终端窗口中。远程管理的隧道要求您安装cloudflared 2022.03.04或更高版本。
+
+```sh
+curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb && 
+
+sudo dpkg -i cloudflared.deb && 
+
+sudo cloudflared service install eyJhIjoiMDJmODVlXXXXXXXXXXXXXXXXXXXXXX
+```
+
+编辑演示隧道的公共主机名
+
+![image.png](https://qiniu.121rh.com/obsidian/img/20230216230532.png)
+![](安装bitwarden_20230216230531660.png)
+
+
 ## 七、Chrome插件无法登陆等问题
 
 网友留言
-
 1. 好像是老版本的服务端与新版本的插件不兼容，老版本的服务端被弃用了，所以要么用回老版本插件，要么更新服务端，但是大部分人用的docker镜像，服务端更新应该没那么快吧
-   
 2. 最新版无法登录的问题，如果用的是docker部署, 可以直接下载vaultwarden/server 1.27.0版本的，不要直接下载vaultwarden/server latest版本的， latest不知道是缓存还是什么原因，下载下来之后一直是1.23.1版本的， 这个版本还是21年发布的。想要确定版本的话docker启动的时候日志会打印版本号
 
 ![弃用通知](http://imgsrc.baidu.com/forum/pic/item/521d20ca39dbb6fdbc95d5e34c24ab18952b3775.jpg)
 
 使用Docker拉取镜像，bitwarden指定版本号 V1.27.0 ，不指明版本号，就下载老版本[Bitwarden-2022.10.1](https://github.com/bitwarden/clients/releases/tag/browser-v2022.10.1) 插件（包括 android版、chrome插件、firefox插件）
+
+
+
+## 八、登入bitwarden
+
+注册并登入
+
+![image.png](https://qiniu.121rh.com/obsidian/img/20230218214619.png)
+![](bitwarden密码管理程序_20230218214618957.png)
+
+Chrome浏览器利用[bitwarden插件](https://github.121rh.com/https://github.com/bitwarden/clients/releases/download/browser-v2023.2.1/dist-chrome-2023.2.1.zip)自动填充CSDN账号密码
+
+![image.png](https://qiniu.121rh.com/obsidian/img/20230218214523.png)
+![](bitwarden密码管理程序_20230218214521816.png)
+
+[Windows平台](https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-Installer-2023.2.0.exe)
+
+![image.png](https://qiniu.121rh.com/obsidian/img/20230218214906.png)
+![](bitwarden密码管理程序_20230218214905349.png)
+
 
