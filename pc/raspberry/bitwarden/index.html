@@ -689,6 +689,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#七chrome插件无法登陆等问题" class="md-nav__link">
+    七、Chrome插件无法登陆等问题
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1021,6 +1028,12 @@ nginx:latest    本地运行的版本
 <p>重启容器
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>docker restart nginx
 </code></pre></div></p>
+<h2 id="七chrome插件无法登陆等问题">七、Chrome插件无法登陆等问题<a class="headerlink" href="#七chrome插件无法登陆等问题" title="Permanent link">🔱</a></h2>
+<p>网友留言
+1. 好像是老版本的服务端与新版本的插件不兼容，老版本的服务端被弃用了，所以要么用回老版本插件，要么更新服务端，但是大部分人用的docker镜像，服务端更新应该没那么快吧
+2. 最新版无法登录的问题，如果用的是docker部署, 可以直接下载vaultwarden/server 1.27.0版本的，不要直接下载vaultwarden/server latest版本的， latest不知道是缓存还是什么原因，下载下来之后一直是1.23.1版本的， 这个版本还是21年发布的。想要确定版本的话docker启动的时候日志会打印版本号</p>
+<p><img alt="弃用通知" src="http://imgsrc.baidu.com/forum/pic/item/521d20ca39dbb6fdbc95d5e34c24ab18952b3775.jpg" /></p>
+<p>使用Docker拉取镜像，bitwarden指定版本号 V1.27.0 ，不指明版本号，就下载老版本<a href="https://github.com/bitwarden/clients/releases/tag/browser-v2022.10.1">Bitwarden-2022.10.1</a> 插件（包括 android版、chrome插件、firefox插件）</p>
 
   <!--
   Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
@@ -1048,12 +1061,12 @@ nginx:latest    本地运行的版本
     <!-- mkdocs-git-revision-date-localized-plugin -->
       
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 17, 2023 23:53:45</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 17, 2023 23:59:40</span>
       
       
       <br />
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 17, 2023 23:53:45</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 17, 2023 23:59:40</span>
     <!-- mkdocs-git-revision-date-plugin -->
     
   </small>
