@@ -1,10 +1,10 @@
 ---
-title: 马克使用
+title: markdown使用
 description: markdown使用
 tags:
   - Hugo
 ---
-# 马克使用
+
 
 嵌入哔哩哔哩(bilibili)视频
 <iframe src=//player.bilibili.com/player.html?aid=757154348&bvid=BV1764y1D7fD&cid=412008128&page=1" scrolling="no" width="800px" height="600px" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>

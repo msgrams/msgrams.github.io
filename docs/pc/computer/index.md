@@ -1,4 +1,5 @@
 ---
+exclude_from_blog: true
 title: 计算机
 description: 文章索引
 ---

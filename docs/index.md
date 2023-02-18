@@ -4,7 +4,7 @@ comments: true
  
 # Home
 
-??? 2023年2月
+??? 2023年2月笔记
     === "内存数据库"
         [Redis整理!](app/redis/redisTidy/)
     === "搭建bitwarden密码库"

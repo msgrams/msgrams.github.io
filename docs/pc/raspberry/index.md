@@ -1,4 +1,5 @@
 ---
+exclude_from_blog: true
 title: 树莓派
 description: 文章索引
 ---

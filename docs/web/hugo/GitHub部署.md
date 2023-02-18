@@ -1,5 +1,5 @@
 ---
-title: 部署GitHub
+title: GitHub部署
 description: 部署github上
 tags:
   - Hugo

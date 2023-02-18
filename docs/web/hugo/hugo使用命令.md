@@ -1,10 +1,9 @@
 ---
-title: hugo使用
+title: hugo使用命令
 description: hugo使用命令
 tags:
   - Hugo
 ---
-# Hugo使用
 ## 1. 创建新网站
 
 ```

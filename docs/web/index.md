@@ -18,8 +18,3 @@ description: 文章索引
 - [Mkdocs安装和配置](Mkdocs/installMkdocs)
 - [PyMkdocs使用](Mkdocs/PyMdown)
 
-
-
-## Frame
-- [jQuery 简介](frame/jquery/)
-- [Vue 简介](frame/vue/)
