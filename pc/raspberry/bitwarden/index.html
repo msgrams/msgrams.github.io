@@ -603,51 +603,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#四bitwarden安装成功" class="md-nav__link">
-    四、Bitwarden安装【成功】
+  <a href="#四安装nginx" class="md-nav__link">
+    四、安装Nginx
   </a>
   
-    <nav class="md-nav" aria-label="四、Bitwarden安装【成功】">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#安装bitwardenr密码管理程序" class="md-nav__link">
-    安装bitwardenr密码管理程序
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#五利用cf打洞内网http映射公网https" class="md-nav__link">
-    五、利用CF打洞，内网http映射公网https
-  </a>
-  
-    <nav class="md-nav" aria-label="五、利用CF打洞，内网http映射公网https">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#public-hostname-page" class="md-nav__link">
-    Public Hostname Page
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#六安装nginx" class="md-nav__link">
-    六、安装Nginx
-  </a>
-  
-    <nav class="md-nav" aria-label="六、安装Nginx">
+    <nav class="md-nav" aria-label="四、安装Nginx">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -663,8 +623,76 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#五bitwarden安装成功" class="md-nav__link">
+    五、Bitwarden安装【成功】
+  </a>
+  
+    <nav class="md-nav" aria-label="五、Bitwarden安装【成功】">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#安装bitwardenr密码管理程序" class="md-nav__link">
+    安装bitwardenr密码管理程序
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#六利用cf打洞内网http映射公网https" class="md-nav__link">
+    六、利用CF打洞，内网http映射公网https
+  </a>
+  
+    <nav class="md-nav" aria-label="六、利用CF打洞，内网http映射公网https">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#public-hostname-page" class="md-nav__link">
+    Public Hostname Page
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#给隧道起个名字" class="md-nav__link">
+    给隧道起个名字
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#选择您的环境" class="md-nav__link">
+    选择您的环境
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#安装和运行连接器" class="md-nav__link">
+    安装和运行连接器
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#七chrome插件无法登陆等问题" class="md-nav__link">
     七、Chrome插件无法登陆等问题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#八登入bitwarden" class="md-nav__link">
+    八、登入bitwarden
   </a>
   
 </li>
@@ -747,9 +775,9 @@
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>deb http://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
 <a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>deb-src http://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
 </code></pre></div></p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo vi /etc/apt/sources.list.d/raspi.list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo vi /etc/apt/sources.list.d/raspi.list
 </code></pre></div>
-注释原有内容，新增</p>
+<p>注释原有内容，新增</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
 </code></pre></div>
 <p>同步更新源，执行如下命令：</p>
@@ -893,83 +921,55 @@
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>CPython version: <span class="m">3</span>.9.2
 <a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>OpenSSL version: OpenSSL <span class="m">1</span>.1.1n  <span class="m">15</span> Mar <span class="m">2022</span>
 </code></pre></div>
-<h2 id="四bitwarden安装成功">四、Bitwarden安装【成功】<a class="headerlink" href="#四bitwarden安装成功" title="Permanent link">🔱</a></h2>
-<p><a href="https://blog.csdn.net/dyq94310/article/details/120250963">bitwarden-vaultwarden-docker搭建</a></p>
-<h3 id="安装bitwardenr密码管理程序">安装bitwardenr密码管理程序<a class="headerlink" href="#安装bitwardenr密码管理程序" title="Permanent link">🔱</a></h3>
-<p>下载镜像
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>docker pull vaultwarden/server:1.27.0
-</code></pre></div></p>
-<p>创建密码保存
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>sudo mkdir /srv/bitwarden
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>sudo chmod go-rwx /srv/bitwarden
-</code></pre></div></p>
-<p>启动bitwarden
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>sudo docker run -d --name bitwarden -v /srv/bitwarden:/data -e <span class="nv">WEBSOCKET_ENABLED</span><span class="o">=</span><span class="nb">true</span> -p <span class="m">127</span>.:80 -p <span class="m">3012</span>:3012 --restart on-failure vaultwarden/server:1.27.0
-</code></pre></div></p>
-<div class="highlight"><pre><span></span><code>-d 在后台运行
-
--v 卷/srv/bitwarden 映射 docker镜像的/data，保证数据不丢失
-
--e WEBSOCKET_ENABLED 开启websocket 需要使用websocket
-
--p 端口映射 8080 是主程序的端口，3012是ws的端口
-
-–restart on-failure 在容器非正常退出时，重启
-</code></pre></div>
-<h2 id="五利用cf打洞内网http映射公网https">五、利用CF打洞，内网http映射公网https<a class="headerlink" href="#五利用cf打洞内网http映射公网https" title="Permanent link">🔱</a></h2>
-<h3 id="public-hostname-page">Public Hostname Page<a class="headerlink" href="#public-hostname-page" title="Permanent link">🔱</a></h3>
-<p>Edit public hostname for DemoTunnels</p>
-<p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230216230532.png" />
-<img alt="" src="安装bitwarden_20230216230531660.png" /></p>
-<h2 id="六安装nginx">六、安装Nginx<a class="headerlink" href="#六安装nginx" title="Permanent link">🔱</a></h2>
+<h2 id="四安装nginx">四、安装Nginx<a class="headerlink" href="#四安装nginx" title="Permanent link">🔱</a></h2>
 <p>拉取nginx
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>docker pull nginx <span class="c1">#拉取最新版本</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>docker pull nginx <span class="c1">#拉取最新版本</span>
 </code></pre></div></p>
 <p>创建Nginx配置文件 </p>
-<p>启动前需要先创建Nginx外部挂载的配置文件（ /home/nginx/conf/nginx.conf）
+<p>启动前需要先创建Nginx外部挂载的配置文件（ /home/pi/soft/nginx/conf）
 之所以要先创建 , 是因为Nginx本身容器只存在/etc/nginx 目录 , 本身就不创建 nginx.conf 文件
 当服务器和容器都不存在 nginx.conf 文件时, 执行启动命令的时候 docker会将nginx.conf 作为目录创建 , 这并不是我们想要的结果 。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 创建挂载目录</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>mkdir -p /home/pi/soft/nginx/conf
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>mkdir -p /home/pi/soft/nginx/log
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>mkdir -p /home/pi/soft/nginx/html
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 创建挂载目录</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>mkdir -p /home/pi/soft/nginx/conf
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>mkdir -p /home/pi/soft/nginx/log
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>mkdir -p /home/pi/soft/nginx/html
 </code></pre></div>
 <blockquote>
 <p>容器中的nginx.conf文件和conf.d文件夹复制到宿主机</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c"># 生成容器</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="c">docker</span><span class="w"> </span><span class="kp">run</span><span class="w"> </span><span class="o">--</span><span class="nv">name</span><span class="w"> </span><span class="nv">nginx</span><span class="w"> </span><span class="o">-</span><span class="nv">p</span><span class="w"> </span><span class="mi">9001</span><span class="p">:</span><span class="mi">80 </span><span class="o">-</span><span class="nv">d</span><span class="w"> </span><span class="nv">nginx</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c"># 将容器n</span><span class="nv">ginx</span><span class="p">.</span><span class="nv">conf</span><span class="err">文件复制到宿主机</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="c">docker</span><span class="w"> </span><span class="nv">cp</span><span class="w"> </span><span class="nv">nginx</span><span class="p">:</span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">nginx</span><span class="p">.</span><span class="nv">conf</span><span class="w"> </span><span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nf">pi</span><span class="o">/</span><span class="nv">soft</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">conf</span><span class="o">/</span><span class="nv">nginx</span><span class="p">.</span><span class="nv">conf</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="c"># 将容器c</span><span class="nv">onf</span><span class="p">.</span><span class="nv">d</span><span class="err">文件夹下内容复制到宿主机</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="c">docker</span><span class="w"> </span><span class="nv">cp</span><span class="w"> </span><span class="nv">nginx</span><span class="p">:</span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">conf</span><span class="p">.</span><span class="nv">d</span><span class="w"> </span><span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nf">pi</span><span class="o">/</span><span class="nv">soft</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">conf</span><span class="o">/</span><span class="nv">conf</span><span class="p">.</span><span class="nv">d</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="c"># 将容器中</span><span class="err">的</span><span class="nv">html</span><span class="err">文件夹复制到宿主机</span>
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="c">docker</span><span class="w"> </span><span class="nv">cp</span><span class="w"> </span><span class="nv">nginx</span><span class="p">:</span><span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">share</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">html</span><span class="w"> </span><span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nf">pi</span><span class="o">/</span><span class="nv">soft</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c"># 生成容器</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="c">docker</span><span class="w"> </span><span class="kp">run</span><span class="w"> </span><span class="o">--</span><span class="nv">name</span><span class="w"> </span><span class="nv">nginx</span><span class="w"> </span><span class="o">-</span><span class="nv">p</span><span class="w"> </span><span class="mi">9001</span><span class="p">:</span><span class="mi">80 </span><span class="o">-</span><span class="nv">d</span><span class="w"> </span><span class="nv">nginx</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c"># 将容器n</span><span class="nv">ginx</span><span class="p">.</span><span class="nv">conf</span><span class="err">文件复制到宿主机</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="c">docker</span><span class="w"> </span><span class="nv">cp</span><span class="w"> </span><span class="nv">nginx</span><span class="p">:</span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">nginx</span><span class="p">.</span><span class="nv">conf</span><span class="w"> </span><span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nf">pi</span><span class="o">/</span><span class="nv">soft</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">conf</span><span class="o">/</span><span class="nv">nginx</span><span class="p">.</span><span class="nv">conf</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="c"># 将容器c</span><span class="nv">onf</span><span class="p">.</span><span class="nv">d</span><span class="err">文件夹下内容复制到宿主机</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="c">docker</span><span class="w"> </span><span class="nv">cp</span><span class="w"> </span><span class="nv">nginx</span><span class="p">:</span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">conf</span><span class="p">.</span><span class="nv">d</span><span class="w"> </span><span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nf">pi</span><span class="o">/</span><span class="nv">soft</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">conf</span><span class="o">/</span><span class="nv">conf</span><span class="p">.</span><span class="nv">d</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="c"># 将容器中</span><span class="err">的</span><span class="nv">html</span><span class="err">文件夹复制到宿主机</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="c">docker</span><span class="w"> </span><span class="nv">cp</span><span class="w"> </span><span class="nv">nginx</span><span class="p">:</span><span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">share</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span><span class="nv">html</span><span class="w"> </span><span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nf">pi</span><span class="o">/</span><span class="nv">soft</span><span class="o">/</span><span class="nv">nginx</span><span class="o">/</span>
 </code></pre></div>
 <h3 id="创建nginx容器并运行">创建Nginx容器并运行<a class="headerlink" href="#创建nginx容器并运行" title="Permanent link">🔱</a></h3>
 <blockquote>
 <p>Docker 创建Nginx容器</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># 直接执行docker rm nginx或者以容器id方式关闭容器</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="c1"># 找到nginx对应的容器id</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>docker ps -a
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1"># 关闭该容器</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>docker stop nginx
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="c1"># 删除该容器</span>
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>docker rm nginx
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>
-<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="c1"># 删除正在运行的nginx容器</span>
-<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>docker rm -f nginx
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 直接执行docker rm nginx或者以容器id方式关闭容器</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="c1"># 找到nginx对应的容器id</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>docker ps -a
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># 关闭该容器</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>docker stop nginx
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="c1"># 删除该容器</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>docker rm nginx
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="c1"># 删除正在运行的nginx容器</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>docker rm -f nginx
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>docker run <span class="se">\</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>-p <span class="m">9002</span>:80 <span class="se">\</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>--name nginx <span class="se">\</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>-v /home/pi/soft/nginx/conf/nginx.conf:/etc/nginx/nginx.conf <span class="se">\</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>-v /home/pi/soft/nginx/conf/conf.d:/etc/nginx/conf.d <span class="se">\</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>-v /home/pi/soft/nginx/log:/var/log/nginx <span class="se">\</span>
-<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>-v /home/pi/soft/nginx/html:/usr/share/nginx/html <span class="se">\</span>
-<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>-d nginx:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>docker run <span class="se">\</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>-p <span class="m">9002</span>:80 <span class="se">\</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>--name nginx <span class="se">\</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>-v /home/pi/soft/nginx/conf/nginx.conf:/etc/nginx/nginx.conf <span class="se">\</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>-v /home/pi/soft/nginx/conf/conf.d:/etc/nginx/conf.d <span class="se">\</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>-v /home/pi/soft/nginx/log:/var/log/nginx <span class="se">\</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>-v /home/pi/soft/nginx/html:/usr/share/nginx/html <span class="se">\</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>-d nginx:latest
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>命令     描述
 –name nginx 启动容器的名字
@@ -983,23 +983,70 @@ nginx:latest    本地运行的版本
 \   shell 命令换行
 </code></pre></div>
 <p>单行模式</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>docker run -p <span class="m">9002</span>:80 --name nginx -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /home/nginx/conf/conf.d:/etc/nginx/conf.d -v /home/nginx/log:/var/log/nginx -v /home/nginx/html:/usr/share/nginx/html -d nginx:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>docker run -p <span class="m">9002</span>:80 --name nginx -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /home/nginx/conf/conf.d:/etc/nginx/conf.d -v /home/nginx/log:/var/log/nginx -v /home/nginx/html:/usr/share/nginx/html -d nginx:latest
 </code></pre></div>
 <p>重启容器
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>docker restart nginx
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>docker restart nginx
 </code></pre></div></p>
+<h2 id="五bitwarden安装成功">五、Bitwarden安装【成功】<a class="headerlink" href="#五bitwarden安装成功" title="Permanent link">🔱</a></h2>
+<p><a href="https://blog.csdn.net/dyq94310/article/details/120250963">bitwarden-vaultwarden-docker搭建</a></p>
+<h3 id="安装bitwardenr密码管理程序">安装bitwardenr密码管理程序<a class="headerlink" href="#安装bitwardenr密码管理程序" title="Permanent link">🔱</a></h3>
+<p>下载镜像
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>docker pull vaultwarden/server:1.27.0
+</code></pre></div></p>
+<p>创建密码保存
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>sudo mkdir /srv/bitwarden
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>sudo chmod go-rwx /srv/bitwarden
+</code></pre></div></p>
+<p>启动bitwarden
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>sudo docker run -d --name bitwarden -v /srv/bitwarden:/data -e <span class="nv">WEBSOCKET_ENABLED</span><span class="o">=</span><span class="nb">true</span> -p <span class="m">127</span>.:80 -p <span class="m">3012</span>:3012 --restart on-failure vaultwarden/server:1.27.0
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>-d 在后台运行
+
+-v 卷/srv/bitwarden 映射 docker镜像的/data，保证数据不丢失
+
+-e WEBSOCKET_ENABLED 开启websocket 需要使用websocket
+
+-p 端口映射 8080 是主程序的端口，3012是ws的端口
+
+–restart on-failure 在容器非正常退出时，重启
+</code></pre></div>
+<h2 id="六利用cf打洞内网http映射公网https">六、利用CF打洞，内网http映射公网https<a class="headerlink" href="#六利用cf打洞内网http映射公网https" title="Permanent link">🔱</a></h2>
+<h3 id="public-hostname-page">Public Hostname Page<a class="headerlink" href="#public-hostname-page" title="Permanent link">🔱</a></h3>
+<h3 id="给隧道起个名字">给隧道起个名字<a class="headerlink" href="#给隧道起个名字" title="Permanent link">🔱</a></h3>
+<p>根据要连接的网络使用描述性名称。建议仅为每个网络创建一个隧道。</p>
+<h3 id="选择您的环境">选择您的环境<a class="headerlink" href="#选择您的环境" title="Permanent link">🔱</a></h3>
+<p>Choose an operating system: 选择操作系统：</p>
+<p>Debian</p>
+<p>Choose an architecture: 选择一种体系结构：</p>
+<p>arm64-bit</p>
+<h3 id="安装和运行连接器">安装和运行连接器<a class="headerlink" href="#安装和运行连接器" title="Permanent link">🔱</a></h3>
+<p>要将隧道连接到Cloudflare，请将以下命令之一复制粘贴到终端窗口中。远程管理的隧道要求您安装cloudflared 2022.03.04或更高版本。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb <span class="o">&amp;&amp;</span> 
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>sudo dpkg -i cloudflared.deb <span class="o">&amp;&amp;</span> 
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>sudo cloudflared service install eyJhIjoiMDJmODVlXXXXXXXXXXXXXXXXXXXXXX
+</code></pre></div>
+<p>编辑演示隧道的公共主机名</p>
+<p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230216230532.png" />
+<img alt="" src="安装bitwarden_20230216230531660.png" /></p>
 <h2 id="七chrome插件无法登陆等问题">七、Chrome插件无法登陆等问题<a class="headerlink" href="#七chrome插件无法登陆等问题" title="Permanent link">🔱</a></h2>
-<p>网友留言</p>
-<ol>
-<li>
-<p>好像是老版本的服务端与新版本的插件不兼容，老版本的服务端被弃用了，所以要么用回老版本插件，要么更新服务端，但是大部分人用的docker镜像，服务端更新应该没那么快吧</p>
-</li>
-<li>
-<p>最新版无法登录的问题，如果用的是docker部署, 可以直接下载vaultwarden/server 1.27.0版本的，不要直接下载vaultwarden/server latest版本的， latest不知道是缓存还是什么原因，下载下来之后一直是1.23.1版本的， 这个版本还是21年发布的。想要确定版本的话docker启动的时候日志会打印版本号</p>
-</li>
-</ol>
+<p>网友留言
+1. 好像是老版本的服务端与新版本的插件不兼容，老版本的服务端被弃用了，所以要么用回老版本插件，要么更新服务端，但是大部分人用的docker镜像，服务端更新应该没那么快吧
+2. 最新版无法登录的问题，如果用的是docker部署, 可以直接下载vaultwarden/server 1.27.0版本的，不要直接下载vaultwarden/server latest版本的， latest不知道是缓存还是什么原因，下载下来之后一直是1.23.1版本的， 这个版本还是21年发布的。想要确定版本的话docker启动的时候日志会打印版本号</p>
 <p><img alt="弃用通知" src="http://imgsrc.baidu.com/forum/pic/item/521d20ca39dbb6fdbc95d5e34c24ab18952b3775.jpg" /></p>
 <p>使用Docker拉取镜像，bitwarden指定版本号 V1.27.0 ，不指明版本号，就下载老版本<a href="https://github.com/bitwarden/clients/releases/tag/browser-v2022.10.1">Bitwarden-2022.10.1</a> 插件（包括 android版、chrome插件、firefox插件）</p>
+<h2 id="八登入bitwarden">八、登入bitwarden<a class="headerlink" href="#八登入bitwarden" title="Permanent link">🔱</a></h2>
+<p>注册并登入</p>
+<p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230218214619.png" />
+<img alt="" src="bitwarden密码管理程序_20230218214618957.png" /></p>
+<p>Chrome浏览器利用<a href="https://github.121rh.com/https://github.com/bitwarden/clients/releases/download/browser-v2023.2.1/dist-chrome-2023.2.1.zip">bitwarden插件</a>自动填充CSDN账号密码</p>
+<p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230218214523.png" />
+<img alt="" src="bitwarden密码管理程序_20230218214521816.png" /></p>
+<p><a href="https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-Installer-2023.2.0.exe">Windows平台</a></p>
+<p><img alt="image.png" src="https://qiniu.121rh.com/obsidian/img/20230218214906.png" />
+<img alt="" src="bitwarden密码管理程序_20230218214905349.png" /></p>
 
   <!--
   Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
@@ -1032,7 +1079,7 @@ nginx:latest    本地运行的版本
       
       <br />
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 18, 2023 09:08:33</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 18, 2023 10:09:32</span>
     <!-- mkdocs-git-revision-date-plugin -->
     
   </small>
