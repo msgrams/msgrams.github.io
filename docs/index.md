@@ -7,8 +7,10 @@ comments: true
 ??? 2023年2月笔记
     === "内存数据库"
         [Redis整理!](app/redis/redisTidy/)
-    === "搭建bitwarden密码库"
-        [安装Bitwarden](pc/raspberry/bitwarden/)
+    === "树莓派"
+        - [安装Bitwarden](pc/raspberry/bitwarden/)
+        - [防火墙ufw](pc/raspberry/ufw)
+        - [通过Docker安装Redis](pc/raspberry/redis)
 
 
 <img src=https://api.yimian.xyz/img?type=wallpaper>
