@@ -1,0 +1,1380 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+  
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="To Using Docker Install Redis">
+      
+      
+        <meta name="author" content="FYA">
+      
+      
+        <link rel="canonical" href="https://121rh.com/pc/raspberry/redis/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">       
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" charset="UTF-8">
+    <meta name="baidu-site-verification" content="code-VSU9zlmT1E">
+<!--添加部分-start-->
+<script>
+  document.addEventListener('visibilitychange',function(){
+      if( document.visibilityState == 'hidden' ){
+      normal_title = document.title;
+      document.title = 'ヽ(●-`Д´-)ノ你丑你就走！';
+      }else{
+      document.title = 'ヾ(Ő∀Ő3)ノ你帅就回来！';
+      setTimeout(function(){
+          document.title = normal_title;
+      }, 1200)
+      }
+  });
+  </script>
+<!--添加部分-end-->
+
+    
+      
+        <title>树莓派安装Redis - FYA·心愿所往</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+
+    
+  
+
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/extra.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/video-js.min.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/video.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/vssue.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/vssue.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+  
+      
+
+    
+
+    
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#一docker搜索redis镜像" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="FYA·心愿所往" class="md-header__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FYA·心愿所往
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              树莓派安装Redis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/msgrams/msgrams.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    msgrams
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../timeline/" class="md-tabs__link">
+      时间线
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../life/" class="md-tabs__link">
+      生活
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../algs/" class="md-tabs__link">
+      算法
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../app/" class="md-tabs__link">
+      后端
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../" class="md-tabs__link">
+      计算机
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FYA·心愿所往" class="md-nav__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+      
+  <img src="../../../assets/images/logo.png" alt="logo">
+
+    </a>
+    FYA·心愿所往
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/msgrams/msgrams.github.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    msgrams
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../timeline/" class="md-nav__link">
+        时间线
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../life/" class="md-nav__link">
+        生活
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algs/" class="md-nav__link">
+        算法
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../app/" class="md-nav__link">
+        后端
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        计算机
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一docker搜索redis镜像" class="md-nav__link">
+    一、Docker搜索redis镜像
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二docker拉取镜像" class="md-nav__link">
+    二、Docker拉取镜像
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三docker挂载配置文件" class="md-nav__link">
+    三、Docker挂载配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#四启动redis-容器" class="md-nav__link">
+    四、启动redis 容器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#五测试" class="md-nav__link">
+    五、测试
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#六配置文件" class="md-nav__link">
+    六、配置文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考文章" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+                
+  <a href="https://github.com/msgrams/msgrams.github.io/edit/main/docs/pc/raspberry/redis.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>树莓派安装Redis</h1>
+
+<h2 id="一docker搜索redis镜像">一、Docker搜索redis镜像<a class="headerlink" href="#一docker搜索redis镜像" title="Permanent link">🔱</a></h2>
+<blockquote>
+<p>命令：docker search &lt;镜像名称&gt;</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker search redis
+</code></pre></div>
+<p>可以看到有很多redis的镜像，此处因没有指定版本，所以下载的就是默认的最新版本 。<strong>redis latest.</strong></p>
+<h2 id="二docker拉取镜像">二、Docker拉取镜像<a class="headerlink" href="#二docker拉取镜像" title="Permanent link">🔱</a></h2>
+<blockquote>
+<p>命令：：docker pull &lt;镜像名称&gt;:&lt;版本号&gt;</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker pull redis
+</code></pre></div>
+<h2 id="三docker挂载配置文件">三、Docker挂载配置文件<a class="headerlink" href="#三docker挂载配置文件" title="Permanent link">🔱</a></h2>
+<p>接下来就是要将redis 的配置文件进行挂载，以配置文件方式启动redis 容器。（挂载：即将宿主的文件和容器内部目录相关联，相互绑定，在宿主机内修改文件的话也随之修改容器内部文件）</p>
+<p>1）、挂载 redis 的配置文件</p>
+<p>2）、挂载 redis 的持久化文件（为了数据的持久化）。</p>
+<p>本人的配置文件是放在</p>
+<p>liunx 下redis.conf文件位置：/home/pi/soft/redis/redis.conf</p>
+<p>liunx 下redis的data文件位置 ：/home/pi/soft/redis/data</p>
+<h2 id="四启动redis-容器">四、启动redis 容器<a class="headerlink" href="#四启动redis-容器" title="Permanent link">🔱</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo docker run -p <span class="m">6379</span>:6379 --name redis -v /home/pi/soft/redis/redis.conf:/etc/redis/redis.conf -v /home/pi/soft/redis/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes --restart<span class="o">=</span>always --log-opt max-size<span class="o">=</span>100m --log-opt max-file<span class="o">=</span><span class="m">2</span> --requirepass password
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>--restart=always 总是开机启动
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>--log是日志方面的
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>-p 6379:6379 将6379端口挂载出去
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>--name 给这个容器取一个名字
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>-v 数据卷挂载
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    -/home/pi/soft/redis/redis.conf:/etc/redis/redis.conf:/etc/redis/redis.conf 这里是将 liunx 路径下的redis.conf 和 redis下的redis.conf 挂载在一起。
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    - /home/pi/soft/redis/data:/data 这个同上
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>-d redis 表示后台启动redis
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>redis-server /etc/redis/redis.conf 以配置文件启动redis，加载容器内的conf文件，最终找到的是挂载的目录 /etc/redis/redis.conf 也就是liunx下的/home/pi/soft/redis/redis.conf
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>–appendonly yes 开启redis 持久化
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>–requirepass password 设置密码 （如果你是通过docker 容器内部连接的话，就随意，可设可不设。但是如果想向外开放的话，一定要设置）
+</code></pre></div>
+<p>报错</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>*** FATAL CONFIG FILE ERROR <span class="o">(</span>Redis <span class="m">6</span>.2.6<span class="o">)</span> ***
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Reading the configuration file, at line <span class="m">624</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>&gt;&gt;&gt; <span class="s1">&#39;repl-diskless-sync-max-replicas 0&#39;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Bad directive or wrong number of arguments
+</code></pre></div>
+<p>解决： redis.conf 版本与docker pull redis最新版本不一致导致报错！！！</p>
+<h2 id="五测试">五、测试<a class="headerlink" href="#五测试" title="Permanent link">🔱</a></h2>
+<p>1、通过docker ps指令查看启动状态</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker ps -a <span class="p">|</span> grep redis <span class="c1"># 通过docker ps指令查看启动状态，是否成功.</span>
+</code></pre></div>
+<p>2、查看容器运行日志</p>
+<blockquote>
+<p>命令：docker logs --since 30m &lt;容器名&gt;</p>
+</blockquote>
+<p>此处 <code>--since 30m</code> 是查看此容器30分钟之内的日志情况。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker logs --since 30m myredis
+</code></pre></div>
+<p>3、容器内部连接进行测试</p>
+<p>进入容器</p>
+<blockquote>
+<p>命令：docker exec -it &lt;容器名&gt; /bin/bash</p>
+</blockquote>
+<p>此处跟着的 redis-cli 是直接将命令输在上面了。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker <span class="nb">exec</span> -it redis redis-cli
+</code></pre></div></p>
+<p>进入之后，输入查看命令：</p>
+<p>error是没有权限验证。<del>（因为设置了密码的。）</del></p>
+<p><strong>验证密码：</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>auth 密码
+</code></pre></div>
+<p><strong>查看当前redis有没有设置密码：</strong><del>（得验证通过了才能输入的）</del></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>config get requirepass
+</code></pre></div>
+<h2 id="六配置文件">六、配置文件<a class="headerlink" href="#六配置文件" title="Permanent link">🔱</a></h2>
+<p><strong>redis6.2.6-Chinese.conf</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>#redis 配置
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>################################## 配置 include ###################################
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a># 加载配置文件
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a># include /path/to/local.conf
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a># include /path/to/other.conf
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>################################## 模块 #####################################
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a># 加载模块
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a># loadmodule /path/to/my_module.so
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a># loadmodule /path/to/other_module.so
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>################################## 网络 #####################################
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>#指定 redis 只接收来自于该IP地址的请求，如果不进行设置，那么将处理所有请求
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>#bind 127.0.0.1 -::1
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>#是否开启保护模式，默认开启。要是配置里没有指定bind和密码。开启该参数后，redis只会本地进行访问，
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>#拒绝外部访问。要是开启了密码和bind，可以开启。否则最好关闭，设置为no
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>protected-mode no
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>#tcp keepalive参数。如果设置不为0，就使用配置tcp的SO_KEEPALIVE值，
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>#使用keepalive有两个好处:检测挂掉的对端。降低中间设备出问题而导致网络看似连接却已经与对端端口的问题。
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>#在Linux内核中，设置了keepalive，redis会定时给对端发送ack。检测到对端关闭需要两倍的设置值
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>tcp-keepalive 300
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>################################# TLS/SSL #####################################
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a># 默认情况下，禁用TLS / SSL。要启用它，请使用“ tls-port”配置。
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a># tls-port 6379
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a># tls-cert-file redis.crt 
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a># tls-key-file redis.key
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>
+<a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a># tls-key-file-pass secret
+<a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>
+<a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>
+<a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a># tls-client-cert-file client.crt
+<a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a># tls-client-key-file client.key
+<a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>
+<a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a># tls-client-key-file-pass secret
+<a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>
+<a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a># tls-dh-params-file redis.dh
+<a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>
+<a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a># tls-ca-cert-file ca.crt
+<a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a># tls-ca-cert-dir /etc/ssl/certs
+<a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>
+<a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a># tls-auth-clients no
+<a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a># tls-auth-clients optional
+<a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>
+<a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a># tls-replication yes
+<a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>
+<a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a># tls-cluster yes
+<a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a>
+<a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a># tls-ciphers DEFAULT:!MEDIUM
+<a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>
+<a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a># tls-ciphersuites TLS_CHACHA20_POLY1305_SHA256
+<a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>
+<a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a># tls-prefer-server-ciphers yes
+<a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a>
+<a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a># tls-session-caching no
+<a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a>
+<a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a># tls-session-cache-size 5000
+<a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a>
+<a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a># tls-session-cache-timeout 60
+<a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a>
+<a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a>
+<a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a>################################# 通用 #####################################
+<a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a>
+<a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a>
+<a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a># 是否后台启动（静默）
+<a id="__codelineno-10-76" name="__codelineno-10-76" href="#__codelineno-10-76"></a>daemonize yes
+<a id="__codelineno-10-77" name="__codelineno-10-77" href="#__codelineno-10-77"></a>
+<a id="__codelineno-10-78" name="__codelineno-10-78" href="#__codelineno-10-78"></a># 可以通过upstart和systemd管理Redis守护进程，这个参数是和具体的操作系统相关的
+<a id="__codelineno-10-79" name="__codelineno-10-79" href="#__codelineno-10-79"></a># supervised auto
+<a id="__codelineno-10-80" name="__codelineno-10-80" href="#__codelineno-10-80"></a>
+<a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a># redis的进程文件 
+<a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a>pidfile /var/run/redis_6379.pid
+<a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a>
+<a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a>#指定了服务端日志的级别。级别包括：debug（很多信息，方便开发、测试），verbose（许多有用的信息）
+<a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a>#notice（适当的日志级别，适合生产环境），warn（只有非常重要的信息）
+<a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a>loglevel notice
+<a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a>
+<a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a>
+<a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a>#指定了记录日志的文件。空字符串的话，日志会打印到标准输出设备。后台运行的redis标准输出是/dev/null
+<a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a>logfile &quot;&quot;
+<a id="__codelineno-10-91" name="__codelineno-10-91" href="#__codelineno-10-91"></a>
+<a id="__codelineno-10-92" name="__codelineno-10-92" href="#__codelineno-10-92"></a>
+<a id="__codelineno-10-93" name="__codelineno-10-93" href="#__codelineno-10-93"></a>#是否打开记录syslog功能
+<a id="__codelineno-10-94" name="__codelineno-10-94" href="#__codelineno-10-94"></a># syslog-enabled no
+<a id="__codelineno-10-95" name="__codelineno-10-95" href="#__codelineno-10-95"></a>
+<a id="__codelineno-10-96" name="__codelineno-10-96" href="#__codelineno-10-96"></a>
+<a id="__codelineno-10-97" name="__codelineno-10-97" href="#__codelineno-10-97"></a>#syslog的标识符
+<a id="__codelineno-10-98" name="__codelineno-10-98" href="#__codelineno-10-98"></a># syslog-ident redis
+<a id="__codelineno-10-99" name="__codelineno-10-99" href="#__codelineno-10-99"></a>
+<a id="__codelineno-10-100" name="__codelineno-10-100" href="#__codelineno-10-100"></a>
+<a id="__codelineno-10-101" name="__codelineno-10-101" href="#__codelineno-10-101"></a>#日志的来源、设备.
+<a id="__codelineno-10-102" name="__codelineno-10-102" href="#__codelineno-10-102"></a># syslog-facility local0
+<a id="__codelineno-10-103" name="__codelineno-10-103" href="#__codelineno-10-103"></a>
+<a id="__codelineno-10-104" name="__codelineno-10-104" href="#__codelineno-10-104"></a>
+<a id="__codelineno-10-105" name="__codelineno-10-105" href="#__codelineno-10-105"></a>#数据库的数量，默认使用的数据库是0。可以通过”SELECT 【数据库序号】“命令选择一个数据库，序号从0开始
+<a id="__codelineno-10-106" name="__codelineno-10-106" href="#__codelineno-10-106"></a>databases 16
+<a id="__codelineno-10-107" name="__codelineno-10-107" href="#__codelineno-10-107"></a>
+<a id="__codelineno-10-108" name="__codelineno-10-108" href="#__codelineno-10-108"></a># 是否显示redis logo
+<a id="__codelineno-10-109" name="__codelineno-10-109" href="#__codelineno-10-109"></a>always-show-logo no
+<a id="__codelineno-10-110" name="__codelineno-10-110" href="#__codelineno-10-110"></a>
+<a id="__codelineno-10-111" name="__codelineno-10-111" href="#__codelineno-10-111"></a># By default, Redis modifies the process title (as seen in &#39;top&#39; and &#39;ps&#39;) to
+<a id="__codelineno-10-112" name="__codelineno-10-112" href="#__codelineno-10-112"></a># provide some runtime information. It is possible to disable this and leave
+<a id="__codelineno-10-113" name="__codelineno-10-113" href="#__codelineno-10-113"></a># the process name as executed by setting the following to no.
+<a id="__codelineno-10-114" name="__codelineno-10-114" href="#__codelineno-10-114"></a>set-proc-title yes
+<a id="__codelineno-10-115" name="__codelineno-10-115" href="#__codelineno-10-115"></a>
+<a id="__codelineno-10-116" name="__codelineno-10-116" href="#__codelineno-10-116"></a># When changing the process title, Redis uses the following template to construct
+<a id="__codelineno-10-117" name="__codelineno-10-117" href="#__codelineno-10-117"></a># the modified title.
+<a id="__codelineno-10-118" name="__codelineno-10-118" href="#__codelineno-10-118"></a>#
+<a id="__codelineno-10-119" name="__codelineno-10-119" href="#__codelineno-10-119"></a># Template variables are specified in curly brackets. The following variables are
+<a id="__codelineno-10-120" name="__codelineno-10-120" href="#__codelineno-10-120"></a># supported:
+<a id="__codelineno-10-121" name="__codelineno-10-121" href="#__codelineno-10-121"></a>#
+<a id="__codelineno-10-122" name="__codelineno-10-122" href="#__codelineno-10-122"></a># {title}           Name of process as executed if parent, or type of child process.
+<a id="__codelineno-10-123" name="__codelineno-10-123" href="#__codelineno-10-123"></a># {listen-addr}     Bind address or &#39;*&#39; followed by TCP or TLS port listening on, or
+<a id="__codelineno-10-124" name="__codelineno-10-124" href="#__codelineno-10-124"></a>#                   Unix socket if only that&#39;s available.
+<a id="__codelineno-10-125" name="__codelineno-10-125" href="#__codelineno-10-125"></a># {server-mode}     Special mode, i.e. &quot;[sentinel]&quot; or &quot;[cluster]&quot;.
+<a id="__codelineno-10-126" name="__codelineno-10-126" href="#__codelineno-10-126"></a># {port}            TCP port listening on, or 0.
+<a id="__codelineno-10-127" name="__codelineno-10-127" href="#__codelineno-10-127"></a># {tls-port}        TLS port listening on, or 0.
+<a id="__codelineno-10-128" name="__codelineno-10-128" href="#__codelineno-10-128"></a># {unixsocket}      Unix domain socket listening on, or &quot;&quot;.
+<a id="__codelineno-10-129" name="__codelineno-10-129" href="#__codelineno-10-129"></a># {config-file}     Name of configuration file used.
+<a id="__codelineno-10-130" name="__codelineno-10-130" href="#__codelineno-10-130"></a>#
+<a id="__codelineno-10-131" name="__codelineno-10-131" href="#__codelineno-10-131"></a>proc-title-template &quot;{title} {listen-addr} {server-mode}&quot;
+<a id="__codelineno-10-132" name="__codelineno-10-132" href="#__codelineno-10-132"></a>
+<a id="__codelineno-10-133" name="__codelineno-10-133" href="#__codelineno-10-133"></a>################################ rdb快照持久化  ################################
+<a id="__codelineno-10-134" name="__codelineno-10-134" href="#__codelineno-10-134"></a>
+<a id="__codelineno-10-135" name="__codelineno-10-135" href="#__codelineno-10-135"></a># rdb 持久化触发   每seconds(秒)有changes(个)键改变 在触发一次rdb持久化
+<a id="__codelineno-10-136" name="__codelineno-10-136" href="#__codelineno-10-136"></a># save &lt;seconds&gt; &lt;changes&gt;
+<a id="__codelineno-10-137" name="__codelineno-10-137" href="#__codelineno-10-137"></a>
+<a id="__codelineno-10-138" name="__codelineno-10-138" href="#__codelineno-10-138"></a>#
+<a id="__codelineno-10-139" name="__codelineno-10-139" href="#__codelineno-10-139"></a># save 3600 1
+<a id="__codelineno-10-140" name="__codelineno-10-140" href="#__codelineno-10-140"></a># save 300 100
+<a id="__codelineno-10-141" name="__codelineno-10-141" href="#__codelineno-10-141"></a># save 60 10000
+<a id="__codelineno-10-142" name="__codelineno-10-142" href="#__codelineno-10-142"></a>
+<a id="__codelineno-10-143" name="__codelineno-10-143" href="#__codelineno-10-143"></a>
+<a id="__codelineno-10-144" name="__codelineno-10-144" href="#__codelineno-10-144"></a>#当RDB持久化出现错误后，是否依然进行继续进行工作，yes：不能进行工作，no：可以继续进行工作
+<a id="__codelineno-10-145" name="__codelineno-10-145" href="#__codelineno-10-145"></a>stop-writes-on-bgsave-error yes
+<a id="__codelineno-10-146" name="__codelineno-10-146" href="#__codelineno-10-146"></a>
+<a id="__codelineno-10-147" name="__codelineno-10-147" href="#__codelineno-10-147"></a># 配置存储至本地数据库时是否压缩数据，默认为yes。Redis采用LZF压缩方式，但占用了一点CPU的时间。
+<a id="__codelineno-10-148" name="__codelineno-10-148" href="#__codelineno-10-148"></a># 若关闭该选项，但会导致数据库文件变的巨大。建议开启。
+<a id="__codelineno-10-149" name="__codelineno-10-149" href="#__codelineno-10-149"></a>rdbcompression yes
+<a id="__codelineno-10-150" name="__codelineno-10-150" href="#__codelineno-10-150"></a>
+<a id="__codelineno-10-151" name="__codelineno-10-151" href="#__codelineno-10-151"></a>#是否校验rdb文件;从rdb格式的第五个版本开始，在rdb文件的末尾会带上CRC64的校验和。
+<a id="__codelineno-10-152" name="__codelineno-10-152" href="#__codelineno-10-152"></a>#这跟有利于文件的容错性，但是在保存rdb文件的时候，会有大概10%的性能损耗，所以如果你追求高性能，可以关闭该配置
+<a id="__codelineno-10-153" name="__codelineno-10-153" href="#__codelineno-10-153"></a>rdbchecksum yes
+<a id="__codelineno-10-154" name="__codelineno-10-154" href="#__codelineno-10-154"></a>
+<a id="__codelineno-10-155" name="__codelineno-10-155" href="#__codelineno-10-155"></a># rdb快照文件存储地址
+<a id="__codelineno-10-156" name="__codelineno-10-156" href="#__codelineno-10-156"></a>dbfilename dump.rdb
+<a id="__codelineno-10-157" name="__codelineno-10-157" href="#__codelineno-10-157"></a>
+<a id="__codelineno-10-158" name="__codelineno-10-158" href="#__codelineno-10-158"></a># 在没有持久性的情况下删除复制中使用的RDB文件，通常情况下保持默认即可
+<a id="__codelineno-10-159" name="__codelineno-10-159" href="#__codelineno-10-159"></a>rdb-del-sync-files no
+<a id="__codelineno-10-160" name="__codelineno-10-160" href="#__codelineno-10-160"></a>
+<a id="__codelineno-10-161" name="__codelineno-10-161" href="#__codelineno-10-161"></a>数据目录，数据库的写入会在这个目录。rdb、aof文件也会写在这个目录
+<a id="__codelineno-10-162" name="__codelineno-10-162" href="#__codelineno-10-162"></a>dir ./
+<a id="__codelineno-10-163" name="__codelineno-10-163" href="#__codelineno-10-163"></a>
+<a id="__codelineno-10-164" name="__codelineno-10-164" href="#__codelineno-10-164"></a>################################# 主从集群 #################################
+<a id="__codelineno-10-165" name="__codelineno-10-165" href="#__codelineno-10-165"></a>
+<a id="__codelineno-10-166" name="__codelineno-10-166" href="#__codelineno-10-166"></a>#
+<a id="__codelineno-10-167" name="__codelineno-10-167" href="#__codelineno-10-167"></a># 当本机为从服务时，设置主服务的IP及端口。例如：replicaof 192.168.233.233 6379。
+<a id="__codelineno-10-168" name="__codelineno-10-168" href="#__codelineno-10-168"></a># replicaof &lt;masterip&gt; &lt;masterport&gt;
+<a id="__codelineno-10-169" name="__codelineno-10-169" href="#__codelineno-10-169"></a>
+<a id="__codelineno-10-170" name="__codelineno-10-170" href="#__codelineno-10-170"></a>#当本机为从服务时，设置主服务的连接密码
+<a id="__codelineno-10-171" name="__codelineno-10-171" href="#__codelineno-10-171"></a># masterauth &lt;master-password&gt;
+<a id="__codelineno-10-172" name="__codelineno-10-172" href="#__codelineno-10-172"></a>
+<a id="__codelineno-10-173" name="__codelineno-10-173" href="#__codelineno-10-173"></a># 当本机为从服务时，设置主服务的用户名
+<a id="__codelineno-10-174" name="__codelineno-10-174" href="#__codelineno-10-174"></a># masteruser &lt;username&gt;
+<a id="__codelineno-10-175" name="__codelineno-10-175" href="#__codelineno-10-175"></a>
+<a id="__codelineno-10-176" name="__codelineno-10-176" href="#__codelineno-10-176"></a>#当slave失去与master的连接，或正在拷贝中，
+<a id="__codelineno-10-177" name="__codelineno-10-177" href="#__codelineno-10-177"></a>#如果为yes，slave会响应客户端的请求，数据可能不同步甚至没有数据，
+<a id="__codelineno-10-178" name="__codelineno-10-178" href="#__codelineno-10-178"></a>#如果为no，slave会返回错误&quot;SYNC with master in progress&quot;
+<a id="__codelineno-10-179" name="__codelineno-10-179" href="#__codelineno-10-179"></a>replica-serve-stale-data yes
+<a id="__codelineno-10-180" name="__codelineno-10-180" href="#__codelineno-10-180"></a>
+<a id="__codelineno-10-181" name="__codelineno-10-181" href="#__codelineno-10-181"></a># 如果为yes，slave实例只读，如果为no，slave实例可读可写
+<a id="__codelineno-10-182" name="__codelineno-10-182" href="#__codelineno-10-182"></a>replica-read-only yes
+<a id="__codelineno-10-183" name="__codelineno-10-183" href="#__codelineno-10-183"></a>
+<a id="__codelineno-10-184" name="__codelineno-10-184" href="#__codelineno-10-184"></a># 新的或者重连后不能继续备份的从服务器，需要做所谓的“完全备份”，即将一个RDB文件从主站传送到从站。这个传送有以下两种方式：
+<a id="__codelineno-10-185" name="__codelineno-10-185" href="#__codelineno-10-185"></a># 1、硬盘备份：redis主站创建一个新的进程，用于把RDB文件写到硬盘上。过一会儿，其父进程递增地将文件传送给从站。
+<a id="__codelineno-10-186" name="__codelineno-10-186" href="#__codelineno-10-186"></a># 2、无硬盘备份：redis主站创建一个新的进程，子进程直接把RDB文件写到从站的套接字，不需要用到硬盘。
+<a id="__codelineno-10-187" name="__codelineno-10-187" href="#__codelineno-10-187"></a># 在硬盘备份的情况下，主站的子进程生成RDB文件。一旦生成，多个从站可以立即排成队列使用主站的RDB文件。
+<a id="__codelineno-10-188" name="__codelineno-10-188" href="#__codelineno-10-188"></a>#在无硬盘备份的情况下，一次RDB传送开始，新的从站到达后，需要等待现在的传送结束，才能开启新的传送。
+<a id="__codelineno-10-189" name="__codelineno-10-189" href="#__codelineno-10-189"></a>#如果使用无硬盘备份，主站会在开始传送之间等待一段时间（可配置，以秒为单位），希望等待多个子站到达后并行传送。
+<a id="__codelineno-10-190" name="__codelineno-10-190" href="#__codelineno-10-190"></a>repl-diskless-sync no
+<a id="__codelineno-10-191" name="__codelineno-10-191" href="#__codelineno-10-191"></a>
+<a id="__codelineno-10-192" name="__codelineno-10-192" href="#__codelineno-10-192"></a># 无盘复制延时开始秒数，默认是5秒，意思是当PSYNC触发的时候，master延时多少秒开始向master传送数据流，
+<a id="__codelineno-10-193" name="__codelineno-10-193" href="#__codelineno-10-193"></a># 以便等待更多的slave连接可以同时传送数据流，
+<a id="__codelineno-10-194" name="__codelineno-10-194" href="#__codelineno-10-194"></a>#因为一旦PSYNC开始后，如果有新的slave连接master，只能等待下次PSYNC。可以配置为0取消等待，立即开始
+<a id="__codelineno-10-195" name="__codelineno-10-195" href="#__codelineno-10-195"></a>repl-diskless-sync-delay 5
+<a id="__codelineno-10-196" name="__codelineno-10-196" href="#__codelineno-10-196"></a>
+<a id="__codelineno-10-197" name="__codelineno-10-197" href="#__codelineno-10-197"></a>#是否使用无磁盘加载，有三项：
+<a id="__codelineno-10-198" name="__codelineno-10-198" href="#__codelineno-10-198"></a># 1、disabled：不要使用无磁盘加载，先将rdb文件存储到磁盘
+<a id="__codelineno-10-199" name="__codelineno-10-199" href="#__codelineno-10-199"></a># 2、on-empty-db：只有在完全安全的情况下才使用无磁盘加载
+<a id="__codelineno-10-200" name="__codelineno-10-200" href="#__codelineno-10-200"></a># 3、swapdb：解析时在RAM中保留当前db内容的副本，直接从套接字获取数据
+<a id="__codelineno-10-201" name="__codelineno-10-201" href="#__codelineno-10-201"></a>repl-diskless-load disabled
+<a id="__codelineno-10-202" name="__codelineno-10-202" href="#__codelineno-10-202"></a>
+<a id="__codelineno-10-203" name="__codelineno-10-203" href="#__codelineno-10-203"></a># 指定slave定期ping master的周期，默认10秒钟
+<a id="__codelineno-10-204" name="__codelineno-10-204" href="#__codelineno-10-204"></a># repl-ping-replica-period 10
+<a id="__codelineno-10-205" name="__codelineno-10-205" href="#__codelineno-10-205"></a>
+<a id="__codelineno-10-206" name="__codelineno-10-206" href="#__codelineno-10-206"></a># 从服务ping主服务的超时时间，若超过repl-timeout设置的时间，slave就会认为master已经宕了
+<a id="__codelineno-10-207" name="__codelineno-10-207" href="#__codelineno-10-207"></a># repl-timeout 60
+<a id="__codelineno-10-208" name="__codelineno-10-208" href="#__codelineno-10-208"></a>
+<a id="__codelineno-10-209" name="__codelineno-10-209" href="#__codelineno-10-209"></a># 在slave和master同步后（发送psync/sync），后续的同步是否设置成TCP_NODELAY . 
+<a id="__codelineno-10-210" name="__codelineno-10-210" href="#__codelineno-10-210"></a># 假如设置成yes，则redis会合并小的TCP包从而节省带宽，但会增加同步延迟（40ms），
+<a id="__codelineno-10-211" name="__codelineno-10-211" href="#__codelineno-10-211"></a># 造成master与slave数据不一致 假如设置成no，则redis master会立即发送同步数据，没有延迟。
+<a id="__codelineno-10-212" name="__codelineno-10-212" href="#__codelineno-10-212"></a>repl-disable-tcp-nodelay no
+<a id="__codelineno-10-213" name="__codelineno-10-213" href="#__codelineno-10-213"></a>
+<a id="__codelineno-10-214" name="__codelineno-10-214" href="#__codelineno-10-214"></a># 设置主从复制backlog容量大小。这个 backlog 是一个用来在 slaves 被断开连接时存放 slave 数据的 buffer，
+<a id="__codelineno-10-215" name="__codelineno-10-215" href="#__codelineno-10-215"></a>#所以当一个 slave 想要重新连接，通常不希望全部重新同步，只是部分同步就够了，
+<a id="__codelineno-10-216" name="__codelineno-10-216" href="#__codelineno-10-216"></a>#仅仅传递 slave 在断开连接时丢失的这部分数据。这个值越大，salve 可以断开连接的时间就越长
+<a id="__codelineno-10-217" name="__codelineno-10-217" href="#__codelineno-10-217"></a># repl-backlog-size 1mb
+<a id="__codelineno-10-218" name="__codelineno-10-218" href="#__codelineno-10-218"></a>
+<a id="__codelineno-10-219" name="__codelineno-10-219" href="#__codelineno-10-219"></a># 配置当master和slave失去联系多少秒之后，清空backlog释放空间。当配置成0时，表示永远不清空
+<a id="__codelineno-10-220" name="__codelineno-10-220" href="#__codelineno-10-220"></a># repl-backlog-ttl 3600
+<a id="__codelineno-10-221" name="__codelineno-10-221" href="#__codelineno-10-221"></a>
+<a id="__codelineno-10-222" name="__codelineno-10-222" href="#__codelineno-10-222"></a>#当 master 不能正常工作的时候，Redis Sentinel 会从 slaves 中选出一个新的 master，
+<a id="__codelineno-10-223" name="__codelineno-10-223" href="#__codelineno-10-223"></a>#这个值越小，就越会被优先选中，但是如果是 0 ， 那是意味着这个 slave 不可能被选中。 默认优先级为 100
+<a id="__codelineno-10-224" name="__codelineno-10-224" href="#__codelineno-10-224"></a>replica-priority 100
+<a id="__codelineno-10-225" name="__codelineno-10-225" href="#__codelineno-10-225"></a>
+<a id="__codelineno-10-226" name="__codelineno-10-226" href="#__codelineno-10-226"></a>
+<a id="__codelineno-10-227" name="__codelineno-10-227" href="#__codelineno-10-227"></a>
+<a id="__codelineno-10-228" name="__codelineno-10-228" href="#__codelineno-10-228"></a>
+<a id="__codelineno-10-229" name="__codelineno-10-229" href="#__codelineno-10-229"></a>################################## SECURITY(安全) ###################################
+<a id="__codelineno-10-230" name="__codelineno-10-230" href="#__codelineno-10-230"></a>#ACL日志存储在内存中并消耗内存，设置此项可以设置最大值来回收内存
+<a id="__codelineno-10-231" name="__codelineno-10-231" href="#__codelineno-10-231"></a>acllog-max-len 128
+<a id="__codelineno-10-232" name="__codelineno-10-232" href="#__codelineno-10-232"></a>
+<a id="__codelineno-10-233" name="__codelineno-10-233" href="#__codelineno-10-233"></a># acl 日志文件
+<a id="__codelineno-10-234" name="__codelineno-10-234" href="#__codelineno-10-234"></a># aclfile /etc/redis/users.acl
+<a id="__codelineno-10-235" name="__codelineno-10-235" href="#__codelineno-10-235"></a>
+<a id="__codelineno-10-236" name="__codelineno-10-236" href="#__codelineno-10-236"></a># 设置Redis连接密码
+<a id="__codelineno-10-237" name="__codelineno-10-237" href="#__codelineno-10-237"></a>requirepass xiu123
+<a id="__codelineno-10-238" name="__codelineno-10-238" href="#__codelineno-10-238"></a>
+<a id="__codelineno-10-239" name="__codelineno-10-239" href="#__codelineno-10-239"></a># 将命令重命名。为了安全考虑，可以将某些重要的、危险的命令重命名。
+<a id="__codelineno-10-240" name="__codelineno-10-240" href="#__codelineno-10-240"></a>#当你把某个命令重命名成空字符串的时候就等于取消了这个命令。
+<a id="__codelineno-10-241" name="__codelineno-10-241" href="#__codelineno-10-241"></a># rename-command CONFIG &quot;&quot;
+<a id="__codelineno-10-242" name="__codelineno-10-242" href="#__codelineno-10-242"></a>
+<a id="__codelineno-10-243" name="__codelineno-10-243" href="#__codelineno-10-243"></a>
+<a id="__codelineno-10-244" name="__codelineno-10-244" href="#__codelineno-10-244"></a>################################### CLIENTS(客户端) ####################################
+<a id="__codelineno-10-245" name="__codelineno-10-245" href="#__codelineno-10-245"></a>
+<a id="__codelineno-10-246" name="__codelineno-10-246" href="#__codelineno-10-246"></a># 客户端最大连接数
+<a id="__codelineno-10-247" name="__codelineno-10-247" href="#__codelineno-10-247"></a># maxclients 10000
+<a id="__codelineno-10-248" name="__codelineno-10-248" href="#__codelineno-10-248"></a>
+<a id="__codelineno-10-249" name="__codelineno-10-249" href="#__codelineno-10-249"></a>############################## MEMORY MANAGEMENT(内存管理) ################################
+<a id="__codelineno-10-250" name="__codelineno-10-250" href="#__codelineno-10-250"></a>
+<a id="__codelineno-10-251" name="__codelineno-10-251" href="#__codelineno-10-251"></a># 指定Redis最大内存限制。达到内存限制时，Redis将尝试删除已到期或即将到期的Key
+<a id="__codelineno-10-252" name="__codelineno-10-252" href="#__codelineno-10-252"></a># maxmemory &lt;bytes&gt;
+<a id="__codelineno-10-253" name="__codelineno-10-253" href="#__codelineno-10-253"></a>
+<a id="__codelineno-10-254" name="__codelineno-10-254" href="#__codelineno-10-254"></a># 存储到达最大内存限制的key删除策略
+<a id="__codelineno-10-255" name="__codelineno-10-255" href="#__codelineno-10-255"></a>#1.volatile-lru：利用LRU算法移除设置过过期时间的key (LRU:最近使用 Least Recently Used )
+<a id="__codelineno-10-256" name="__codelineno-10-256" href="#__codelineno-10-256"></a>#2.allkeys-lru：利用LRU算法移除任何key
+<a id="__codelineno-10-257" name="__codelineno-10-257" href="#__codelineno-10-257"></a>#3.volatile-random：移除设置过过期时间的随机key
+<a id="__codelineno-10-258" name="__codelineno-10-258" href="#__codelineno-10-258"></a>#4.allkeys-random：移除随机key
+<a id="__codelineno-10-259" name="__codelineno-10-259" href="#__codelineno-10-259"></a>#5.volatile-ttl：移除即将过期的key(minor TTL)
+<a id="__codelineno-10-260" name="__codelineno-10-260" href="#__codelineno-10-260"></a>#6.noeviction：不移除任何key，只是返回一个写错误 。默认选项
+<a id="__codelineno-10-261" name="__codelineno-10-261" href="#__codelineno-10-261"></a># maxmemory-policy noeviction
+<a id="__codelineno-10-262" name="__codelineno-10-262" href="#__codelineno-10-262"></a>
+<a id="__codelineno-10-263" name="__codelineno-10-263" href="#__codelineno-10-263"></a># LRU 和 minimal TTL 算法都不是精准的算法，但是相对精确的算法(为了节省内存)，随意你可以选择样本大小进行检测
+<a id="__codelineno-10-264" name="__codelineno-10-264" href="#__codelineno-10-264"></a># maxmemory-samples 5
+<a id="__codelineno-10-265" name="__codelineno-10-265" href="#__codelineno-10-265"></a>
+<a id="__codelineno-10-266" name="__codelineno-10-266" href="#__codelineno-10-266"></a># 从 Redis 5 开始，默认情况下，replica 节点会忽略 maxmemory 设置（除非在发生 failover 后，此节点被提升为 master 节点）。
+<a id="__codelineno-10-267" name="__codelineno-10-267" href="#__codelineno-10-267"></a># 这意味着只有 master 才会执行过期删除策略，并且 master 在删除键之后会对 replica 发送 DEL 命令。
+<a id="__codelineno-10-268" name="__codelineno-10-268" href="#__codelineno-10-268"></a># replica-ignore-maxmemory yes
+<a id="__codelineno-10-269" name="__codelineno-10-269" href="#__codelineno-10-269"></a>
+<a id="__codelineno-10-270" name="__codelineno-10-270" href="#__codelineno-10-270"></a>
+<a id="__codelineno-10-271" name="__codelineno-10-271" href="#__codelineno-10-271"></a>############################# LAZY FREEING （惰性删除） ####################################
+<a id="__codelineno-10-272" name="__codelineno-10-272" href="#__codelineno-10-272"></a>
+<a id="__codelineno-10-273" name="__codelineno-10-273" href="#__codelineno-10-273"></a>
+<a id="__codelineno-10-274" name="__codelineno-10-274" href="#__codelineno-10-274"></a># 针对redis内存使用达到maxmeory，并设置有淘汰策略时，在被动淘汰键时，是否采用lazy free机制。
+<a id="__codelineno-10-275" name="__codelineno-10-275" href="#__codelineno-10-275"></a># 因为此场景开启lazy free, 可能使用淘汰键的内存释放不及时，导致redis内存超用，超过maxmemory的限制
+<a id="__codelineno-10-276" name="__codelineno-10-276" href="#__codelineno-10-276"></a>lazyfree-lazy-eviction no
+<a id="__codelineno-10-277" name="__codelineno-10-277" href="#__codelineno-10-277"></a>
+<a id="__codelineno-10-278" name="__codelineno-10-278" href="#__codelineno-10-278"></a># 针对设置有TTL的键，达到过期后，被redis清理删除时是否采用lazy free机制。
+<a id="__codelineno-10-279" name="__codelineno-10-279" href="#__codelineno-10-279"></a># 此场景建议开启，因TTL本身是自适应调整的速度。
+<a id="__codelineno-10-280" name="__codelineno-10-280" href="#__codelineno-10-280"></a>lazyfree-lazy-expire no
+<a id="__codelineno-10-281" name="__codelineno-10-281" href="#__codelineno-10-281"></a>
+<a id="__codelineno-10-282" name="__codelineno-10-282" href="#__codelineno-10-282"></a># 针对有些指令在处理已存在的键时，会带有一个隐式的DEL键的操作。如rename命令，当目标键已存在,redis会先删除目标键，
+<a id="__codelineno-10-283" name="__codelineno-10-283" href="#__codelineno-10-283"></a># 如果这些目标键是一个big key,那就会引入阻塞删除的性能问题。 此参数设置就是解决这类问题，建议可开启。
+<a id="__codelineno-10-284" name="__codelineno-10-284" href="#__codelineno-10-284"></a>lazyfree-lazy-server-del no
+<a id="__codelineno-10-285" name="__codelineno-10-285" href="#__codelineno-10-285"></a>
+<a id="__codelineno-10-286" name="__codelineno-10-286" href="#__codelineno-10-286"></a># 针对slave进行全量数据同步，slave在加载master的RDB文件前，会运行flushall来清理自己的数据场景，参数设置决定是否采用异常flush机制。
+<a id="__codelineno-10-287" name="__codelineno-10-287" href="#__codelineno-10-287"></a># 如果内存变动不大，建议可开启。可减少全量同步耗时，从而减少主库因输出缓冲区爆涨引起的内存使用增长
+<a id="__codelineno-10-288" name="__codelineno-10-288" href="#__codelineno-10-288"></a>replica-lazy-flush no
+<a id="__codelineno-10-289" name="__codelineno-10-289" href="#__codelineno-10-289"></a>
+<a id="__codelineno-10-290" name="__codelineno-10-290" href="#__codelineno-10-290"></a># 对于替换用户代码DEL调用的情况，也可以这样做
+<a id="__codelineno-10-291" name="__codelineno-10-291" href="#__codelineno-10-291"></a># 使用UNLINK调用是不容易的，要修改DEL的默认行为
+<a id="__codelineno-10-292" name="__codelineno-10-292" href="#__codelineno-10-292"></a># 命令的行为完全像UNLINK。
+<a id="__codelineno-10-293" name="__codelineno-10-293" href="#__codelineno-10-293"></a>lazyfree-lazy-user-del no
+<a id="__codelineno-10-294" name="__codelineno-10-294" href="#__codelineno-10-294"></a>
+<a id="__codelineno-10-295" name="__codelineno-10-295" href="#__codelineno-10-295"></a>lazyfree-lazy-user-flush no
+<a id="__codelineno-10-296" name="__codelineno-10-296" href="#__codelineno-10-296"></a>
+<a id="__codelineno-10-297" name="__codelineno-10-297" href="#__codelineno-10-297"></a>################################ THREADED I/O(线程 IO) #################################
+<a id="__codelineno-10-298" name="__codelineno-10-298" href="#__codelineno-10-298"></a>
+<a id="__codelineno-10-299" name="__codelineno-10-299" href="#__codelineno-10-299"></a>
+<a id="__codelineno-10-300" name="__codelineno-10-300" href="#__codelineno-10-300"></a># io-threads 4
+<a id="__codelineno-10-301" name="__codelineno-10-301" href="#__codelineno-10-301"></a>#
+<a id="__codelineno-10-302" name="__codelineno-10-302" href="#__codelineno-10-302"></a># 
+<a id="__codelineno-10-303" name="__codelineno-10-303" href="#__codelineno-10-303"></a># io-threads-do-reads no
+<a id="__codelineno-10-304" name="__codelineno-10-304" href="#__codelineno-10-304"></a>
+<a id="__codelineno-10-305" name="__codelineno-10-305" href="#__codelineno-10-305"></a>
+<a id="__codelineno-10-306" name="__codelineno-10-306" href="#__codelineno-10-306"></a>############################ KERNEL OOM CONTROL ##############################
+<a id="__codelineno-10-307" name="__codelineno-10-307" href="#__codelineno-10-307"></a>
+<a id="__codelineno-10-308" name="__codelineno-10-308" href="#__codelineno-10-308"></a># On Linux, it is possible to hint the kernel OOM killer on what processes
+<a id="__codelineno-10-309" name="__codelineno-10-309" href="#__codelineno-10-309"></a># should be killed first when out of memory.
+<a id="__codelineno-10-310" name="__codelineno-10-310" href="#__codelineno-10-310"></a>#
+<a id="__codelineno-10-311" name="__codelineno-10-311" href="#__codelineno-10-311"></a># Enabling this feature makes Redis actively control the oom_score_adj value
+<a id="__codelineno-10-312" name="__codelineno-10-312" href="#__codelineno-10-312"></a># for all its processes, depending on their role. The default scores will
+<a id="__codelineno-10-313" name="__codelineno-10-313" href="#__codelineno-10-313"></a># attempt to have background child processes killed before all others, and
+<a id="__codelineno-10-314" name="__codelineno-10-314" href="#__codelineno-10-314"></a># replicas killed before masters.
+<a id="__codelineno-10-315" name="__codelineno-10-315" href="#__codelineno-10-315"></a>#
+<a id="__codelineno-10-316" name="__codelineno-10-316" href="#__codelineno-10-316"></a># Redis supports three options:
+<a id="__codelineno-10-317" name="__codelineno-10-317" href="#__codelineno-10-317"></a>#
+<a id="__codelineno-10-318" name="__codelineno-10-318" href="#__codelineno-10-318"></a># no:       Don&#39;t make changes to oom-score-adj (default).
+<a id="__codelineno-10-319" name="__codelineno-10-319" href="#__codelineno-10-319"></a># yes:      Alias to &quot;relative&quot; see below.
+<a id="__codelineno-10-320" name="__codelineno-10-320" href="#__codelineno-10-320"></a># absolute: Values in oom-score-adj-values are written as is to the kernel.
+<a id="__codelineno-10-321" name="__codelineno-10-321" href="#__codelineno-10-321"></a># relative: Values are used relative to the initial value of oom_score_adj when
+<a id="__codelineno-10-322" name="__codelineno-10-322" href="#__codelineno-10-322"></a>#           the server starts and are then clamped to a range of -1000 to 1000.
+<a id="__codelineno-10-323" name="__codelineno-10-323" href="#__codelineno-10-323"></a>#           Because typically the initial value is 0, they will often match the
+<a id="__codelineno-10-324" name="__codelineno-10-324" href="#__codelineno-10-324"></a>#           absolute values.
+<a id="__codelineno-10-325" name="__codelineno-10-325" href="#__codelineno-10-325"></a>oom-score-adj no
+<a id="__codelineno-10-326" name="__codelineno-10-326" href="#__codelineno-10-326"></a>
+<a id="__codelineno-10-327" name="__codelineno-10-327" href="#__codelineno-10-327"></a># When oom-score-adj is used, this directive controls the specific values used
+<a id="__codelineno-10-328" name="__codelineno-10-328" href="#__codelineno-10-328"></a># for master, replica and background child processes. Values range -2000 to
+<a id="__codelineno-10-329" name="__codelineno-10-329" href="#__codelineno-10-329"></a># 2000 (higher means more likely to be killed).
+<a id="__codelineno-10-330" name="__codelineno-10-330" href="#__codelineno-10-330"></a>#
+<a id="__codelineno-10-331" name="__codelineno-10-331" href="#__codelineno-10-331"></a># Unprivileged processes (not root, and without CAP_SYS_RESOURCE capabilities)
+<a id="__codelineno-10-332" name="__codelineno-10-332" href="#__codelineno-10-332"></a># can freely increase their value, but not decrease it below its initial
+<a id="__codelineno-10-333" name="__codelineno-10-333" href="#__codelineno-10-333"></a># settings. This means that setting oom-score-adj to &quot;relative&quot; and setting the
+<a id="__codelineno-10-334" name="__codelineno-10-334" href="#__codelineno-10-334"></a># oom-score-adj-values to positive values will always succeed.
+<a id="__codelineno-10-335" name="__codelineno-10-335" href="#__codelineno-10-335"></a>oom-score-adj-values 0 200 800
+<a id="__codelineno-10-336" name="__codelineno-10-336" href="#__codelineno-10-336"></a>
+<a id="__codelineno-10-337" name="__codelineno-10-337" href="#__codelineno-10-337"></a>
+<a id="__codelineno-10-338" name="__codelineno-10-338" href="#__codelineno-10-338"></a>#################### KERNEL transparent hugepage CONTROL ######################
+<a id="__codelineno-10-339" name="__codelineno-10-339" href="#__codelineno-10-339"></a>
+<a id="__codelineno-10-340" name="__codelineno-10-340" href="#__codelineno-10-340"></a># Usually the kernel Transparent Huge Pages control is set to &quot;madvise&quot; or
+<a id="__codelineno-10-341" name="__codelineno-10-341" href="#__codelineno-10-341"></a># or &quot;never&quot; by default (/sys/kernel/mm/transparent_hugepage/enabled), in which
+<a id="__codelineno-10-342" name="__codelineno-10-342" href="#__codelineno-10-342"></a># case this config has no effect. On systems in which it is set to &quot;always&quot;,
+<a id="__codelineno-10-343" name="__codelineno-10-343" href="#__codelineno-10-343"></a># redis will attempt to disable it specifically for the redis process in order
+<a id="__codelineno-10-344" name="__codelineno-10-344" href="#__codelineno-10-344"></a># to avoid latency problems specifically with fork(2) and CoW.
+<a id="__codelineno-10-345" name="__codelineno-10-345" href="#__codelineno-10-345"></a># If for some reason you prefer to keep it enabled, you can set this config to
+<a id="__codelineno-10-346" name="__codelineno-10-346" href="#__codelineno-10-346"></a># &quot;no&quot; and the kernel global to &quot;always&quot;.
+<a id="__codelineno-10-347" name="__codelineno-10-347" href="#__codelineno-10-347"></a>
+<a id="__codelineno-10-348" name="__codelineno-10-348" href="#__codelineno-10-348"></a>disable-thp yes
+<a id="__codelineno-10-349" name="__codelineno-10-349" href="#__codelineno-10-349"></a>
+<a id="__codelineno-10-350" name="__codelineno-10-350" href="#__codelineno-10-350"></a>############################## APPEND ONLY MODE （AOF持久化） ###############################
+<a id="__codelineno-10-351" name="__codelineno-10-351" href="#__codelineno-10-351"></a>
+<a id="__codelineno-10-352" name="__codelineno-10-352" href="#__codelineno-10-352"></a>#是否启用aof持久化方式
+<a id="__codelineno-10-353" name="__codelineno-10-353" href="#__codelineno-10-353"></a>appendonly no
+<a id="__codelineno-10-354" name="__codelineno-10-354" href="#__codelineno-10-354"></a>
+<a id="__codelineno-10-355" name="__codelineno-10-355" href="#__codelineno-10-355"></a>#aof持久化文件名
+<a id="__codelineno-10-356" name="__codelineno-10-356" href="#__codelineno-10-356"></a>appendfilename &quot;appendonly.aof&quot;
+<a id="__codelineno-10-357" name="__codelineno-10-357" href="#__codelineno-10-357"></a>
+<a id="__codelineno-10-358" name="__codelineno-10-358" href="#__codelineno-10-358"></a>#aof文件刷新的频率。有三种：
+<a id="__codelineno-10-359" name="__codelineno-10-359" href="#__codelineno-10-359"></a># 1.no 依靠OS进行刷新，redis不主动刷新AOF，这样最快，但安全性就差。
+<a id="__codelineno-10-360" name="__codelineno-10-360" href="#__codelineno-10-360"></a># 2.always 每提交一个修改命令都调用fsync刷新到AOF文件，非常非常慢，但也非常安全。
+<a id="__codelineno-10-361" name="__codelineno-10-361" href="#__codelineno-10-361"></a># 3.everysec 每秒钟都调用fsync刷新到AOF文件，很快，但可能会丢失一秒以内的数据。
+<a id="__codelineno-10-362" name="__codelineno-10-362" href="#__codelineno-10-362"></a>
+<a id="__codelineno-10-363" name="__codelineno-10-363" href="#__codelineno-10-363"></a># appendfsync always
+<a id="__codelineno-10-364" name="__codelineno-10-364" href="#__codelineno-10-364"></a>appendfsync everysec
+<a id="__codelineno-10-365" name="__codelineno-10-365" href="#__codelineno-10-365"></a># appendfsync no
+<a id="__codelineno-10-366" name="__codelineno-10-366" href="#__codelineno-10-366"></a>
+<a id="__codelineno-10-367" name="__codelineno-10-367" href="#__codelineno-10-367"></a># 指定是否在后台aof文件rewrite期间调用fsync，默认为no，表示要调用fsync
+<a id="__codelineno-10-368" name="__codelineno-10-368" href="#__codelineno-10-368"></a># Redis在后台写RDB文件或重写AOF文件期间会存在大量磁盘IO，此时，在某些linux系统中，调用fsync可能会阻塞
+<a id="__codelineno-10-369" name="__codelineno-10-369" href="#__codelineno-10-369"></a>no-appendfsync-on-rewrite no
+<a id="__codelineno-10-370" name="__codelineno-10-370" href="#__codelineno-10-370"></a>
+<a id="__codelineno-10-371" name="__codelineno-10-371" href="#__codelineno-10-371"></a># aof自动重写配置，aof文件增长比例到达该配置后重写。
+<a id="__codelineno-10-372" name="__codelineno-10-372" href="#__codelineno-10-372"></a># aof重写即在aof文件在一定大小之后，重新将整个内存写到aof文件当中，以反映最新的状态(相当于bgsave)。
+<a id="__codelineno-10-373" name="__codelineno-10-373" href="#__codelineno-10-373"></a># 避免了aof文件过大而实际内存数据小的问题(频繁修改数据问题)
+<a id="__codelineno-10-374" name="__codelineno-10-374" href="#__codelineno-10-374"></a>auto-aof-rewrite-percentage 100
+<a id="__codelineno-10-375" name="__codelineno-10-375" href="#__codelineno-10-375"></a>#aof文件重写最小的文件大小，即最开始aof文件必须要达到这个文件时才触发，
+<a id="__codelineno-10-376" name="__codelineno-10-376" href="#__codelineno-10-376"></a>#后面的每次重写就不会根据这个变量了(根据上一次重写完成之后的大小)
+<a id="__codelineno-10-377" name="__codelineno-10-377" href="#__codelineno-10-377"></a>auto-aof-rewrite-min-size 64mb
+<a id="__codelineno-10-378" name="__codelineno-10-378" href="#__codelineno-10-378"></a>
+<a id="__codelineno-10-379" name="__codelineno-10-379" href="#__codelineno-10-379"></a>#指redis在恢复时，会忽略最后一条可能存在问题的指令。默认值yes。
+<a id="__codelineno-10-380" name="__codelineno-10-380" href="#__codelineno-10-380"></a>#即在aof写入时，可能存在指令写错的问题(突然断电，写了一半)，这种情况下，yes会log并继续，而no会直接恢复失败。
+<a id="__codelineno-10-381" name="__codelineno-10-381" href="#__codelineno-10-381"></a>aof-load-truncated yes
+<a id="__codelineno-10-382" name="__codelineno-10-382" href="#__codelineno-10-382"></a>
+<a id="__codelineno-10-383" name="__codelineno-10-383" href="#__codelineno-10-383"></a>#混合持久化 在开启了这个功能之后，AOF重写产生的文件将同时包含RDB格式的内容和AOF格式的内容
+<a id="__codelineno-10-384" name="__codelineno-10-384" href="#__codelineno-10-384"></a>aof-use-rdb-preamble yes
+<a id="__codelineno-10-385" name="__codelineno-10-385" href="#__codelineno-10-385"></a>
+<a id="__codelineno-10-386" name="__codelineno-10-386" href="#__codelineno-10-386"></a>################################ LUA SCRIPTING(LUA 脚本) ###############################
+<a id="__codelineno-10-387" name="__codelineno-10-387" href="#__codelineno-10-387"></a>
+<a id="__codelineno-10-388" name="__codelineno-10-388" href="#__codelineno-10-388"></a>#一个Lua脚本最长的执行时间，单位为毫秒
+<a id="__codelineno-10-389" name="__codelineno-10-389" href="#__codelineno-10-389"></a>lua-time-limit 5000
+<a id="__codelineno-10-390" name="__codelineno-10-390" href="#__codelineno-10-390"></a>
+<a id="__codelineno-10-391" name="__codelineno-10-391" href="#__codelineno-10-391"></a>################################ REDIS CLUSTER (集群) ###############################
+<a id="__codelineno-10-392" name="__codelineno-10-392" href="#__codelineno-10-392"></a>
+<a id="__codelineno-10-393" name="__codelineno-10-393" href="#__codelineno-10-393"></a>
+<a id="__codelineno-10-394" name="__codelineno-10-394" href="#__codelineno-10-394"></a># 如果是yes，表示启用集群，否则以单例模式启动
+<a id="__codelineno-10-395" name="__codelineno-10-395" href="#__codelineno-10-395"></a># cluster-enabled yes
+<a id="__codelineno-10-396" name="__codelineno-10-396" href="#__codelineno-10-396"></a>
+<a id="__codelineno-10-397" name="__codelineno-10-397" href="#__codelineno-10-397"></a># 集群配置文件 Redis集群节点自动持久化每次配置的改变，为了在启动的时候重新读取它
+<a id="__codelineno-10-398" name="__codelineno-10-398" href="#__codelineno-10-398"></a># cluster-config-file nodes-6379.conf
+<a id="__codelineno-10-399" name="__codelineno-10-399" href="#__codelineno-10-399"></a>
+<a id="__codelineno-10-400" name="__codelineno-10-400" href="#__codelineno-10-400"></a># 集群节点不可用的最大时间。如果一个master节点不可到达超过了指定时间，则认为它失败了
+<a id="__codelineno-10-401" name="__codelineno-10-401" href="#__codelineno-10-401"></a># cluster-node-timeout 15000
+<a id="__codelineno-10-402" name="__codelineno-10-402" href="#__codelineno-10-402"></a>
+<a id="__codelineno-10-403" name="__codelineno-10-403" href="#__codelineno-10-403"></a># 在进行故障转移的时候，全部slave都会请求申请为master，
+<a id="__codelineno-10-404" name="__codelineno-10-404" href="#__codelineno-10-404"></a># 但是有些slave可能与master断开连接一段时间了，导致数据过于陈旧，这样的slave不应该被提升为master。
+<a id="__codelineno-10-405" name="__codelineno-10-405" href="#__codelineno-10-405"></a># 该参数就是用来判断slave节点与master断线的时间是否过长。
+<a id="__codelineno-10-406" name="__codelineno-10-406" href="#__codelineno-10-406"></a>#判断方法是：
+<a id="__codelineno-10-407" name="__codelineno-10-407" href="#__codelineno-10-407"></a>#比较slave断开连接的时间和(node-timeout * slave-validity-factor) + repl-ping-slave-period
+<a id="__codelineno-10-408" name="__codelineno-10-408" href="#__codelineno-10-408"></a>#如果节点超时时间为三十秒, 并且slave-validity-factor为10,假设默认的repl-ping-slave-period是10
+<a id="__codelineno-10-409" name="__codelineno-10-409" href="#__codelineno-10-409"></a>秒，即如果超过310秒slave将不会尝试进行故障转移
+<a id="__codelineno-10-410" name="__codelineno-10-410" href="#__codelineno-10-410"></a># cluster-replica-validity-factor 10
+<a id="__codelineno-10-411" name="__codelineno-10-411" href="#__codelineno-10-411"></a>
+<a id="__codelineno-10-412" name="__codelineno-10-412" href="#__codelineno-10-412"></a># 一个master和slave保持连接的最小数量（即：最少与多少个slave保持连接），
+<a id="__codelineno-10-413" name="__codelineno-10-413" href="#__codelineno-10-413"></a>#也就是说至少与其它多少slave保持连接的slave才有资格成为master(故障转移)
+<a id="__codelineno-10-414" name="__codelineno-10-414" href="#__codelineno-10-414"></a># cluster-migration-barrier 1
+<a id="__codelineno-10-415" name="__codelineno-10-415" href="#__codelineno-10-415"></a>
+<a id="__codelineno-10-416" name="__codelineno-10-416" href="#__codelineno-10-416"></a>
+<a id="__codelineno-10-417" name="__codelineno-10-417" href="#__codelineno-10-417"></a># 是否允许故障自动迁移
+<a id="__codelineno-10-418" name="__codelineno-10-418" href="#__codelineno-10-418"></a># cluster-allow-replica-migration yes
+<a id="__codelineno-10-419" name="__codelineno-10-419" href="#__codelineno-10-419"></a>
+<a id="__codelineno-10-420" name="__codelineno-10-420" href="#__codelineno-10-420"></a># 集群全部的slot有节点负责，集群状态才为ok，才能提供服务。设置为no，可以在slot没有全部分配的时候提供服务。
+<a id="__codelineno-10-421" name="__codelineno-10-421" href="#__codelineno-10-421"></a>#不建议打开该配置，这样会造成分区的时候，小分区的master一直在接受写请求，而造成很长时间数据不一致
+<a id="__codelineno-10-422" name="__codelineno-10-422" href="#__codelineno-10-422"></a># cluster-require-full-coverage yes
+<a id="__codelineno-10-423" name="__codelineno-10-423" href="#__codelineno-10-423"></a>
+<a id="__codelineno-10-424" name="__codelineno-10-424" href="#__codelineno-10-424"></a># 此选项设置为yes时，可防止从设备尝试对其进行故障转移master在主故障期间。仍然可以强制执行手动故障转移
+<a id="__codelineno-10-425" name="__codelineno-10-425" href="#__codelineno-10-425"></a># cluster-replica-no-failover no
+<a id="__codelineno-10-426" name="__codelineno-10-426" href="#__codelineno-10-426"></a>
+<a id="__codelineno-10-427" name="__codelineno-10-427" href="#__codelineno-10-427"></a># This option, when set to yes, allows nodes to serve read traffic while the
+<a id="__codelineno-10-428" name="__codelineno-10-428" href="#__codelineno-10-428"></a># the cluster is in a down state, as long as it believes it owns the slots. 
+<a id="__codelineno-10-429" name="__codelineno-10-429" href="#__codelineno-10-429"></a>#
+<a id="__codelineno-10-430" name="__codelineno-10-430" href="#__codelineno-10-430"></a># This is useful for two cases.  The first case is for when an application 
+<a id="__codelineno-10-431" name="__codelineno-10-431" href="#__codelineno-10-431"></a># doesn&#39;t require consistency of data during node failures or network partitions.
+<a id="__codelineno-10-432" name="__codelineno-10-432" href="#__codelineno-10-432"></a># One example of this is a cache, where as long as the node has the data it
+<a id="__codelineno-10-433" name="__codelineno-10-433" href="#__codelineno-10-433"></a># should be able to serve it. 
+<a id="__codelineno-10-434" name="__codelineno-10-434" href="#__codelineno-10-434"></a>#
+<a id="__codelineno-10-435" name="__codelineno-10-435" href="#__codelineno-10-435"></a># 是否允许集群在宕机时读取
+<a id="__codelineno-10-436" name="__codelineno-10-436" href="#__codelineno-10-436"></a># cluster-allow-reads-when-down no
+<a id="__codelineno-10-437" name="__codelineno-10-437" href="#__codelineno-10-437"></a>
+<a id="__codelineno-10-438" name="__codelineno-10-438" href="#__codelineno-10-438"></a>########################## CLUSTER DOCKER/NAT support(docker集群/NAT支持)  ########################
+<a id="__codelineno-10-439" name="__codelineno-10-439" href="#__codelineno-10-439"></a>
+<a id="__codelineno-10-440" name="__codelineno-10-440" href="#__codelineno-10-440"></a>
+<a id="__codelineno-10-441" name="__codelineno-10-441" href="#__codelineno-10-441"></a># 宣布IP地址
+<a id="__codelineno-10-442" name="__codelineno-10-442" href="#__codelineno-10-442"></a># cluster-announce-ip 10.1.1.5
+<a id="__codelineno-10-443" name="__codelineno-10-443" href="#__codelineno-10-443"></a># 宣布服务端口 tls端口
+<a id="__codelineno-10-444" name="__codelineno-10-444" href="#__codelineno-10-444"></a># cluster-announce-tls-port 6379
+<a id="__codelineno-10-445" name="__codelineno-10-445" href="#__codelineno-10-445"></a># cluster-announce-port 0
+<a id="__codelineno-10-446" name="__codelineno-10-446" href="#__codelineno-10-446"></a># 宣布集群总线端口
+<a id="__codelineno-10-447" name="__codelineno-10-447" href="#__codelineno-10-447"></a># cluster-announce-bus-port 6380
+<a id="__codelineno-10-448" name="__codelineno-10-448" href="#__codelineno-10-448"></a>
+<a id="__codelineno-10-449" name="__codelineno-10-449" href="#__codelineno-10-449"></a>################################## SLOW LOG(慢查询日志) ###################################
+<a id="__codelineno-10-450" name="__codelineno-10-450" href="#__codelineno-10-450"></a>
+<a id="__codelineno-10-451" name="__codelineno-10-451" href="#__codelineno-10-451"></a># 超过该查询配置事件的操作记录为慢查询
+<a id="__codelineno-10-452" name="__codelineno-10-452" href="#__codelineno-10-452"></a>slowlog-log-slower-than 10000
+<a id="__codelineno-10-453" name="__codelineno-10-453" href="#__codelineno-10-453"></a>
+<a id="__codelineno-10-454" name="__codelineno-10-454" href="#__codelineno-10-454"></a># 决定 slow log 最多能保存多少条日志， slow log 本身是一个 FIFO 队列（淘汰策略也是FIFO）
+<a id="__codelineno-10-455" name="__codelineno-10-455" href="#__codelineno-10-455"></a>slowlog-max-len 128
+<a id="__codelineno-10-456" name="__codelineno-10-456" href="#__codelineno-10-456"></a>
+<a id="__codelineno-10-457" name="__codelineno-10-457" href="#__codelineno-10-457"></a>################################ LATENCY MONITOR(延时监控) ##############################
+<a id="__codelineno-10-458" name="__codelineno-10-458" href="#__codelineno-10-458"></a>
+<a id="__codelineno-10-459" name="__codelineno-10-459" href="#__codelineno-10-459"></a># 能够采样不同的执行路径来知道redis阻塞在哪里。这使得调试各种延时问题变得简单，设置一个毫秒单位的延时阈值来开启延时监控。  
+<a id="__codelineno-10-460" name="__codelineno-10-460" href="#__codelineno-10-460"></a>latency-monitor-threshold 0
+<a id="__codelineno-10-461" name="__codelineno-10-461" href="#__codelineno-10-461"></a>
+<a id="__codelineno-10-462" name="__codelineno-10-462" href="#__codelineno-10-462"></a>############################# EVENT NOTIFICATION(事件通知) ##############################
+<a id="__codelineno-10-463" name="__codelineno-10-463" href="#__codelineno-10-463"></a>
+<a id="__codelineno-10-464" name="__codelineno-10-464" href="#__codelineno-10-464"></a># 键事件通知，可用参数：
+<a id="__codelineno-10-465" name="__codelineno-10-465" href="#__codelineno-10-465"></a># K 键空间通知，所有通知以 keyspace@ 为前缀.
+<a id="__codelineno-10-466" name="__codelineno-10-466" href="#__codelineno-10-466"></a># E 键事件通知，所有通知以 keyevent@ 为前缀
+<a id="__codelineno-10-467" name="__codelineno-10-467" href="#__codelineno-10-467"></a># g DEL 、 EXPIRE 、 RENAME 等类型无关的通用命令的通知
+<a id="__codelineno-10-468" name="__codelineno-10-468" href="#__codelineno-10-468"></a># $ 字符串命令的通知
+<a id="__codelineno-10-469" name="__codelineno-10-469" href="#__codelineno-10-469"></a># l 列表命令的通知
+<a id="__codelineno-10-470" name="__codelineno-10-470" href="#__codelineno-10-470"></a># s 集合命令的通知
+<a id="__codelineno-10-471" name="__codelineno-10-471" href="#__codelineno-10-471"></a># h 哈希命令的通知
+<a id="__codelineno-10-472" name="__codelineno-10-472" href="#__codelineno-10-472"></a># z 有序集合命令的通知
+<a id="__codelineno-10-473" name="__codelineno-10-473" href="#__codelineno-10-473"></a># x 过期事件：每当有过期键被删除时发送
+<a id="__codelineno-10-474" name="__codelineno-10-474" href="#__codelineno-10-474"></a># e 驱逐(evict)事件：每当有键因为 maxmemory 策略而被删除时发送
+<a id="__codelineno-10-475" name="__codelineno-10-475" href="#__codelineno-10-475"></a># A 参数 g$lshzxe 的别名
+<a id="__codelineno-10-476" name="__codelineno-10-476" href="#__codelineno-10-476"></a># 书写：notify-keyspace-events Ex
+<a id="__codelineno-10-477" name="__codelineno-10-477" href="#__codelineno-10-477"></a># 默认配置项：notify-keyspace-events &quot; &quot;
+<a id="__codelineno-10-478" name="__codelineno-10-478" href="#__codelineno-10-478"></a>
+<a id="__codelineno-10-479" name="__codelineno-10-479" href="#__codelineno-10-479"></a>#  notify-keyspace-events Ex
+<a id="__codelineno-10-480" name="__codelineno-10-480" href="#__codelineno-10-480"></a>#
+<a id="__codelineno-10-481" name="__codelineno-10-481" href="#__codelineno-10-481"></a>
+<a id="__codelineno-10-482" name="__codelineno-10-482" href="#__codelineno-10-482"></a>
+<a id="__codelineno-10-483" name="__codelineno-10-483" href="#__codelineno-10-483"></a>############################### GOPHER SERVER(GOPHER协议服务) #################################
+<a id="__codelineno-10-484" name="__codelineno-10-484" href="#__codelineno-10-484"></a>
+<a id="__codelineno-10-485" name="__codelineno-10-485" href="#__codelineno-10-485"></a># 开启gopher功能 Intemet上广泛使用的菜单式信息浏览工具
+<a id="__codelineno-10-486" name="__codelineno-10-486" href="#__codelineno-10-486"></a># gopher-enabled no
+<a id="__codelineno-10-487" name="__codelineno-10-487" href="#__codelineno-10-487"></a>
+<a id="__codelineno-10-488" name="__codelineno-10-488" href="#__codelineno-10-488"></a>############################### ADVANCED CONFIG（高级配置） ###############################
+<a id="__codelineno-10-489" name="__codelineno-10-489" href="#__codelineno-10-489"></a>
+<a id="__codelineno-10-490" name="__codelineno-10-490" href="#__codelineno-10-490"></a># 这个参数指的是ziplist中允许存储的最大条目个数，默认为512，建议为128。
+<a id="__codelineno-10-491" name="__codelineno-10-491" href="#__codelineno-10-491"></a>hash-max-ziplist-entries 512
+<a id="__codelineno-10-492" name="__codelineno-10-492" href="#__codelineno-10-492"></a># ziplist中允许条目value值最大字节数，默认为64，建议为1024。
+<a id="__codelineno-10-493" name="__codelineno-10-493" href="#__codelineno-10-493"></a>hash-max-ziplist-value 64
+<a id="__codelineno-10-494" name="__codelineno-10-494" href="#__codelineno-10-494"></a>
+<a id="__codelineno-10-495" name="__codelineno-10-495" href="#__codelineno-10-495"></a># ziplist列表最大值，默认存在五项：
+<a id="__codelineno-10-496" name="__codelineno-10-496" href="#__codelineno-10-496"></a>#   -5:最大大小:64 Kb &lt;——不建议用于正常工作负载
+<a id="__codelineno-10-497" name="__codelineno-10-497" href="#__codelineno-10-497"></a>#   -4:最大大小:32 Kb &lt;——不推荐
+<a id="__codelineno-10-498" name="__codelineno-10-498" href="#__codelineno-10-498"></a>#   -3:最大大小:16 Kb &lt;——可能不推荐
+<a id="__codelineno-10-499" name="__codelineno-10-499" href="#__codelineno-10-499"></a>#   -2:最大大小:8 Kb&lt;——很好
+<a id="__codelineno-10-500" name="__codelineno-10-500" href="#__codelineno-10-500"></a>#   -1:最大大小:4 Kb &lt;——好
+<a id="__codelineno-10-501" name="__codelineno-10-501" href="#__codelineno-10-501"></a>list-max-ziplist-size -2
+<a id="__codelineno-10-502" name="__codelineno-10-502" href="#__codelineno-10-502"></a>
+<a id="__codelineno-10-503" name="__codelineno-10-503" href="#__codelineno-10-503"></a>#  一个quicklist两端不被压缩的节点个数。
+<a id="__codelineno-10-504" name="__codelineno-10-504" href="#__codelineno-10-504"></a># 0: 表示都不压缩。这是Redis的默认值。
+<a id="__codelineno-10-505" name="__codelineno-10-505" href="#__codelineno-10-505"></a># 1: 表示quicklist两端各有1个节点不压缩，中间的节点压缩。
+<a id="__codelineno-10-506" name="__codelineno-10-506" href="#__codelineno-10-506"></a># 3: 表示quicklist两端各有3个节点不压缩，中间的节点压缩。
+<a id="__codelineno-10-507" name="__codelineno-10-507" href="#__codelineno-10-507"></a>list-compress-depth 0
+<a id="__codelineno-10-508" name="__codelineno-10-508" href="#__codelineno-10-508"></a>
+<a id="__codelineno-10-509" name="__codelineno-10-509" href="#__codelineno-10-509"></a># 当集合中的元素全是整数,且长度不超过set-max-intset-entries(默认为512个)时,redis会选用intset作为内部编码，大于512用set
+<a id="__codelineno-10-510" name="__codelineno-10-510" href="#__codelineno-10-510"></a>set-max-intset-entries 512
+<a id="__codelineno-10-511" name="__codelineno-10-511" href="#__codelineno-10-511"></a>
+<a id="__codelineno-10-512" name="__codelineno-10-512" href="#__codelineno-10-512"></a># 当有序集合的元素小于zset-max-ziplist-entries配置(默认是128个)
+<a id="__codelineno-10-513" name="__codelineno-10-513" href="#__codelineno-10-513"></a># 同时每个元素的值都小于zset-max-ziplist-value(默认是64字节)时
+<a id="__codelineno-10-514" name="__codelineno-10-514" href="#__codelineno-10-514"></a># Redis会用ziplist来作为有序集合的内部编码实现,ziplist可以有效的减少内存的使用。
+<a id="__codelineno-10-515" name="__codelineno-10-515" href="#__codelineno-10-515"></a>zset-max-ziplist-entries 128
+<a id="__codelineno-10-516" name="__codelineno-10-516" href="#__codelineno-10-516"></a>zset-max-ziplist-value 64
+<a id="__codelineno-10-517" name="__codelineno-10-517" href="#__codelineno-10-517"></a>
+<a id="__codelineno-10-518" name="__codelineno-10-518" href="#__codelineno-10-518"></a># value大小 小于等于hll-sparse-max-bytes使用稀疏数据结构（sparse），大于hll-sparse-max-bytes使用稠密的数据结构
+<a id="__codelineno-10-519" name="__codelineno-10-519" href="#__codelineno-10-519"></a>hll-sparse-max-bytes 3000
+<a id="__codelineno-10-520" name="__codelineno-10-520" href="#__codelineno-10-520"></a>
+<a id="__codelineno-10-521" name="__codelineno-10-521" href="#__codelineno-10-521"></a># Streams单个节点的字节数，以及切换到新节点之前可能包含的最大项目数。
+<a id="__codelineno-10-522" name="__codelineno-10-522" href="#__codelineno-10-522"></a>stream-node-max-bytes 4096
+<a id="__codelineno-10-523" name="__codelineno-10-523" href="#__codelineno-10-523"></a>stream-node-max-entries 100
+<a id="__codelineno-10-524" name="__codelineno-10-524" href="#__codelineno-10-524"></a>
+<a id="__codelineno-10-525" name="__codelineno-10-525" href="#__codelineno-10-525"></a># 主动重新散列每100毫秒CPU时间使用1毫秒，以帮助重新散列主Redis散列表（将顶级键映射到值）
+<a id="__codelineno-10-526" name="__codelineno-10-526" href="#__codelineno-10-526"></a>activerehashing yes
+<a id="__codelineno-10-527" name="__codelineno-10-527" href="#__codelineno-10-527"></a>
+<a id="__codelineno-10-528" name="__codelineno-10-528" href="#__codelineno-10-528"></a># 对客户端输出缓冲进行限制可以强迫那些不从服务器读取数据的客户端断开连接，用来强制关闭传输缓慢的客户端
+<a id="__codelineno-10-529" name="__codelineno-10-529" href="#__codelineno-10-529"></a>client-output-buffer-limit normal 0 0 0
+<a id="__codelineno-10-530" name="__codelineno-10-530" href="#__codelineno-10-530"></a># 对于slave client和MONITER client，如果client-output-buffer一旦超过256mb，又或者超过64mb持续60秒，那么服务器就会立即断开客户端连接。
+<a id="__codelineno-10-531" name="__codelineno-10-531" href="#__codelineno-10-531"></a>client-output-buffer-limit replica 256mb 64mb 60
+<a id="__codelineno-10-532" name="__codelineno-10-532" href="#__codelineno-10-532"></a># 对于pubsub client，如果client-output-buffer一旦超过32mb，又或者超过8mb持续60秒，那么服务器就会立即断开客户端连接。
+<a id="__codelineno-10-533" name="__codelineno-10-533" href="#__codelineno-10-533"></a>client-output-buffer-limit pubsub 32mb 8mb 60
+<a id="__codelineno-10-534" name="__codelineno-10-534" href="#__codelineno-10-534"></a>
+<a id="__codelineno-10-535" name="__codelineno-10-535" href="#__codelineno-10-535"></a># 客户端查询缓冲区累积新命令。 默认情况下，它被限制为固定数量，以避免协议失步（例如由于客户端中的错误）将导致查询缓冲区中的未绑定内存使用。
+<a id="__codelineno-10-536" name="__codelineno-10-536" href="#__codelineno-10-536"></a># 但是，如果您有非常特殊的需求，可以在此配置它，例如我们巨大执行请求。
+<a id="__codelineno-10-537" name="__codelineno-10-537" href="#__codelineno-10-537"></a># client-query-buffer-limit 1gb
+<a id="__codelineno-10-538" name="__codelineno-10-538" href="#__codelineno-10-538"></a>
+<a id="__codelineno-10-539" name="__codelineno-10-539" href="#__codelineno-10-539"></a># 在Redis协议中，批量请求（即表示单个字符串的元素）通常限制为512 MB。 但是，您可以在此更改此限制
+<a id="__codelineno-10-540" name="__codelineno-10-540" href="#__codelineno-10-540"></a># proto-max-bulk-len 512mb
+<a id="__codelineno-10-541" name="__codelineno-10-541" href="#__codelineno-10-541"></a>
+<a id="__codelineno-10-542" name="__codelineno-10-542" href="#__codelineno-10-542"></a># 默认情况下，hz设置为10.提高值时，在Redis处于空闲状态下，将使用更多CPU。范围介于1到500之间，
+<a id="__codelineno-10-543" name="__codelineno-10-543" href="#__codelineno-10-543"></a># 大多数用户应使用默认值10，除非仅在需要非常低延迟的环境中将此值提高到100。
+<a id="__codelineno-10-544" name="__codelineno-10-544" href="#__codelineno-10-544"></a>hz 10
+<a id="__codelineno-10-545" name="__codelineno-10-545" href="#__codelineno-10-545"></a>
+<a id="__codelineno-10-546" name="__codelineno-10-546" href="#__codelineno-10-546"></a># 启用动态HZ时，实际配置的HZ将用作基线，但是一旦连接了更多客户端，将根据实际需要使用配置的HZ值的倍数。
+<a id="__codelineno-10-547" name="__codelineno-10-547" href="#__codelineno-10-547"></a>dynamic-hz yes
+<a id="__codelineno-10-548" name="__codelineno-10-548" href="#__codelineno-10-548"></a>
+<a id="__codelineno-10-549" name="__codelineno-10-549" href="#__codelineno-10-549"></a># 当一个子进程重写AOF文件时，如果启用下面的选项，则文件每生成32M数据会被同步
+<a id="__codelineno-10-550" name="__codelineno-10-550" href="#__codelineno-10-550"></a>aof-rewrite-incremental-fsync yes
+<a id="__codelineno-10-551" name="__codelineno-10-551" href="#__codelineno-10-551"></a>
+<a id="__codelineno-10-552" name="__codelineno-10-552" href="#__codelineno-10-552"></a># 当redis保存RDB文件时，如果启用了以下选项，则每生成32 MB数据将对文件进行fsync。 
+<a id="__codelineno-10-553" name="__codelineno-10-553" href="#__codelineno-10-553"></a># 这对于以递增方式将文件提交到磁盘并避免大延迟峰值非常有用
+<a id="__codelineno-10-554" name="__codelineno-10-554" href="#__codelineno-10-554"></a>rdb-save-incremental-fsync yes
+<a id="__codelineno-10-555" name="__codelineno-10-555" href="#__codelineno-10-555"></a>
+<a id="__codelineno-10-556" name="__codelineno-10-556" href="#__codelineno-10-556"></a>
+<a id="__codelineno-10-557" name="__codelineno-10-557" href="#__codelineno-10-557"></a># lfu-log-factor 10
+<a id="__codelineno-10-558" name="__codelineno-10-558" href="#__codelineno-10-558"></a># lfu-decay-time 1
+<a id="__codelineno-10-559" name="__codelineno-10-559" href="#__codelineno-10-559"></a>
+<a id="__codelineno-10-560" name="__codelineno-10-560" href="#__codelineno-10-560"></a>########################### ACTIVE DEFRAGMENTATION（活跃的碎片整理） #######################
+<a id="__codelineno-10-561" name="__codelineno-10-561" href="#__codelineno-10-561"></a>
+<a id="__codelineno-10-562" name="__codelineno-10-562" href="#__codelineno-10-562"></a>
+<a id="__codelineno-10-563" name="__codelineno-10-563" href="#__codelineno-10-563"></a># 是否启用碎片整理
+<a id="__codelineno-10-564" name="__codelineno-10-564" href="#__codelineno-10-564"></a># activedefrag no
+<a id="__codelineno-10-565" name="__codelineno-10-565" href="#__codelineno-10-565"></a>
+<a id="__codelineno-10-566" name="__codelineno-10-566" href="#__codelineno-10-566"></a># 启动活动碎片整理的最小碎片浪费量
+<a id="__codelineno-10-567" name="__codelineno-10-567" href="#__codelineno-10-567"></a># active-defrag-ignore-bytes 100mb
+<a id="__codelineno-10-568" name="__codelineno-10-568" href="#__codelineno-10-568"></a>
+<a id="__codelineno-10-569" name="__codelineno-10-569" href="#__codelineno-10-569"></a># 启动碎片整理的最小碎片百分比
+<a id="__codelineno-10-570" name="__codelineno-10-570" href="#__codelineno-10-570"></a># active-defrag-threshold-lower 10
+<a id="__codelineno-10-571" name="__codelineno-10-571" href="#__codelineno-10-571"></a>
+<a id="__codelineno-10-572" name="__codelineno-10-572" href="#__codelineno-10-572"></a># 使用最大消耗时的最大碎片百分比
+<a id="__codelineno-10-573" name="__codelineno-10-573" href="#__codelineno-10-573"></a># active-defrag-threshold-upper 100
+<a id="__codelineno-10-574" name="__codelineno-10-574" href="#__codelineno-10-574"></a>
+<a id="__codelineno-10-575" name="__codelineno-10-575" href="#__codelineno-10-575"></a># 在CPU百分比中进行碎片整理的最小消耗
+<a id="__codelineno-10-576" name="__codelineno-10-576" href="#__codelineno-10-576"></a># active-defrag-cycle-min 1
+<a id="__codelineno-10-577" name="__codelineno-10-577" href="#__codelineno-10-577"></a>
+<a id="__codelineno-10-578" name="__codelineno-10-578" href="#__codelineno-10-578"></a># 在CPU百分比达到最大值时，进行碎片整理
+<a id="__codelineno-10-579" name="__codelineno-10-579" href="#__codelineno-10-579"></a># active-defrag-cycle-max 25
+<a id="__codelineno-10-580" name="__codelineno-10-580" href="#__codelineno-10-580"></a>
+<a id="__codelineno-10-581" name="__codelineno-10-581" href="#__codelineno-10-581"></a># 从set / hash / zset / list 扫描的最大字段数
+<a id="__codelineno-10-582" name="__codelineno-10-582" href="#__codelineno-10-582"></a># active-defrag-max-scan-fields 1000
+<a id="__codelineno-10-583" name="__codelineno-10-583" href="#__codelineno-10-583"></a>
+<a id="__codelineno-10-584" name="__codelineno-10-584" href="#__codelineno-10-584"></a># 默认情况下，用于清除的Jemalloc后台线程是启用的。
+<a id="__codelineno-10-585" name="__codelineno-10-585" href="#__codelineno-10-585"></a>jemalloc-bg-thread yes
+<a id="__codelineno-10-586" name="__codelineno-10-586" href="#__codelineno-10-586"></a>
+<a id="__codelineno-10-587" name="__codelineno-10-587" href="#__codelineno-10-587"></a>
+<a id="__codelineno-10-588" name="__codelineno-10-588" href="#__codelineno-10-588"></a>
+<a id="__codelineno-10-589" name="__codelineno-10-589" href="#__codelineno-10-589"></a># 设置 redis server的IO线程数
+<a id="__codelineno-10-590" name="__codelineno-10-590" href="#__codelineno-10-590"></a># server_cpulist 0-7:2
+<a id="__codelineno-10-591" name="__codelineno-10-591" href="#__codelineno-10-591"></a>#
+<a id="__codelineno-10-592" name="__codelineno-10-592" href="#__codelineno-10-592"></a>
+<a id="__codelineno-10-593" name="__codelineno-10-593" href="#__codelineno-10-593"></a># 设置 阻塞IO线程数
+<a id="__codelineno-10-594" name="__codelineno-10-594" href="#__codelineno-10-594"></a># bio_cpulist 1,3
+<a id="__codelineno-10-595" name="__codelineno-10-595" href="#__codelineno-10-595"></a>#
+<a id="__codelineno-10-596" name="__codelineno-10-596" href="#__codelineno-10-596"></a>
+<a id="__codelineno-10-597" name="__codelineno-10-597" href="#__codelineno-10-597"></a># aof_rewrite_cpulist 8-11
+<a id="__codelineno-10-598" name="__codelineno-10-598" href="#__codelineno-10-598"></a>#
+<a id="__codelineno-10-599" name="__codelineno-10-599" href="#__codelineno-10-599"></a>
+<a id="__codelineno-10-600" name="__codelineno-10-600" href="#__codelineno-10-600"></a># bgsave_cpulist 1,10-11
+<a id="__codelineno-10-601" name="__codelineno-10-601" href="#__codelineno-10-601"></a>
+<a id="__codelineno-10-602" name="__codelineno-10-602" href="#__codelineno-10-602"></a># In some cases redis will emit warnings and even refuse to start if it detects
+<a id="__codelineno-10-603" name="__codelineno-10-603" href="#__codelineno-10-603"></a># that the system is in bad state, it is possible to suppress these warnings
+<a id="__codelineno-10-604" name="__codelineno-10-604" href="#__codelineno-10-604"></a># by setting the following config which takes a space delimited list of warnings
+<a id="__codelineno-10-605" name="__codelineno-10-605" href="#__codelineno-10-605"></a># to suppress
+<a id="__codelineno-10-606" name="__codelineno-10-606" href="#__codelineno-10-606"></a>#
+<a id="__codelineno-10-607" name="__codelineno-10-607" href="#__codelineno-10-607"></a># ignore-warnings ARM64-COW-BUG
+</code></pre></div>
+<h2 id="参考文章">参考文章<a class="headerlink" href="#参考文章" title="Permanent link">🔱</a></h2>
+<ul>
+<li><a href="https://blog.csdn.net/weixin_45821811/article/details/116211724">最详细Docker安装Redis （含每一步的图解）实战</a></li>
+<li><a href="https://blog.csdn.net/qq_34908167/article/details/127090690">Redis-6.2.* 版本配置文件redis.conf详解</a></li>
+</ul>
+
+  <!--
+  Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Source file information -->
+<hr />
+<div class="md-source-file">
+  <small>
+    <!-- mkdocs-git-revision-date-localized-plugin -->
+      
+        Created:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 19, 2023 22:52:11</span>
+      
+      
+      <br />
+      Last update:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 19, 2023 22:52:11</span>
+    <!-- mkdocs-git-revision-date-plugin -->
+    
+  </small>
+</div>
+
+              
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022-2023  FYA·心愿所往 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">黑ICP备17009103号-1</a>
+    </a>
+    </div>
+  
+  
+<center id="siteTime">
+  <span id="timeDate">天</span><span id="times"></span>💓
+本站总访问量<span id="busuanzi_value_site_pv"></span>次💓
+本站访客数<span id="busuanzi_value_site_uv"></span>人次💓
+本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://121rh.com/feed_rss_updated.xml" target="_blank" rel="noopener" title="RSS订阅" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M25.57 176.1C12.41 175.4.912 185.2.052 198.4s9.173 24.65 22.39 25.5c120.1 7.875 225.7 112.7 233.6 233.6C256.9 470.3 267.4 480 279.1 480c.531 0 1.062-.031 1.594-.063 13.22-.843 23.25-12.28 22.39-25.5C294.6 310.3 169.7 185.4 25.57 176.1zM32 32C14.33 32 0 46.31 0 64s14.33 32 32 32c194.1 0 352 157.9 352 352 0 17.69 14.33 32 32 32s32-14.31 32-32C448 218.6 261.4 32 32 32zm31.1 319.9C28.63 351.9 0 380.6 0 416s28.63 64 63.1 64 64.08-28.62 64.08-64-27.81-64.1-64.08-64.1z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:<fyabwz@126.com>" target="_blank" rel="noopener" title="发送邮件" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m511.6 36.86-64 415.1a32.008 32.008 0 0 1-31.65 27.147c-4.188 0-8.319-.815-12.29-2.472l-122.6-51.1-50.86 76.29C226.3 508.5 219.8 512 212.8 512c-11.5 0-20.8-9.3-20.8-20.8v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96 122.3 360.3 19.69 317.5C8.438 312.8.812 302.2.062 289.1s5.47-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://gitee.com/fya666" target="_blank" rel="noopener" title="gitee地址" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://weibo.com/fyawbz" target="_blank" rel="noopener" title="VB联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+    </a>
+  
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1434090053&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" rel="noopener" title="QQ联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg>
+    </a>
+  
+    
+    
+    <a href="/life/weixin/" target="_blank" rel="noopener" title="VX联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+  
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/extra.js"></script>
+      
+        <script src="https://js.121rh.com/js/video.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/vue.js"></script>
+      
+        <script src="https://js.121rh.com/js/time.js"></script>
+      
+        <script src="https://js.121rh.com/js/console.js"></script>
+      
+        <script src="https://js.121rh.com/js/anime.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/jquery-3.3.1.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/G-CHY1TBZZVW.js"></script>
+      
+        <script src="https://js.121rh.com/js/G-NRCPMZGDT9.js"></script>
+      
+        <script src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+
+  </body>
+</html>

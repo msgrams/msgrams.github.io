@@ -7,15 +7,15 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="记录MK使用">
+        <meta name="description" content="使用ufw">
       
       
         <meta name="author" content="FYA">
       
       
-        <link rel="canonical" href="https://121rh.com/web/Mkdocs/">
+        <link rel="canonical" href="https://121rh.com/pc/raspberry/ufw/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">       
     
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" charset="UTF-8">
@@ -38,15 +38,15 @@
 
     
       
-        <title>mkdocs使用 - FYA·心愿所往</title>
+        <title>树莓派防火墙UFW - FYA·心愿所往</title>
       
     
     
   
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -75,7 +75,7 @@
     
       <link rel="stylesheet" href="https://qiniu.121rh.com/css/vssue.min.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
   
       
@@ -106,6 +106,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#一启动防火墙" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -116,9 +121,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="FYA·心愿所往" class="md-header__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+    <a href="../../.." title="FYA·心愿所往" class="md-header__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
       
-  <img src="../../assets/images/logo.png" alt="logo">
+  <img src="../../../assets/images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -134,7 +139,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              mkdocs使用
+              树莓派防火墙UFW
             
           </span>
         </div>
@@ -237,7 +242,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../.." class="md-tabs__link">
+    <a href="../../.." class="md-tabs__link">
       主页
     </a>
   </li>
@@ -249,7 +254,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../timeline/" class="md-tabs__link">
+    <a href="../../../timeline/" class="md-tabs__link">
       时间线
     </a>
   </li>
@@ -261,7 +266,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../life/" class="md-tabs__link">
+    <a href="../../../life/" class="md-tabs__link">
       生活
     </a>
   </li>
@@ -273,7 +278,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../algs/" class="md-tabs__link">
+    <a href="../../../algs/" class="md-tabs__link">
       算法
     </a>
   </li>
@@ -285,7 +290,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../app/" class="md-tabs__link">
+    <a href="../../../app/" class="md-tabs__link">
       后端
     </a>
   </li>
@@ -297,7 +302,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../pc/" class="md-tabs__link">
+    <a href="../../" class="md-tabs__link">
       计算机
     </a>
   </li>
@@ -324,9 +329,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="FYA·心愿所往" class="md-nav__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+    <a href="../../.." title="FYA·心愿所往" class="md-nav__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
       
-  <img src="../../assets/images/logo.png" alt="logo">
+  <img src="../../../assets/images/logo.png" alt="logo">
 
     </a>
     FYA·心愿所往
@@ -354,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         主页
       </a>
     </li>
@@ -369,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../timeline/" class="md-nav__link">
+      <a href="../../../timeline/" class="md-nav__link">
         时间线
       </a>
     </li>
@@ -384,7 +389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../life/" class="md-nav__link">
+      <a href="../../../life/" class="md-nav__link">
         生活
       </a>
     </li>
@@ -399,7 +404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../algs/" class="md-nav__link">
+      <a href="../../../algs/" class="md-nav__link">
         算法
       </a>
     </li>
@@ -414,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../app/" class="md-nav__link">
+      <a href="../../../app/" class="md-nav__link">
         后端
       </a>
     </li>
@@ -429,7 +434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../pc/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         计算机
       </a>
     </li>
@@ -454,6 +459,49 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一启动防火墙" class="md-nav__link">
+    一、启动防火墙
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二防火墙规则" class="md-nav__link">
+    二、防火墙规则
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三端口的设置" class="md-nav__link">
+    三、端口的设置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#四ip的设置" class="md-nav__link">
+    四、IP的设置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#五raspberrypi-开发端口" class="md-nav__link">
+    五、raspberrypi 开发端口
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -465,17 +513,89 @@
               
   
                 
-  <a href="https://github.com/msgrams/msgrams.github.io/edit/main/docs/web/Mkdocs/index.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/msgrams/msgrams.github.io/edit/main/docs/pc/raspberry/ufw.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>mkdocs使用</h1>
+  <h1>树莓派防火墙UFW</h1>
 
+<h2 id="一启动防火墙">一、启动防火墙<a class="headerlink" href="#一启动防火墙" title="Permanent link">🔱</a></h2>
+<p>安装ufw</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo apt-get install ufw
+</code></pre></div>
+<p>启动ufw</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo ufw <span class="nb">enable</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Command may disrupt existing ssh connections. Proceed with operation <span class="o">(</span>y<span class="p">|</span>n<span class="o">)</span>? y
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Firewall is active and enabled on system startup
+</code></pre></div>
+<p>设置入站规则为全关闭，出站规则为全开放</p>
+<p>注意：ssh的22端口要及时添加到入站规则中，否则下次ssh将连接不上</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo ufw default deny
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Default incoming policy changed to <span class="s1">&#39;deny&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="o">(</span>be sure to update your rules accordingly<span class="o">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo ufw allow <span class="m">22</span>/tcp
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Rule added
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Rule added <span class="o">(</span>v6<span class="o">)</span>
+</code></pre></div>
+<h2 id="二防火墙规则">二、防火墙规则<a class="headerlink" href="#二防火墙规则" title="Permanent link">🔱</a></h2>
+<p>开启、关闭防火墙</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo ufw <span class="nb">enable</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo ufw disable
+</code></pre></div>
+<p>查看防火墙的状态
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo ufw status
+</code></pre></div></p>
+<h2 id="三端口的设置">三、端口的设置<a class="headerlink" href="#三端口的设置" title="Permanent link">🔱</a></h2>
+<p>开放tcp协议80端口
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo ufw allow <span class="m">80</span>/tcp
+</code></pre></div></p>
+<p>移除80端口
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a> sudo ufw delete allow <span class="m">80</span>/tcp
+</code></pre></div></p>
+<p>开放RDP的3389端口
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sudo ufw allow <span class="m">3389</span>
+</code></pre></div></p>
+<p>移除3389端口
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo ufw delete allow <span class="m">3389</span>
+</code></pre></div></p>
+<p>开放10000-11000端口，需指定协议(tcp/udp)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo ufw allow <span class="m">10000</span>:11000/tcp
+</code></pre></div></p>
+<p>移除上述端口
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>sudo ufw delete allow <span class="m">10000</span>:11000/tcp
+</code></pre></div></p>
+<p>禁止外部访问smtp服务
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo ufw deny smtp 
+</code></pre></div></p>
+<p>删除上面建立的某条规则
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sudo ufw delete allow smtp 
+</code></pre></div></p>
+<h2 id="四ip的设置">四、IP的设置<a class="headerlink" href="#四ip的设置" title="Permanent link">🔱</a></h2>
+<p>允许192.168.1.110的访问，不限端口、协议</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>sudo ufw allow from <span class="m">192</span>.168.1.110
+</code></pre></div>
+<p>移除上条规则</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sudo ufw delete allow from <span class="m">192</span>.168.1.110
+</code></pre></div>
+<h2 id="五raspberrypi-开发端口">五、raspberrypi 开发端口<a class="headerlink" href="#五raspberrypi-开发端口" title="Permanent link">🔱</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pi@raspberrypi:~ $ sudo ufw status 
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Status: active
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>To                         Action      From
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>--                         ------      ----
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="m">22</span>/tcp                     ALLOW       Anywhere                  
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="m">8775</span>/tcp                   ALLOW       Anywhere                  
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>Anywhere                   ALLOW       <span class="m">192</span>.168.0.114             
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="m">22</span>/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span>             
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="m">8775</span>/tcp <span class="o">(</span>v6<span class="o">)</span>              ALLOW       Anywhere <span class="o">(</span>v6<span class="o">)</span> 
+</code></pre></div>
+<p>参考文章</p>
 <ul>
-<li><a href="installMkdocs">安装和配置Mkdocs</a></li>
-<li><a href="PyMdown">PyMkdocs使用</a></li>
+<li><a href="https://blog.51cto.com/u_15304255/3114511">树莓配置派防火墙</a></li>
+<li><a href="https://blog.csdn.net/zifengzwz/article/details/112756566">树莓派防火墙配置</a></li>
 </ul>
 
   <!--
@@ -504,12 +624,12 @@
     <!-- mkdocs-git-revision-date-localized-plugin -->
       
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 19, 2023 22:52:14</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 19, 2023 22:52:12</span>
       
       
       <br />
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 19, 2023 22:52:14</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 19, 2023 22:52:12</span>
     <!-- mkdocs-git-revision-date-plugin -->
     
   </small>
@@ -599,11 +719,11 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
   
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
         <script src="https://js.121rh.com/js/extra.js"></script>
       
