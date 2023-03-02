@@ -4,6 +4,10 @@ comments: true
  
 # Home
 
+??? success "本月最新笔记"
+    === "树莓派"
+        - [zerotier组建局域网](pc/raspberry/zerotier)
+
 ??? 2023年2月笔记
     === "内存数据库"
         [Redis整理!](app/redis/redisTidy/)
