@@ -12,9 +12,9 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   custom_dir: overrides
-  logo: assets/images/logo.png
+  # logo: assets/images/logo.png
   favicon: assets/images/favicon.png
-  language: en
+  language: zh
   # 网站字体
   icon:
     repo: fontawesome/brands/github
@@ -59,12 +59,18 @@ theme:
     # - toc.integrate
 
 plugins:
-  - search
+  - search:
+      lang:
+        - en
+        - zh
+        - ja
+      separator: '[\s\-\.]+'
+      # separator: '[\s\u200b\-]'
   - autolinks #自动链接插件
   # - tags:
   #     tags_file: tags.md #呈现标签指数
-      #index_page: tags.md #“索引”页面
-      #insert: top #显示文章的标签 top or bottom
+  #     index_page: tags.md #“索引”页面
+  #     insert: top #显示文章的标签 top or bottom
   - blogging:
       dirs: # 要包含的目录
         - app
@@ -202,7 +208,7 @@ markdown_extensions:
   - meta
   - def_list
   - toc:
-      permalink: 🔱 # ⚓︎ #🐟  # 显示锚点
+      permalink: 🪁 # ⚓︎ #🐟  # 显示锚点
       slugify: !!python/name:pymdownx.slugs.uslugify # 显示一些Unicode的标识符
 
 
