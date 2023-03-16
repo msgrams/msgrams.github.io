@@ -481,6 +481,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#三注意" class="md-nav__link">
+    三、注意
+  </a>
+  
+    <nav class="md-nav" aria-label="三、注意">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#盘符问题" class="md-nav__link">
+    盘符问题
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -528,6 +548,10 @@
 <li>C盘扩容，选择扩容盘符“D盘”，并执行</li>
 <li>若D盘有剩余空间，”D盘+E盘“ 合并一起。合并完成确认盘符是否为”D盘“</li>
 </ol>
+<h2 id="三注意">三、注意<a class="headerlink" href="#三注意" title="Permanent link">🪁</a></h2>
+<h3 id="盘符问题">盘符问题<a class="headerlink" href="#盘符问题" title="Permanent link">🪁</a></h3>
+<p>把D盘干掉之后，少个盘符，那么原来的E盘升为D盘，原来的F盘升为E盘。这样会导致某处程序引用E盘文件，此时会找不到文件，原因是找不到盘符。</p>
+<p>例如：本来属于C盘文件夹 -&gt; ”桌面、下载、文档、图片、..." 改为其他盘符，那么在扩容C盘并且调整了盘符之后，这些目录相继找不到，解决办法：“桌面“左键‘属性’，选择‘位置’（你可以将此文件夹中文件存储的位置更改为此硬盘上的另一个位置、另一个驱动器或网络上的另一台计算机）改变一下盘符即可。</p>
 
   <!--
   Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
@@ -555,12 +579,12 @@
     <!-- mkdocs-git-revision-date-localized-plugin -->
       
         创建日期:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 16, 2023 21:42:45</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 16, 2023 21:45:45</span>
       
       
       <br />
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 16, 2023 21:42:45</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 16, 2023 21:45:45</span>
     <!-- mkdocs-git-revision-date-plugin -->
     
   </small>
