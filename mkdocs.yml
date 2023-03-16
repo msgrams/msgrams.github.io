@@ -14,7 +14,7 @@ theme:
   custom_dir: overrides
   # logo: assets/images/logo.png
   favicon: assets/images/favicon.png
-  language: zh
+  language: en
   # 网站字体
   icon:
     repo: fontawesome/brands/github

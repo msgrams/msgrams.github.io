@@ -7,7 +7,8 @@ comments: true
 ??? success "本月最新笔记"
     === "树莓派"
         - [zerotier组建局域网](pc/raspberry/zerotier)
-
+    === "计算机"
+        - [扩容C盘空间](pc/computer/capacity)
 ??? 2023年2月笔记
     === "内存数据库"
         [Redis整理!](app/redis/redisTidy/)
