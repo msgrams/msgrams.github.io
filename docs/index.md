@@ -9,6 +9,7 @@ comments: true
         - [zerotier组建局域网](pc/raspberry/zerotier)
     === "计算机"
         - [扩容C盘空间](pc/computer/capacity)
+        - [模块错误,模块名称“KERNELBASE.dll”](pc/computer/kernelbase)
 ??? 2023年2月笔记
     === "内存数据库"
         [Redis整理!](app/redis/redisTidy/)
