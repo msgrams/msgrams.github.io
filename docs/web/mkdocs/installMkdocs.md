@@ -1,8 +1,8 @@
-  ---
+---
 title: 安装Mkdocs
 description: 安装和配置Mkdocs
 tags:
-  - mkdocs
+  - Mkdocs
 ---
 
 ## 安装步骤：

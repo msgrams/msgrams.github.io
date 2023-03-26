@@ -1,8 +1,8 @@
 ---
-title: OMV系统
+title: 树莓派安装OMV系统
 description: 安装OMV系统
 tags:
-  - raspberry
+  - Raspberry
 ---
 # 安装OMV系统
 ## 【1】DiskGenius 格式化SD卡

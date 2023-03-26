@@ -2,7 +2,7 @@
 title: 扩容C盘空间
 description:  C盘空间爆红，可以使用DiskGenius软件扩容C盘空间
 tags:
-  - computer
+  - Computer
 ---
 ## 一、介绍
 

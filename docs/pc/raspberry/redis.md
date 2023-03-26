@@ -2,7 +2,7 @@
 title: 树莓派安装Redis
 description:  To Using Docker Install Redis
 tags:
-  - raspberry
+  - Raspberry
 ---
 
 ## 一、Docker搜索redis镜像

@@ -2,7 +2,7 @@
 title: 模块错误,模块名称“KERNELBASE.dll”
 description: kernelbase.dll 模块报错,崩溃地址：0x75cb845d,异常代码：0x7fffffff
 tags:
-  - pc
+  - Computer
 ---
 
 ## 环境

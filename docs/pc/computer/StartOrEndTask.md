@@ -2,7 +2,7 @@
 title: 一键开关程序
 description: 自动化启动关闭程序
 tags:
-  - computer
+  - Computer
 ---
 
 ## 任务列表：

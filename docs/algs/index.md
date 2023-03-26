@@ -2,7 +2,7 @@
 title: 数据结构
 description: 数据结构、算法讲解
 tags:
-  - algorithms
+  - Algorithms
 ---
 
 # 数据结构

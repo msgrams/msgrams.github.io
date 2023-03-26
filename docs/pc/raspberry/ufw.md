@@ -2,7 +2,7 @@
 title: 树莓派防火墙UFW
 description:  使用ufw
 tags:
-  - raspberry
+  - Raspberry
 ---
 
 ## 一、启动防火墙

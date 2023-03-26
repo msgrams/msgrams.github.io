@@ -2,7 +2,7 @@
 title: ping故障
 description: ping 127.0.0.1 一般故障
 tags:
-  - computer
+  - Computer
 ---
 
 # 解决ping 127.0.0.1 一般故障 问题

@@ -2,7 +2,7 @@
 title: 蓝屏
 description: 电脑蓝屏
 tags:
-  - computer
+  - Computer
 ---
 # 电脑蓝屏
 电脑蓝屏 0x00000024

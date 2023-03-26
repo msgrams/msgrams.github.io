@@ -2,7 +2,7 @@
 title: PyMdown使用
 description: PyMdown使用
 tags:
-  - mkdocs
+  - Mkdocs
 ---
 
 ### 基本用法：

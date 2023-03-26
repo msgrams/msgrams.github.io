@@ -2,7 +2,7 @@
 title: 树莓派zerotier组建局域网
 description: zerotier组建局域网
 tags:
-  - raspberry
+  - Raspberry
 ---
 # zerotier 组建局域网
 
