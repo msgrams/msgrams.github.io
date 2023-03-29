@@ -10,6 +10,8 @@ comments: true
     === "计算机"
         - [扩容C盘空间](pc/computer/capacity)
         - [模块错误,模块名称“KERNELBASE.dll”](pc/computer/kernelbase)
+    === "软件"
+        - [数据恢复软件](pc/software/DataRecovery)
 ??? 2023年2月笔记
     === "内存数据库"
         [Redis整理!](app/redis/redisTidy/)
