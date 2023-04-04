@@ -1,0 +1,923 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+  
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="挂载rclone + 服务器Webdav">
+      
+      
+        <meta name="author" content="FYA">
+      
+      
+        <link rel="canonical" href="https://121rh.com/pc/raspberry/rclone/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">       
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" charset="UTF-8">
+    <meta name="baidu-site-verification" content="code-VSU9zlmT1E">
+    <meta name="Keywords" content="Java开发,SpringBoot,SpringCloud...">
+<!--添加部分-start-->
+<script>
+  document.addEventListener('visibilitychange',function(){
+      if( document.visibilityState == 'hidden' ){
+      normal_title = document.title;
+      document.title = 'ヽ(●-`Д´-)ノ你丑你就走！';
+      }else{
+      document.title = 'ヾ(Ő∀Ő3)ノ你帅就回来！';
+      setTimeout(function(){
+          document.title = normal_title;
+      }, 1200)
+      }
+  });
+  </script>
+<!--添加部分-end-->
+
+    
+      
+        <title>树莓派rclone+Webdav - FYA·心愿所往</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+
+    
+  
+
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/extra.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/video-js.min.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/video.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/vssue.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/vssue.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+  
+      
+
+    
+
+    
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#一官方有提供脚本安装" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="FYA·心愿所往" class="md-header__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FYA·心愿所往
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              树莓派rclone+Webdav
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/msgrams/msgrams.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    msgrams
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../life/" class="md-tabs__link">
+      生活
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../timeline/" class="md-tabs__link">
+      时间线
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../tags/" class="md-tabs__link">
+      打标签
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../algs/" class="md-tabs__link">
+      算法
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FYA·心愿所往" class="md-nav__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    FYA·心愿所往
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/msgrams/msgrams.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    msgrams
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../life/" class="md-nav__link">
+        生活
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../timeline/" class="md-nav__link">
+        时间线
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tags/" class="md-nav__link">
+        打标签
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algs/" class="md-nav__link">
+        算法
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一官方有提供脚本安装" class="md-nav__link">
+    一、官方有提供脚本安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二配置路径" class="md-nav__link">
+    二、配置路径
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三挂载树莓派本地目录" class="md-nav__link">
+    三、挂载树莓派本地目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#四查看挂载" class="md-nav__link">
+    四、查看挂载
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#五开机自启" class="md-nav__link">
+    五、开机自启
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#六阿里云盘转成webdav" class="md-nav__link">
+    六、阿里云盘转成Webdav
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+                
+  <a href="https://github.com/msgrams/msgrams.github.io/edit/main/docs/pc/raspberry/rclone.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  
+
+  <nav class="md-tags" >
+    
+      
+        <a href="../../../tags/#raspberry" class="md-tag">
+          Raspberry
+        </a>
+      
+    
+  </nav>
+
+
+
+  <h1>树莓派rclone+Webdav</h1>
+
+<blockquote>
+<p>rclone挂载阿里云盘，其他网盘都可以，<a href="https://rclone.org/docs/">官方文档</a></p>
+</blockquote>
+<h2 id="一官方有提供脚本安装">一、官方有提供脚本安装<a class="headerlink" href="#一官方有提供脚本安装" title="Permanent link">🪁</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl https://rclone.org/install.sh <span class="p">|</span> sudo bash
+</code></pre></div>
+<p>安装之后，输入 <code>rclone config</code> 配置，命令行配置。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">pi</span><span class="err">@</span><span class="n">raspberrypi</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="w"> </span><span class="n">$</span><span class="w"> </span><span class="n">rclone</span><span class="w"> </span><span class="n">config</span><span class="w"></span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Current</span><span class="w"> </span><span class="n">remotes</span><span class="o">:</span><span class="w"></span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">Name</span><span class="w">                 </span><span class="n">Type</span><span class="w"></span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">====</span><span class="w">                 </span><span class="o">====</span><span class="w"></span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">aliyun</span><span class="w">               </span><span class="n">webdav</span><span class="w"></span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="n">Edit</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="n">Delete</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="n">Rename</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="n">Copy</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">password</span><span class="w"></span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="n">Quit</span><span class="w"> </span><span class="n">config</span><span class="w"></span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">e</span><span class="o">/</span><span class="n">n</span><span class="o">/</span><span class="n">d</span><span class="o">/</span><span class="n">r</span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="n">q</span><span class="o">&gt;</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">Enter</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">remote</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">name</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aliyunTwo</span><span class="w"></span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">Option</span><span class="w"> </span><span class="n">Storage</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">Type</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">storage</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">configure</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">Choose</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">below</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">own</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="mi">46</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">WebDAV</span><span class="w"></span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">webdav</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="mi">47</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Yandex</span><span class="w"> </span><span class="n">Disk</span><span class="w"></span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">yandex</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="mi">48</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Zoho</span><span class="w"></span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">zoho</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="mi">49</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">premiumize</span><span class="p">.</span><span class="n">me</span><span class="w"></span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">premiumizeme</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="mi">50</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">seafile</span><span class="w"></span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">seafile</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="n">Storage</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">46</span><span class="w"></span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="n">Option</span><span class="w"> </span><span class="n">url</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">URL</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">http</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">connect</span><span class="w"> </span><span class="n">to</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="n">E</span><span class="p">.</span><span class="n">g</span><span class="p">.</span><span class="w"> </span><span class="n">https</span><span class="o">:</span><span class="c1">//example.com.</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="n">Enter</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="n">url</span><span class="o">&gt;</span><span class="w"> </span><span class="n">http</span><span class="o">:</span><span class="c1">//192.168.0.108:8777  </span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="n">Option</span><span class="w"> </span><span class="n">vendor</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="n">Name</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">WebDAV</span><span class="w"> </span><span class="n">site</span><span class="o">/</span><span class="n">service</span><span class="o">/</span><span class="n">software</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">using</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="n">Choose</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">below</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">own</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="n">Press</span><span class="w"> </span><span class="n">Enter</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">leave</span><span class="w"> </span><span class="n">empty</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Nextcloud</span><span class="w"></span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">nextcloud</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Owncloud</span><span class="w"></span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">owncloud</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Sharepoint</span><span class="w"> </span><span class="n">Online</span><span class="p">,</span><span class="w"> </span><span class="n">authenticated</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">account</span><span class="w"></span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">sharepoint</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Sharepoint</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">NTLM</span><span class="w"> </span><span class="n">authentication</span><span class="p">,</span><span class="w"> </span><span class="n">usually</span><span class="w"> </span><span class="n">self</span><span class="o">-</span><span class="n">hosted</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">on</span><span class="o">-</span><span class="n">premises</span><span class="w"></span>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">sharepoint</span><span class="o">-</span><span class="n">ntlm</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">Other</span><span class="w"> </span><span class="n">site</span><span class="o">/</span><span class="n">service</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">software</span><span class="w"></span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">   </span><span class="err">\</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="n">vendor</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="n">Option</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="n">User</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="n">In</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">NTLM</span><span class="w"> </span><span class="no">authentication</span><span class="w"> </span><span class="no">is</span><span class="w"> </span><span class="no">used</span><span class="p">,</span><span class="w"> </span><span class="no">the</span><span class="w"> </span><span class="no">username</span><span class="w"> </span><span class="no">should</span><span class="w"> </span><span class="no">be</span><span class="w"> </span><span class="no">in</span><span class="w"> </span><span class="no">the</span><span class="w"> </span><span class="no">format</span><span class="w"> </span><span class="err">&#39;</span><span class="no">Domain</span><span class="err">\</span><span class="no">User</span><span class="err">&#39;</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="no">Enter</span><span class="w"> </span><span class="no">a</span><span class="w"> </span><span class="no">value</span><span class="p">.</span><span class="w"> </span><span class="no">Press</span><span class="w"> </span><span class="no">Enter</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">leave</span><span class="w"> </span><span class="no">empty</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="no">user</span><span class="o">&gt;</span><span class="w"> </span><span class="no">admin</span><span class="w"></span>
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="no">Option</span><span class="w"> </span><span class="no">pass</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a><span class="no">Password</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="no">Choose</span><span class="w"> </span><span class="no">an</span><span class="w"> </span><span class="no">alternative</span><span class="w"> </span><span class="no">below</span><span class="p">.</span><span class="w"> </span><span class="no">Press</span><span class="w"> </span><span class="no">Enter</span><span class="w"> </span><span class="no">for</span><span class="w"> </span><span class="no">the</span><span class="w"> </span><span class="no">default</span><span class="w"> </span><span class="p">(</span><span class="no">n</span><span class="p">).</span><span class="w"></span>
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="no">y</span><span class="p">)</span><span class="w"> </span><span class="no">Yes</span><span class="p">,</span><span class="w"> </span><span class="no">type</span><span class="w"> </span><span class="no">in</span><span class="w"> </span><span class="no">my</span><span class="w"> </span><span class="no">own</span><span class="w"> </span><span class="no">password</span><span class="w"></span>
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="no">g</span><span class="p">)</span><span class="w"> </span><span class="no">Generate</span><span class="w"> </span><span class="no">random</span><span class="w"> </span><span class="no">password</span><span class="w"></span>
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="no">n</span><span class="p">)</span><span class="w"> </span><span class="no">No</span><span class="p">,</span><span class="w"> </span><span class="no">leave</span><span class="w"> </span><span class="no">this</span><span class="w"> </span><span class="no">optional</span><span class="w"> </span><span class="no">password</span><span class="w"> </span><span class="no">blank</span><span class="w"> </span><span class="p">(</span><span class="no">default</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a><span class="no">y</span><span class="o">/</span><span class="no">g</span><span class="o">/</span><span class="no">n</span><span class="o">&gt;</span><span class="w"> </span><span class="no">y</span><span class="w"></span>
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a><span class="no">Enter</span><span class="w"> </span><span class="no">the</span><span class="w"> </span><span class="no">password</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a><span class="nl">password</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a><span class="n">Confirm</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">password</span><span class="o">:</span><span class="w"></span>
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a><span class="nl">password</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a><span class="n">Option</span><span class="w"> </span><span class="n">bearer_token</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a><span class="n">Bearer</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="n">instead</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">user</span><span class="o">/</span><span class="n">pass</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Macaroon</span><span class="p">).</span><span class="w"></span>
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a><span class="n">Enter</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="w"> </span><span class="n">Press</span><span class="w"> </span><span class="n">Enter</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">leave</span><span class="w"> </span><span class="n">empty</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="n">bearer_token</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">666666</span><span class="n">d56666666666666666</span><span class="w"></span>
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a><span class="n">Edit</span><span class="w"> </span><span class="n">advanced</span><span class="w"> </span><span class="n">config</span><span class="o">?</span><span class="w"></span>
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="n">Yes</span><span class="w"></span>
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">No</span><span class="w"> </span><span class="p">(</span><span class="k">default</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="o">&gt;</span><span class="w"> </span>
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a><span class="n">Configuration</span><span class="w"> </span><span class="n">complete</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a><span class="nl">Options</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a><span class="o">-</span><span class="w"> </span><span class="n">type</span><span class="o">:</span><span class="w"> </span><span class="n">webdav</span><span class="w"></span>
+<a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a><span class="o">-</span><span class="w"> </span><span class="n">url</span><span class="o">:</span><span class="w"> </span><span class="n">http</span><span class="o">:</span><span class="c1">//192.168.0.108:8777</span>
+<a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a><span class="o">-</span><span class="w"> </span><span class="n">vendor</span><span class="o">:</span><span class="w"> </span><span class="n">other</span><span class="w"></span>
+<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a><span class="o">-</span><span class="w"> </span><span class="n">user</span><span class="o">:</span><span class="w"> </span><span class="n">admin</span><span class="w"></span>
+<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a><span class="o">-</span><span class="w"> </span><span class="n">pass</span><span class="o">:</span><span class="w"> </span><span class="o">***</span><span class="w"> </span><span class="n">ENCRYPTED</span><span class="w"> </span><span class="o">***</span><span class="w"></span>
+<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a><span class="o">-</span><span class="w"> </span><span class="n">bearer_token</span><span class="o">:</span><span class="w"> </span><span class="mi">666666</span><span class="n">d56666666666666666</span><span class="w"></span>
+<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a><span class="n">Keep</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="s">&quot;aliyunTwo&quot;</span><span class="w"> </span><span class="n">remote</span><span class="o">?</span><span class="w"></span>
+<a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="n">Yes</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">OK</span><span class="w"> </span><span class="p">(</span><span class="k">default</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="n">Edit</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="n">Delete</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a><span class="n">y</span><span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="n">d</span><span class="o">&gt;</span><span class="w"> </span>
+<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a><span class="n">Current</span><span class="w"> </span><span class="n">remotes</span><span class="o">:</span><span class="w"></span>
+<a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a>
+<a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a><span class="n">Name</span><span class="w">                 </span><span class="n">Type</span><span class="w"></span>
+<a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a><span class="o">====</span><span class="w">                 </span><span class="o">====</span><span class="w"></span>
+<a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a><span class="n">aliyun</span><span class="w">               </span><span class="n">webdav</span><span class="w"></span>
+<a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a><span class="n">aliyunTwo</span><span class="w">            </span><span class="n">webdav</span><span class="w"></span>
+<a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a>
+<a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="n">Edit</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a><span class="n">d</span><span class="p">)</span><span class="w"> </span><span class="n">Delete</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="n">Rename</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="n">Copy</span><span class="w"> </span><span class="n">remote</span><span class="w"></span>
+<a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">password</span><span class="w"></span>
+<a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="n">Quit</span><span class="w"> </span><span class="n">config</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>阿里云盘Token获取方式：打开网页版登录，F12打开开发者工具，找到应用位置-&gt;存储-&gt;复制refresh_token后面引号中的值，我用的谷歌浏览器。</li>
+</ul>
+<h2 id="二配置路径">二、配置路径<a class="headerlink" href="#二配置路径" title="Permanent link">🪁</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">rclone</span><span class="w"></span>
+</code></pre></div>
+<p>配置完成，并打开rclone.conf，看到文件内容</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">[</span><span class="n">aliyun</span><span class="p">]</span><span class="w"></span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">webdav</span><span class="w"></span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">:</span><span class="c1">//192.168.0.108:8711</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">vendor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="w"></span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">admin</span><span class="w"></span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">pass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">yZhK6666666666</span><span class="w"></span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">bearer_token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">78f</span><span class="mi">36666666666</span><span class="n">d56666666666666666</span><span class="w"></span>
+</code></pre></div>
+<h2 id="三挂载树莓派本地目录">三、挂载树莓派本地目录<a class="headerlink" href="#三挂载树莓派本地目录" title="Permanent link">🪁</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">rclone</span><span class="w"> </span><span class="n">mount</span><span class="w"> </span><span class="n">aliyun</span><span class="o">:/</span><span class="n">raspberry_bak</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">soft</span><span class="o">/</span><span class="n">aliDrive</span><span class="w"> </span><span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">other</span><span class="w"> </span><span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">non</span><span class="o">-</span><span class="n">empty</span><span class="w"> </span><span class="o">--</span><span class="n">vfs</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">mode</span><span class="w"> </span><span class="n">writes</span><span class="w"> </span><span class="o">--</span><span class="n">daemon</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>aliyun:/raspberry_bak 刚才rclone新建的名字，raspberry_bak阿里云盘中的目录名字</li>
+<li>/home/pi/soft/aliDrive 本地目录</li>
+</ul>
+<h2 id="四查看挂载">四、查看挂载<a class="headerlink" href="#四查看挂载" title="Permanent link">🪁</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp"># 查看是否挂载</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">df</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w"></span>
+</code></pre></div>
+<p>发现<code>aliyun:raspberry_bak  3.4T  1.4T  2.1T  40% /home/pi/soft/aliDrive</code>，则挂载成功</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp"># 进入目录，有文件证明挂载成功</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">cd</span><span class="w">  </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">soft</span><span class="o">/</span><span class="n">aliDrive</span><span class="w"></span>
+</code></pre></div>
+<h2 id="五开机自启">五、开机自启<a class="headerlink" href="#五开机自启" title="Permanent link">🪁</a></h2>
+<p>首先需要卸载掉aliyun</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fusermount -uqz aliyun
+</code></pre></div>
+<p>新建启动文件</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">vi</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">rclone</span><span class="o">-</span><span class="n">aliyun</span><span class="p">.</span><span class="n">service</span><span class="w"></span>
+</code></pre></div>
+<p>写入
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">[</span><span class="n">Unit</span><span class="p">]</span><span class="w"></span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">Description</span><span class="o">=</span><span class="n">Rclone</span><span class="w"></span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">After</span><span class="o">=</span><span class="n">network</span><span class="o">-</span><span class="n">online</span><span class="p">.</span><span class="n">target</span><span class="w"></span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">[</span><span class="n">Service</span><span class="p">]</span><span class="w"></span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">Type</span><span class="o">=</span><span class="n">simple</span><span class="w"></span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rclone</span><span class="w"> </span><span class="n">mount</span><span class="w"> </span><span class="n">aliyun</span><span class="o">:/</span><span class="n">raspberry_bak</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">soft</span><span class="o">/</span><span class="n">aliDrive</span><span class="w">  </span><span class="o">--</span><span class="n">use</span><span class="o">-</span><span class="n">mmap</span><span class="w"> </span><span class="o">--</span><span class="n">umask</span><span class="w"> </span><span class="mo">000</span><span class="w"> </span><span class="o">--</span><span class="k">default</span><span class="o">-</span><span class="n">permissions</span><span class="w"> </span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">check</span><span class="o">-</span><span class="n">certificate</span><span class="w"> </span><span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">other</span><span class="w"> </span><span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">non</span><span class="o">-</span><span class="n">empty</span><span class="w"> </span><span class="o">--</span><span class="n">dir</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">time</span><span class="w"> </span><span class="mi">24</span><span class="n">h</span><span class="w"> </span><span class="o">--</span><span class="n">cache</span><span class="o">-</span><span class="n">dir</span><span class="o">=/</span><span class="n">tmp</span><span class="w"> </span><span class="o">--</span><span class="n">vfs</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">mode</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="o">--</span><span class="n">buffer</span><span class="o">-</span><span class="n">size</span><span class="w"> </span><span class="mi">256</span><span class="n">M</span><span class="w"> </span><span class="o">--</span><span class="n">vfs</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">ahead</span><span class="w"> </span><span class="mi">512</span><span class="n">M</span><span class="w"> </span><span class="o">--</span><span class="n">vfs</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="n">size</span><span class="w"> </span><span class="mi">32</span><span class="n">M</span><span class="w"> </span><span class="o">--</span><span class="n">vfs</span><span class="o">-</span><span class="n">read</span><span class="o">-</span><span class="n">chunk</span><span class="o">-</span><span class="n">size</span><span class="o">-</span><span class="n">limit</span><span class="w"> </span><span class="mi">128</span><span class="n">M</span><span class="w"> </span><span class="o">--</span><span class="n">vfs</span><span class="o">-</span><span class="n">cache</span><span class="o">-</span><span class="n">max</span><span class="o">-</span><span class="n">size</span><span class="w"> </span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">low</span><span class="o">-</span><span class="n">level</span><span class="o">-</span><span class="n">retries</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="o">--</span><span class="n">config</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="p">.</span><span class="n">config</span><span class="o">/</span><span class="n">rclone</span><span class="o">/</span><span class="n">rclone</span><span class="p">.</span><span class="n">conf</span><span class="w"></span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="n">Restart</span><span class="o">=</span><span class="n">on</span><span class="o">-</span><span class="n">abort</span><span class="w"></span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">User</span><span class="o">=</span><span class="n">root</span><span class="w"></span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="p">[</span><span class="n">Install</span><span class="p">]</span><span class="w"></span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="n">WantedBy</span><span class="o">=</span><span class="k">default</span><span class="p">.</span><span class="n">target</span><span class="w"></span>
+</code></pre></div></p>
+<p>设置开机自启</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp"># 重载配置</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span><span class="w"></span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="cp"># 启动</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">rclone</span><span class="w"></span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="cp"># 查看状态</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">systemctl</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="n">rclone</span><span class="p">.</span><span class="n">service</span><span class="w"></span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="cp"># 设置自启动</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">rclone</span><span class="p">.</span><span class="n">service</span><span class="w"></span>
+</code></pre></div>
+<p>最后验证 rclone config</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">pi</span><span class="err">@</span><span class="n">raspberrypi</span><span class="o">:~/</span><span class="n">soft</span><span class="o">/</span><span class="n">webdav</span><span class="w"> </span><span class="n">$</span><span class="w"> </span><span class="n">rclone</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">show</span><span class="w"></span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">[</span><span class="n">aliyun</span><span class="p">]</span><span class="w"></span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">webdav</span><span class="w"></span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">:</span><span class="c1">//192.168.0.108:8711</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">vendor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="w"></span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">admin</span><span class="w"></span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">pass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="n">yZhKnOd6T66666666666</span><span class="w"></span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">bearer_token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">78f</span><span class="mi">3</span><span class="n">c6d37777777777777777</span><span class="w"></span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="p">[</span><span class="n">aliyunTwo</span><span class="p">]</span><span class="w"></span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">webdav</span><span class="w"></span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http</span><span class="o">:</span><span class="c1">//192.168.0.108:8777</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="n">vendor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="w"></span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">admin</span><span class="w"></span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="n">pass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="n">mSNn3GwLtRC666666666666</span><span class="w"></span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="n">bearer_token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">666666</span><span class="n">d56666666666666666</span><span class="w"></span>
+</code></pre></div>
+<h2 id="六阿里云盘转成webdav">六、阿里云盘转成Webdav<a class="headerlink" href="#六阿里云盘转成webdav" title="Permanent link">🪁</a></h2>
+<p>先配置 rclone，即配置网盘的 Token。</p>
+<p>docker-compose.yaml</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nl">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.0&quot;</span><span class="w"></span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nl">services</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="n">aliyundrive</span><span class="o">-</span><span class="n">webdav</span><span class="o">:</span><span class="w"></span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nl">image</span><span class="p">:</span><span class="w"> </span><span class="n">messense</span><span class="o">/</span><span class="n">aliyundrive</span><span class="o">-</span><span class="n">webdav</span><span class="o">:</span><span class="n">latest</span><span class="w"></span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nl">container_name</span><span class="p">:</span><span class="w"> </span><span class="n">aliyundriver</span><span class="w"></span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nl">environment</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">REFRESH_TOKEN</span><span class="o">=</span><span class="mf">78f</span><span class="mi">3</span><span class="n">c6d66666666666666666</span><span class="w"></span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">WEBDAV_AUTH_USER</span><span class="o">=</span><span class="n">admin</span><span class="w"></span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">WEBDAV_AUTH_PASSWORD</span><span class="o">=</span><span class="n">admin</span><span class="w"></span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="nl">volumes</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">soft</span><span class="o">/</span><span class="n">aliDrive</span><span class="o">/:/</span><span class="n">etc</span><span class="o">/</span><span class="n">aliyundrive</span><span class="o">-</span><span class="n">webdav</span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="nl">ports</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="mi">8711</span><span class="o">:</span><span class="mi">8080</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>volumes: <code>/home/pi/soft/aliDrive/</code> 树莓派本地目录，<code>/etc/aliyundrive-webdav/</code> 镜像目录</li>
+<li>ports：8711 树莓派本地端口，8080镜像端口</li>
+</ul>
+<p>最后在浏览器中输入地址 <code>http://192.168.0.108:8711/</code> ，输入账号密码：admin，即进入！！！</p>
+
+  <!--
+  Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Source file information -->
+<hr />
+<div class="md-source-file">
+  <small>
+    <!-- mkdocs-git-revision-date-localized-plugin -->
+      
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 4, 2023 22:08:45</span>
+      
+      
+      <br />
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 4, 2023 22:08:45</span>
+    <!-- mkdocs-git-revision-date-plugin -->
+    
+  </small>
+</div>
+  <!-- cusdis评论位置 -->
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="12830b58-fda6-4135-99ce-e5f771bd3070"
+  data-page-id=""
+  data-page-url="https://121rh.com/about"
+  data-page-title="主页评论"
+  ></div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  <script>
+  window.CUSDIS_LOCALE = {
+    "powered_by": "评论由 Cusdis 提供",
+    "post_comment": "发送",
+    "loading": "加载中",
+    "email": "邮箱地址 (可选)",
+    "nickname": "昵称",
+    "reply_placeholder": "回复内容...",
+    "reply_btn": "回复",
+    "sending": "发送中...",
+    "mod_badge": "管理员",
+    "content_is_required": "内容不能为空",
+    "nickname_is_required": "昵称不能为空",
+    "comment_has_been_sent": "评论已发送，管理员审核通过后会展示"
+  }
+  </script>
+<!--live2d 看板娘  -->
+<script src="https://cdn.jsdelivr.net/gh/msgrams/live2d-widget@main/autoload.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/msgrams/live2d-widget@main/waifu-tips.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/msgrams/live2d-widget@main/waifu-tips.json"></script>
+
+
+              
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022-2023  FYA·心愿所往 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">黑ICP备17009103号</a>
+    </a>
+    </div>
+  
+  
+<center id="siteTime">
+  <span id="timeDate">天</span><span id="times"></span>💓
+本站总访问量<span id="busuanzi_value_site_pv"></span>次💓
+本站访客数<span id="busuanzi_value_site_uv"></span>人次💓
+本文总阅读量<span id="busuanzi_value_page_pv"></span>次-_-
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://121rh.com/feed_rss_updated.xml" target="_blank" rel="noopener" title="RSS订阅" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M25.57 176.1C12.41 175.4.912 185.2.052 198.4s9.173 24.65 22.39 25.5c120.1 7.875 225.7 112.7 233.6 233.6C256.9 470.3 267.4 480 279.1 480c.531 0 1.062-.031 1.594-.063 13.22-.843 23.25-12.28 22.39-25.5C294.6 310.3 169.7 185.4 25.57 176.1zM32 32C14.33 32 0 46.31 0 64s14.33 32 32 32c194.1 0 352 157.9 352 352 0 17.69 14.33 32 32 32s32-14.31 32-32C448 218.6 261.4 32 32 32zm31.1 319.9C28.63 351.9 0 380.6 0 416s28.63 64 63.1 64 64.08-28.62 64.08-64-27.81-64.1-64.08-64.1z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:<fyabwz@126.com>" target="_blank" rel="noopener" title="发送邮件" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m511.6 36.86-64 415.1a32.008 32.008 0 0 1-31.65 27.147c-4.188 0-8.319-.815-12.29-2.472l-122.6-51.1-50.86 76.29C226.3 508.5 219.8 512 212.8 512c-11.5 0-20.8-9.3-20.8-20.8v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96 122.3 360.3 19.69 317.5C8.438 312.8.812 302.2.062 289.1s5.47-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://gitee.com/fya666" target="_blank" rel="noopener" title="Gitee地址" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://weibo.com/fyawbz" target="_blank" rel="noopener" title="微博联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+    </a>
+  
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1434090053&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" rel="noopener" title="QQ联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg>
+    </a>
+  
+    
+    
+    <a href="/life/weixin/" target="_blank" rel="noopener" title="微信联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+  
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/extra.js"></script>
+      
+        <script src="https://js.121rh.com/js/video.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/vue.js"></script>
+      
+        <script src="https://js.121rh.com/js/time.js"></script>
+      
+        <script src="https://js.121rh.com/js/console.js"></script>
+      
+        <script src="https://js.121rh.com/js/anime.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/jquery-3.3.1.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/G-CHY1TBZZVW.js"></script>
+      
+        <script src="https://js.121rh.com/js/G-NRCPMZGDT9.js"></script>
+      
+        <script src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+
+  </body>
+</html>
