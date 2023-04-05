@@ -4,6 +4,8 @@ comments: true
  
 # Home
 
+>建议：在右上角进行搜索“关键词”，支持中文搜索(jieba搜索引擎)
+
 ??? success "本月最新笔记"
     === "树莓派"
         - [rclone+Webdav](pc/raspberry/rclone)

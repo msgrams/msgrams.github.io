@@ -129,7 +129,7 @@ docker run --name clashNginx -p 80:80 -v /home/pi/soft/clash/clash_web/clash.con
 firefox浏览器，设置 -- > 常规 --> 网络设置 -- >手动配置代理：
 
 - HTTP 代理 ip + 端口号7890
-- HTTP 代理 ip + 端口号7890
+- HTTPS 代理 ip + 端口号7890
 - SOCKS主机 ip + 端口号7891
 
 

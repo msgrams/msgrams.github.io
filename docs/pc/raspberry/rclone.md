@@ -265,8 +265,72 @@ services:
 
 ```
 
-- volumes: ` /home/pi/soft/aliDrive/` 树莓派本地目录，`/etc/aliyundrive-webdav/` 镜像目录
-- ports：8711 树莓派本地端口，8080镜像端口
+- volumes: ` /home/pi/soft/aliDrive/` 树莓派本地目录，`/etc/aliyundrive-webdav/` 容器目录
+- ports：8711 树莓派本地端口，8080容器端口
 
 最后在浏览器中输入地址 `http://192.168.0.108:8711/` ，输入账号密码：admin，即进入！！！
 
+
+
+## 七、定时打包自动上传阿里云盘
+
+>简单的脚本让AI完成啦！
+
+### ChatGPT
+
+如果您需要在排除文件夹的时候，遍历`exclude_folders`数组中的所有文件夹名字，可以使用循环语句来实现。以下是修改后的代码：
+
+```sh
+#!/bin/bash
+
+# 定义变量
+source_dir="/path/to/source/dir"
+exclude_folders=("logs" "cache")
+filename=$(date +%Y%m%d_%H%M%S)
+
+# 打包文件
+exclude_arg=""
+for folder in "${exclude_folders[@]}"
+do
+    exclude_arg+="--exclude=$folder "
+done
+
+tar $exclude_arg-czvf ${filename}.tar.gz $source_dir
+
+# 创建目录并复制文件
+destination_dir="/path/to/destination/dir"
+mkdir -p $destination_dir
+cp ${filename}.tar.gz $destination_dir
+```
+
+我们使用一个`for`循环来遍历数组`exclude_folders`中的所有元素，并将每个元素的值拼接到一个字符串变量`exclude_arg`中。然后在打包文件时，将该变量作为`tar`命令的参数之一传入即可。
+
+通过这种方式，您不仅可以排除`exclude_folders`数组中的所有文件夹，而且可以更加灵活地控制排除哪些文件夹。
+
+
+如果您希望定时自动执行该脚本，可以使用Linux系统中的定时任务功能 `crontab`。以下是具体步骤：
+
+1.  打开终端，输入以下命令，编辑当前用户的 `crontab` 文件：
+
+复制代码
+
+`crontab -e`
+
+2.  在打开的文件中，添加以下一行代码：
+
+复制代码
+
+`0 3 * * * /path/to/your/script.sh`
+
+这一行代码的含义是：每天凌晨3点自动执行 `/path/to/your/script.sh` 脚本。如果您希望在其他时间运行脚本，请修改该行代码。其中，数字代表时间，星号代表任意值。例如，上面的代码中，`*`表示任意月份、任意日期。如果需要更详细的设置，请参考`crontab`格式。
+
+3.  保存并关闭文件。使用以下命令验证是否成功添加定时任务：
+
+复制代码
+
+`crontab -l`
+
+这样，您就可以通过定时任务来实现自动执行脚本了。
+
+-------
+自此完成：Rclone + Webdav + 定时上传云盘任务！
