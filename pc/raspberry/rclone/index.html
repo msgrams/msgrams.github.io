@@ -485,6 +485,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#七定时打包自动上传阿里云盘" class="md-nav__link">
+    七、定时打包自动上传阿里云盘
+  </a>
+  
+    <nav class="md-nav" aria-label="七、定时打包自动上传阿里云盘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chatgpt" class="md-nav__link">
+    ChatGPT
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -735,10 +755,59 @@
 <a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="mi">8711</span><span class="o">:</span><span class="mi">8080</span><span class="w"></span>
 </code></pre></div>
 <ul>
-<li>volumes: <code>/home/pi/soft/aliDrive/</code> 树莓派本地目录，<code>/etc/aliyundrive-webdav/</code> 镜像目录</li>
-<li>ports：8711 树莓派本地端口，8080镜像端口</li>
+<li>volumes: <code>/home/pi/soft/aliDrive/</code> 树莓派本地目录，<code>/etc/aliyundrive-webdav/</code> 容器目录</li>
+<li>ports：8711 树莓派本地端口，8080容器端口</li>
 </ul>
 <p>最后在浏览器中输入地址 <code>http://192.168.0.108:8711/</code> ，输入账号密码：admin，即进入！！！</p>
+<h2 id="七定时打包自动上传阿里云盘">七、定时打包自动上传阿里云盘<a class="headerlink" href="#七定时打包自动上传阿里云盘" title="Permanent link">🪁</a></h2>
+<blockquote>
+<p>简单的脚本让AI完成啦！</p>
+</blockquote>
+<h3 id="chatgpt">ChatGPT<a class="headerlink" href="#chatgpt" title="Permanent link">🪁</a></h3>
+<p>如果您需要在排除文件夹的时候，遍历<code>exclude_folders</code>数组中的所有文件夹名字，可以使用循环语句来实现。以下是修改后的代码：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1"># 定义变量</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nv">source_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/source/dir&quot;</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nv">exclude_folders</span><span class="o">=(</span><span class="s2">&quot;logs&quot;</span> <span class="s2">&quot;cache&quot;</span><span class="o">)</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nv">filename</span><span class="o">=</span><span class="k">$(</span>date +%Y%m%d_%H%M%S<span class="k">)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># 打包文件</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="nv">exclude_arg</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="k">for</span> folder <span class="k">in</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">exclude_folders</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="k">do</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>    <span class="nv">exclude_arg</span><span class="o">+=</span><span class="s2">&quot;--exclude=</span><span class="nv">$folder</span><span class="s2"> &quot;</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="k">done</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>tar <span class="nv">$exclude_arg</span>-czvf <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.tar.gz <span class="nv">$source_dir</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="c1"># 创建目录并复制文件</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="nv">destination_dir</span><span class="o">=</span><span class="s2">&quot;/path/to/destination/dir&quot;</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>mkdir -p <span class="nv">$destination_dir</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>cp <span class="si">${</span><span class="nv">filename</span><span class="si">}</span>.tar.gz <span class="nv">$destination_dir</span>
+</code></pre></div>
+<p>我们使用一个<code>for</code>循环来遍历数组<code>exclude_folders</code>中的所有元素，并将每个元素的值拼接到一个字符串变量<code>exclude_arg</code>中。然后在打包文件时，将该变量作为<code>tar</code>命令的参数之一传入即可。</p>
+<p>通过这种方式，您不仅可以排除<code>exclude_folders</code>数组中的所有文件夹，而且可以更加灵活地控制排除哪些文件夹。</p>
+<p>如果您希望定时自动执行该脚本，可以使用Linux系统中的定时任务功能 <code>crontab</code>。以下是具体步骤：</p>
+<ol>
+<li>打开终端，输入以下命令，编辑当前用户的 <code>crontab</code> 文件：</li>
+</ol>
+<p>复制代码</p>
+<p><code>crontab -e</code></p>
+<ol>
+<li>在打开的文件中，添加以下一行代码：</li>
+</ol>
+<p>复制代码</p>
+<p><code>0 3 * * * /path/to/your/script.sh</code></p>
+<p>这一行代码的含义是：每天凌晨3点自动执行 <code>/path/to/your/script.sh</code> 脚本。如果您希望在其他时间运行脚本，请修改该行代码。其中，数字代表时间，星号代表任意值。例如，上面的代码中，<code>*</code>表示任意月份、任意日期。如果需要更详细的设置，请参考<code>crontab</code>格式。</p>
+<ol>
+<li>保存并关闭文件。使用以下命令验证是否成功添加定时任务：</li>
+</ol>
+<p>复制代码</p>
+<p><code>crontab -l</code></p>
+<p>这样，您就可以通过定时任务来实现自动执行脚本了。</p>
+<hr />
+<p>自此完成：Rclone + Webdav + 定时上传云盘任务！</p>
 
   <!--
   Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
@@ -766,12 +835,12 @@
     <!-- mkdocs-git-revision-date-localized-plugin -->
       
         创建日期:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 4, 2023 22:08:45</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 4, 2023 22:20:34</span>
       
       
       <br />
       最后更新:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 4, 2023 22:08:45</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 4, 2023 22:20:34</span>
     <!-- mkdocs-git-revision-date-plugin -->
     
   </small>
