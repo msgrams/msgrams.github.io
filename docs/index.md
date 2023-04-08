@@ -10,6 +10,7 @@ comments: true
     === "树莓派"
         - [rclone+Webdav](pc/raspberry/rclone)
         - [clash](pc/raspberry/clash)
+        - [openwrt](pc/raspberry/openwrt)
 
 
 ??? 2023年3月笔记

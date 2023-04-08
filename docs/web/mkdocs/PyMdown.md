@@ -92,15 +92,6 @@ Task List
 - [ ] item 2
 - [ ] item 3
 
-
-嵌入本地 PNG、JPEG 和 GIF 图像引用
-
-![胡歌](https://qnimg.yi2.net/FhU9fQqfN0T7FmxlWv6sGUCJ2oss "胡歌")
-
-<img src="https://qnimg.yi2.net/FhU9fQqfN0T7FmxlWv6sGUCJ2oss" alt="胡歌"
-title="胡歌" width="50%" height="10%" />
-
-
 下划线：^^Insert me^^
 
 上角标：H^2^0
