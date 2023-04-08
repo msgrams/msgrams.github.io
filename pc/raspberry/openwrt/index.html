@@ -1,0 +1,1036 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+  
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="OpenWrt路由器">
+      
+      
+        <meta name="author" content="FYA">
+      
+      
+        <link rel="canonical" href="https://121rh.com/pc/raspberry/openwrt/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">       
+    
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" charset="UTF-8">
+    <meta name="baidu-site-verification" content="code-VSU9zlmT1E">
+    <meta name="Keywords" content="Java开发,SpringBoot,SpringCloud...">
+<!--添加部分-start-->
+<script>
+  document.addEventListener('visibilitychange',function(){
+      if( document.visibilityState == 'hidden' ){
+      normal_title = document.title;
+      document.title = 'ヽ(●-`Д´-)ノ你丑你就走！';
+      }else{
+      document.title = 'ヾ(Ő∀Ő3)ノ你帅就回来！';
+      setTimeout(function(){
+          document.title = normal_title;
+      }, 1200)
+      }
+  });
+  </script>
+<!-- 谷歌广告业务 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3116684949286138" crossorigin="anonymous"></script>
+
+<!--添加部分-end-->
+
+    
+      
+        <title>树莓派作为OpenWrt路由器 - FYA·心愿所往</title>
+      
+    
+    
+  
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+
+    
+  
+
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/extra.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/video-js.min.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/video.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/vssue.css">
+    
+      <link rel="stylesheet" href="https://qiniu.121rh.com/css/vssue.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+  
+      
+
+    
+
+    
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#一介绍openwrt" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="FYA·心愿所往" class="md-header__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FYA·心愿所往
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              树莓派作为OpenWrt路由器
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-orange" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/msgrams/msgrams.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    msgrams
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../life/" class="md-tabs__link">
+      生活
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../timeline/" class="md-tabs__link">
+      时间线
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../tags/" class="md-tabs__link">
+      打标签
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../algs/" class="md-tabs__link">
+      算法
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FYA·心愿所往" class="md-nav__button md-logo" aria-label="FYA·心愿所往" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    FYA·心愿所往
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/msgrams/msgrams.github.io" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    msgrams
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../life/" class="md-nav__link">
+        生活
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../timeline/" class="md-nav__link">
+        时间线
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tags/" class="md-nav__link">
+        打标签
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../algs/" class="md-nav__link">
+        算法
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一介绍openwrt" class="md-nav__link">
+    一、介绍OpenWrt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二旁路网关" class="md-nav__link">
+    二、旁路网关
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三具体步骤" class="md-nav__link">
+    三、具体步骤
+  </a>
+  
+    <nav class="md-nav" aria-label="三、具体步骤">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1打开网卡混杂模式" class="md-nav__link">
+    1、打开网卡混杂模式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2创建docker网络" class="md-nav__link">
+    2、创建docker网络
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3拉取镜像" class="md-nav__link">
+    3、拉取镜像
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4创建并启动容器" class="md-nav__link">
+    4、创建并启动容器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5进入容器并修改相关参数" class="md-nav__link">
+    5、进入容器并修改相关参数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6在容器内重启网络" class="md-nav__link">
+    6、在容器内重启网络
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7进入openwrt-管理页面" class="md-nav__link">
+    7、进入openwrt 管理页面
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8关闭dhcp服务" class="md-nav__link">
+    8、关闭DHCP服务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9主路由-dhcp-设置" class="md-nav__link">
+    9、主路由 DHCP 设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10单个设备指定网关" class="md-nav__link">
+    10、单个设备指定网关
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#四科学上网" class="md-nav__link">
+    四、科学上网
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+
+<!-- 将广告代码放在内容信息流的 HTML 中间 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3116684949286138"
+  crossorigin="anonymous"></script>
+<ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-gw-3+1f-3d+2z"
+  data-ad-client="ca-pub-3116684949286138" data-ad-slot="1958221910"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3116684949286138",
+    enable_page_level_ads: true,
+    overlays: { bottom: true }
+  });
+</script>
+
+  
+                
+  <a href="https://github.com/msgrams/msgrams.github.io/edit/main/docs/pc/raspberry/openwrt.md" title="编辑此页" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  
+
+  <nav class="md-tags" >
+    
+      
+        <a href="../../../tags/#raspberry" class="md-tag">
+          Raspberry
+        </a>
+      
+    
+  </nav>
+
+
+
+  <h1>树莓派作为OpenWrt路由器</h1>
+
+<h2 id="一介绍openwrt">一、介绍OpenWrt<a class="headerlink" href="#一介绍openwrt" title="Permanent link">🪁</a></h2>
+<p>OpenWrt 是一个 Linux 操作系统，主要用于嵌入式设备如路由器、交换机等网络设备上。通过 OpenWrt，您可以将路由器升级为更强大、更灵活的设备，并添加额外的功能。</p>
+<p>下面是一些关于 OpenWrt 路由器的常见问题和回答：</p>
+<ol>
+<li>
+<p>什么是 OpenWrt 路由器？</p>
+<p>OpenWrt 路由器是指在运行 OpenWrt 操作系统的路由器设备。OpenWrt 可以使路由器变得更加灵活，提供更多功能，比如 VPN、热点、远程管理等等。</p>
+</li>
+<li>
+<p>如何安装 OpenWrt 到路由器上？</p>
+<p>安装 OpenWrt 到路由器上需要先检查路由器型号是否支持 OpenWrt 并确定正确的版本。可以从 OpenWrt 官方网站下载适用于您的路由器的固件，然后按照官方指引进行安装。</p>
+</li>
+<li>
+<p>我可以自定义 OpenWrt 路由器吗？</p>
+<p>在 OpenWrt 上，您可以根据自己的需要完全自定义路由器。您可以选择安装所需的软件包，或编写自己的程序来实现特定的功能。</p>
+</li>
+<li>
+<p>如何在 OpenWrt 上配置 VPN？</p>
+<p>OpenWrt 支持多种 VPN 协议，包括 PPTP、L2TP、OpenVPN 等。您可以使用 OpenWrt 的 Web 界面或 SSH 登录来配置 VPN。</p>
+</li>
+<li>
+<p>如何在 OpenWrt 上配置热点？</p>
+<p>OpenWrt 支持多种热点模式，包括 Wi-Fi、认证门户、Captive Portal 等。您可以使用 OpenWrt 的 Web 界面来配置热点，也可以使用命令行界面。</p>
+</li>
+<li>
+<p>如何远程管理 OpenWrt 路由器？</p>
+<p>OpenWrt 支持 SSH 和 Web 界面两种远程管理方式。您可以使用 SSH 客户端连接到路由器并执行命令，或使用浏览器访问路由器的 Web 界面进行管理。</p>
+</li>
+<li>
+<p>OpenWrt 在树莓派上正常运行时，资源占用率只有不到 1/10</p>
+</li>
+<li>树莓派与路由器通过网线连接。</li>
+</ol>
+<h2 id="二旁路网关">二、旁路网关<a class="headerlink" href="#二旁路网关" title="Permanent link">🪁</a></h2>
+<p>旁路网关通常是指在企业或组织内部网络中，为了实现网络流量监测、控制和管理等需要而引入的一种特殊网络部署模式。</p>
+<p>在旁路网关模式下，部署了一个额外的设备（旁路网关）来截取网络流量，把流量经过预先配置的过滤和处理操作后再转发到内部网络，从而达到监测流量、防止网络攻击、优化网络性能等目的。</p>
+<p>旁路网关通常被应用于以下场景：</p>
+<ol>
+<li>
+<p>网络安全：可以使用旁路网关来监测入侵攻击、病毒、垃圾邮件等网络活动，并根据安全策略进行处理。</p>
+</li>
+<li>
+<p>网络性能：可以使用旁路网关来监测带宽使用情况、应用程序性能等，并根据需要进行优化。</p>
+</li>
+<li>
+<p>合规性：对于一些需要遵循监管要求的行业和组织，如金融、医疗等，可以使用旁路网关来监测和记录网络活动以满足合规性要求。</p>
+</li>
+</ol>
+<p>旁路网关通常具有高可用性和高性能的特点，采用冗余和负载均衡技术来保证网络连续性和可靠性。但是，与传统网关相比，旁路网关需要更多的配置和维护工作，对网络管理员的技术水平要求较高。</p>
+<p>总之，旁路网关是一种特殊的网络部署模式，提供了一系列网络管理、监测和控制功能，可以帮助组织实现更高的网络安全性、性能和合规性。</p>
+<h2 id="三具体步骤">三、具体步骤<a class="headerlink" href="#三具体步骤" title="Permanent link">🪁</a></h2>
+<h3 id="1打开网卡混杂模式">1、打开网卡混杂模式<a class="headerlink" href="#1打开网卡混杂模式" title="Permanent link">🪁</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo ip link <span class="nb">set</span> eth0 promisc on
+</code></pre></div>
+<h3 id="2创建docker网络">2、创建docker网络<a class="headerlink" href="#2创建docker网络" title="Permanent link">🪁</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">docker</span><span class="w"> </span><span class="n">network</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="n">macvlan</span><span class="w"> </span><span class="o">--</span><span class="n">subnet</span><span class="o">=</span><span class="mf">192.168.0.123</span><span class="o">/</span><span class="mi">24</span><span class="w"> </span><span class="o">--</span><span class="n">gateway</span><span class="o">=</span><span class="mf">192.168.0.1</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">parent</span><span class="o">=</span><span class="n">eth0</span><span class="w"> </span><span class="n">mymacnet</span><span class="w"></span>
+</code></pre></div>
+<p>这是一个创建 Docker 网络的命令，使用了 macvlan 驱动程序来实现将容器连接到宿主机网络的效果。该命令的具体含义如下：</p>
+<details class="warning">
+<summary>macvlan 驱动程序</summary>
+<p>macvlan 是一种 Linux 内核网络驱动程序，可以用于创建虚拟的 MACVLAN 接口，该接口拥有和物理接口相同的 MAC 地址，并独立地处理网络流量。在 Docker 中，macvlan 驱动程序可以用于将 Docker 容器连接到宿主机网络，从而实现容器和宿主机共享物理网络接口。</p>
+<p>使用 macvlan 驱动程序，可以让 Docker 容器直接连接到宿主机网络中，不需要 NAT 或其他中间网络设备的干扰，从而提高了网络性能和容器的可靠性。同时，macvlan 驱动程序还支持多种模式，如 bridge 模式、private 模式和 VEPA 模式等，可以根据不同的应用场景进行选择。</p>
+<p>需要注意的是，在使用 macvlan 驱动程序时，容器和宿主机网络接口的配置需要正确设置，以避免网络冲突和安全问题。此外，不同版本的 Linux 内核和 Docker 环境可能对 macvlan 驱动程序的支持存在差异，需要在具体环境下进行测试和调整。</p>
+</details>
+<ul>
+<li>docker network create：创建 Docker 网络。</li>
+<li>-d macvlan：指定使用 macvlan 驱动程序，可以让容器拥有和宿主机相同的 MAC 地址。</li>
+<li>--subnet=192.168.0.123/24：指定子网地址，该命令将创建一个名为“mymacnet”的网络，其 IP 地址范围为 192.168.0.123/24。</li>
+<li>--gateway=192.168.0.1：设置网关地址，该命令将设置网络的默认网关为 192.168.0.1。</li>
+<li>-o parent=eth0：指定宿主机上的物理接口（即 parent 接口），该命令将使用名为 eth0 的接口连接到宿主机网络中。</li>
+<li>mymacnet：指定要创建的网络的名称。</li>
+</ul>
+<p>总之，上述命令创建了一个名为“mymacnet”的 Docker 网络，使得该网络内的容器可以通过指定的网关访问宿主机网络，并且可以使用与宿主机相同的 MAC 地址，从而更方便地进行网络通信和管理。需要注意的是，使用 macvlan 驱动程序时，容器和宿主机之间需要处于同一子网内。</p>
+<p>查看docker 网络 <code>docker network ls</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">pi</span><span class="err">@</span><span class="nx">raspberrypi</span><span class="o">:~</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">network</span><span class="w"> </span><span class="nx">ls</span><span class="w"></span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nx">NETWORK</span><span class="w"> </span><span class="nx">ID</span><span class="w">     </span><span class="nx">NAME</span><span class="w">                    </span><span class="nx">DRIVER</span><span class="w">    </span><span class="nx">SCOPE</span><span class="w"></span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">bab99c0c4c2d</span><span class="w">   </span><span class="nx">aliyun</span><span class="o">-</span><span class="nx">driver_default</span><span class="w">   </span><span class="nx">bridge</span><span class="w">    </span><span class="nx">local</span><span class="w"></span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="mf">6</span><span class="nx">cf1b9e9542c</span><span class="w">   </span><span class="nx">bitwarden_default</span><span class="w">       </span><span class="nx">bridge</span><span class="w">    </span><span class="nx">local</span><span class="w"></span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="mf">66</span><span class="nx">ebb324836a</span><span class="w">   </span><span class="nx">bridge</span><span class="w">                  </span><span class="nx">bridge</span><span class="w">    </span><span class="nx">local</span><span class="w"></span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nx">dbacc8ad17fe</span><span class="w">   </span><span class="nx">host</span><span class="w">                    </span><span class="nx">host</span><span class="w">      </span><span class="nx">local</span><span class="w"></span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="mf">8546</span><span class="nx">bc867a7c</span><span class="w">   </span><span class="nx">mymacvlan</span><span class="w">               </span><span class="nx">macvlan</span><span class="w">   </span><span class="nx">local</span><span class="w"></span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nx">f6a4c2fd3b97</span><span class="w">   </span><span class="nx">none</span><span class="w">                    </span><span class="kc">null</span><span class="w">      </span><span class="nx">local</span><span class="w"></span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="mf">876</span><span class="nx">a79d48a92</span><span class="w">   </span><span class="nx">vaultwarden_default</span><span class="w">     </span><span class="nx">bridge</span><span class="w">    </span><span class="nx">local</span><span class="w"></span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="mf">4</span><span class="nx">abf0b6b2cf9</span><span class="w">   </span><span class="nx">webdav_default</span><span class="w">          </span><span class="nx">bridge</span><span class="w">    </span><span class="nx">local</span><span class="w"></span>
+</code></pre></div></p>
+<h3 id="3拉取镜像">3、拉取镜像<a class="headerlink" href="#3拉取镜像" title="Permanent link">🪁</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">docker</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="n">unifreq</span><span class="o">/</span><span class="n">openwrt</span><span class="o">-</span><span class="n">aarch64</span><span class="o">:</span><span class="n">latest</span><span class="w"></span>
+</code></pre></div>
+<p><code>docker images</code> 查看本地镜像
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">pi</span><span class="err">@</span><span class="n">raspberrypi</span><span class="o">:~</span><span class="w"> </span><span class="n">$</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">images</span><span class="w"></span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">REPOSITORY</span><span class="w">                    </span><span class="n">TAG</span><span class="w">       </span><span class="n">IMAGE</span><span class="w"> </span><span class="n">ID</span><span class="w">       </span><span class="n">CREATED</span><span class="w">         </span><span class="n">SIZE</span><span class="w"></span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">unifreq</span><span class="o">/</span><span class="n">openwrt</span><span class="o">-</span><span class="n">aarch64</span><span class="w">       </span><span class="n">latest</span><span class="w">    </span><span class="n">c4d047e9d49a</span><span class="w">   </span><span class="mi">15</span><span class="w"> </span><span class="n">months</span><span class="w"> </span><span class="n">ago</span><span class="w">   </span><span class="mi">301</span><span class="n">MB</span><span class="w"></span>
+</code></pre></div></p>
+<h3 id="4创建并启动容器">4、创建并启动容器<a class="headerlink" href="#4创建并启动容器" title="Permanent link">🪁</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">restart</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="o">--</span><span class="n">name</span><span class="w"> </span><span class="n">openwrt</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">soft</span><span class="o">/</span><span class="n">openwrt</span><span class="o">/</span><span class="n">network</span><span class="o">:/</span><span class="n">etc</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">network</span><span class="w"> </span><span class="o">--</span><span class="n">cap</span><span class="o">-</span><span class="n">add</span><span class="w"> </span><span class="n">NET_ADMIN</span><span class="w"> </span><span class="o">--</span><span class="n">device</span><span class="w"> </span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">tun</span><span class="w"> </span>\
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mf">192.168.0.6</span><span class="o">:</span><span class="mi">80</span><span class="o">:</span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mf">192.168.0.6</span><span class="o">:</span><span class="mi">443</span><span class="o">:</span><span class="mi">443</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mf">192.168.0.6</span><span class="o">:</span><span class="mi">22</span><span class="o">:</span><span class="mi">22</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span>\
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="n">TZ</span><span class="o">=</span><span class="n">Asia</span><span class="o">/</span><span class="n">Shanghai</span><span class="w"> </span><span class="o">--</span><span class="n">network</span><span class="w"> </span><span class="n">mymacvlan</span><span class="w"> </span><span class="n">unifreq</span><span class="o">/</span><span class="n">openwrt</span><span class="o">-</span><span class="n">aarch64</span><span class="o">:</span><span class="n">latest</span><span class="w"> </span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">init</span><span class="w"></span>
+</code></pre></div>
+<p>这段命令使用 Docker 运行一个名为 "openwrt" 的容器，具体内容如下：</p>
+<ul>
+<li><code>--restart always</code>：指定 Docker 在自动重启容器时使用 “always” 参数，即容器退出时总是重新启动。</li>
+<li><code>--name openwrt</code>：为容器指定名称 "openwrt"，以便于管理和操作。</li>
+<li><code>-d</code>：在后台运行容器。</li>
+<li><code>-v /home/pi/soft/openwrt/network:/etc/config/network</code>：将宿主机上的 /home/pi/soft/openwrt/network 目录挂载到容器中的 /etc/config/network 目录，用于配置 OpenWrt 网络参数。</li>
+<li><code>--cap-add NET_ADMIN</code>：授予容器管理员网络监控和控制权限。</li>
+<li><code>--device /dev/net/tun</code>：授权容器使用 /dev/net/tun 设备，用于支持虚拟私有网络 (VPN)。</li>
+<li><code>-p 192.168.0.6:80:80/tcp -p 192.168.0.6:443:443/tcp -p 192.168.0.6:22:22/tcp</code>：将容器中的端口映射到宿主机上，使得从外部可以访问这些端口。例如，将容器中的 80 端口映射到宿主机的 192.168.0.6:80 端口。</li>
+<li><code>-e TZ=Asia/Shanghai</code>：设置容器时区为 “Asia/Shanghai”。</li>
+<li><code>--network mymacvlan</code>：将容器连接到一个自定义的 MACVLAN 网络，以实现容器和宿主机之间的通信。</li>
+<li><code>unifreq/openwrt-aarch64:latest</code>：使用指定的Docker镜像创建容器。</li>
+<li><code>/sbin/init</code>：用于启动容器。</li>
+</ul>
+<p>这个命令的作用是在 Docker 中运行一个 OpenWrt 容器，并对容器进行配置和设置，使其支持网络、VPN、Web 服务和 SSH 连接等功能。</p>
+<p>network 配置</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">config</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="err">&#39;</span><span class="n">loopback</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ifname</span><span class="w"> </span><span class="err">&#39;</span><span class="n">lo</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">proto</span><span class="w"> </span><span class="err">&#39;</span><span class="k">static</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ipaddr</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">127.0.0.1</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">netmask</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">255.0.0.0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">config</span><span class="w"> </span><span class="n">globals</span><span class="w"> </span><span class="err">&#39;</span><span class="n">globals</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ula_prefix</span><span class="w"> </span><span class="err">&#39;</span><span class="n">fd62</span><span class="o">:</span><span class="n">dcc5</span><span class="o">:</span><span class="mi">5</span><span class="n">c23</span><span class="o">::/</span><span class="mi">48</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">config</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="err">&#39;</span><span class="n">lan</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="err">&#39;</span><span class="n">bridge</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ifname</span><span class="w"> </span><span class="err">&#39;</span><span class="n">eth0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">proto</span><span class="w"> </span><span class="err">&#39;</span><span class="k">static</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ipaddr</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">192.168.0.6</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">netmask</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">255.255.255.0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">gateway</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">192.168.0.1</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ip6assign</span><span class="w"> </span><span class="err">&#39;</span><span class="mi">60</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">dns</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">192.168.0.1</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="n">config</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="err">&#39;</span><span class="n">VPN</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ifname</span><span class="w"> </span><span class="err">&#39;</span><span class="n">ipsec0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">proto</span><span class="w"> </span><span class="err">&#39;</span><span class="k">static</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ipaddr</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">10.10.10.1</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">netmask</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">255.255.255.0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="n">config</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="err">&#39;</span><span class="n">vpn0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">ifname</span><span class="w"> </span><span class="err">&#39;</span><span class="n">tun0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">    </span><span class="n">option</span><span class="w"> </span><span class="n">proto</span><span class="w"> </span><span class="err">&#39;</span><span class="n">none</span><span class="err">&#39;</span><span class="w"></span>
+</code></pre></div>
+<h3 id="5进入容器并修改相关参数">5、进入容器并修改相关参数<a class="headerlink" href="#5进入容器并修改相关参数" title="Permanent link">🪁</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="n">openwrt</span><span class="w"> </span><span class="n">bash</span><span class="w"></span>
+</code></pre></div>
+<p>进行编写OpenWrt 的网络配置文件：<code>vim /etc/config/network</code></p>
+<p>更改 Lan 口设置</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">config</span><span class="w"> </span><span class="n">interface</span><span class="w"> </span><span class="err">&#39;</span><span class="n">lan</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="err">&#39;</span><span class="n">bridge</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">ifname</span><span class="w"> </span><span class="err">&#39;</span><span class="n">eth0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">proto</span><span class="w"> </span><span class="err">&#39;</span><span class="k">static</span><span class="err">&#39;</span><span class="w"> </span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">ipaddr</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">192.168.0.6</span><span class="err">&#39;</span><span class="w"> </span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">netmask</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">255.255.255.0</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">ip6assign</span><span class="w"> </span><span class="err">&#39;</span><span class="mi">60</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">gateway</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">192.168.0.1</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">broadcast</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">192.168.123.255</span><span class="err">&#39;</span><span class="w"></span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">        </span><span class="n">option</span><span class="w"> </span><span class="n">dns</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">192.168.0.1</span><span class="err">&#39;</span><span class="w"> </span>
+</code></pre></div>
+<ul>
+<li>改三处：option ipaddr、option netmask、option dns，填写**路由器**的IP地址</li>
+</ul>
+<details class="warning">
+<summary>interface Lan介绍</summary>
+<p>这是 OpenWrt 系统中的一个网络配置文件，其中 <code>config interface 'lan'</code> 表示的是对一个名为 "lan" 的网络接口进行配置。具体解释如下：</p>
+<ul>
+<li><code>option type 'bridge'</code>：设置该网络接口类型为 bridge，即桥接模式；</li>
+<li><code>option ifname 'eth0'</code>：指定了该网络接口的名称为 eth0，表示用于连接宿主机的物理网卡；</li>
+<li><code>option proto 'static'</code>：指定了该网络接口的协议类型为静态 IP 地址模式；</li>
+<li><code>option ipaddr '192.168.0.6'</code>：指定了该网络接口的 IP 地址为 192.168.0.6；</li>
+<li><code>option netmask '255.255.255.0'</code>：指定了该网络接口的子网掩码为 255.255.255.0；</li>
+<li><code>option ip6assign '60'</code>：指定了该网络接口的 IPv6 前缀长度为 60；</li>
+<li><code>option gateway '192.168.0.1'</code>：指定了该网络接口的默认网关为 192.168.0.1；</li>
+<li><code>option broadcast '192.168.123.255'</code>：设置该网络接口的广播地址为 192.168.123.255；</li>
+<li><code>option dns '192.168.0.1'</code>：指定了该网络接口使用的 DNS 服务器为 192.168.0.1。</li>
+</ul>
+<p>这个配置文件的作用是将 OpenWrt 系统中的 "lan" 网络接口配置为桥接模式，并设置了该网络接口的 IP 地址、子网掩码、默认网关、广播地址和 DNS 服务器，以实现对该网络接口的控制和管理。</p>
+</details>
+<h3 id="6在容器内重启网络">6、在容器内重启网络<a class="headerlink" href="#6在容器内重启网络" title="Permanent link">🪁</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">network</span><span class="w"> </span><span class="n">restart</span><span class="w"></span>
+</code></pre></div>
+<h3 id="7进入openwrt-管理页面">7、进入openwrt 管理页面<a class="headerlink" href="#7进入openwrt-管理页面" title="Permanent link">🪁</a></h3>
+<p>浏览器中输入<code>http://192.168.0.6</code> ，此IP是在容器内设置的，即option ipaddr '192.168.0.6'，就可以看到Openwrt的管理界面。</p>
+<ul>
+<li>用户名： root</li>
+<li>密码： password </li>
+</ul>
+<p>SSH 连接openwrt容器</p>
+<ul>
+<li>IP： 192.168.0.6</li>
+<li>端口：22</li>
+<li>用户名： root</li>
+<li>密码： password </li>
+</ul>
+<p>连接后显示</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">Connecting</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mf">192.168.0.6</span><span class="o">:</span><span class="mf">22.</span><span class="p">..</span><span class="w"></span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">Connection</span><span class="w"> </span><span class="n">established</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">To</span><span class="w"> </span><span class="n">escape</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="n">shell</span><span class="p">,</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="err">&#39;</span><span class="n">Ctrl</span><span class="o">+</span><span class="n">Alt</span><span class="o">+</span><span class="p">]</span><span class="err">&#39;</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">WARNING</span><span class="o">!</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">remote</span><span class="w"> </span><span class="n">SSH</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">rejected</span><span class="w"> </span><span class="n">X11</span><span class="w"> </span><span class="n">forwarding</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="w"></span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="o">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class="w"></span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="err">\</span><span class="w">    </span><span class="n">____</span><span class="w">                 </span><span class="n">_</span><span class="w">       </span><span class="n">__</span><span class="w">     </span><span class="n">__</span><span class="w">  </span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="err">\</span><span class="w">   </span><span class="o">/</span><span class="w"> </span><span class="n">__</span><span class="w"> </span><span class="err">\</span><span class="n">____</span><span class="w">  </span><span class="n">___</span><span class="w">  </span><span class="n">____</span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">____</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">_</span><span class="w"> </span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="err">\</span><span class="w">  </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">__</span><span class="w"> </span><span class="err">\</span><span class="o">/</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="err">\</span><span class="o">/</span><span class="w"> </span><span class="n">__</span><span class="w"> </span><span class="err">\</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">/|</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">___</span><span class="o">/</span><span class="w"> </span><span class="n">__</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="err">\</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">_</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">_</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w">  </span><span class="n">__</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">|/</span><span class="w"> </span><span class="o">|/</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="w">  </span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">_</span><span class="w">   </span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="err">\</span><span class="w"> </span><span class="err">\</span><span class="n">____</span><span class="o">/</span><span class="w"> </span><span class="p">.</span><span class="n">___</span><span class="o">/</span><span class="err">\</span><span class="n">___</span><span class="o">/</span><span class="n">_</span><span class="o">/</span><span class="w"> </span><span class="o">/</span><span class="n">_</span><span class="o">/|</span><span class="n">__</span><span class="o">/|</span><span class="n">__</span><span class="o">/</span><span class="n">_</span><span class="o">/</span><span class="w">   </span><span class="err">\</span><span class="n">__</span><span class="o">/</span><span class="w">   </span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="err">\</span><span class="w">     </span><span class="o">/</span><span class="n">_</span><span class="o">/</span><span class="w">  </span><span class="n">W</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="n">S</span><span class="w">   </span><span class="n">F</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="n">D</span><span class="w"> </span><span class="n">O</span><span class="w"> </span><span class="n">M</span><span class="w">   </span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="err">\</span><span class="w">                                            </span><span class="o">/</span><span class="w"></span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="o">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><span class="w"></span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">The</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">aarch64</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="n">edition</span><span class="w"></span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="err">\</span><span class="n">n</span><span class="w"></span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="nl">cat</span><span class="p">:</span><span class="w"> </span><span class="n">can</span><span class="err">&#39;</span><span class="n">t</span><span class="w"> </span><span class="n">open</span><span class="w"> </span><span class="err">&#39;</span><span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">device</span><span class="o">-</span><span class="n">tree</span><span class="o">/</span><span class="n">model</span><span class="err">&#39;</span><span class="o">:</span><span class="w"> </span><span class="n">No</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">directory</span><span class="w"></span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="n">设备信息</span><span class="err">：</span><span class="w"> </span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="n">CPU</span><span class="w"> </span><span class="n">型号</span><span class="o">:</span><span class="w">  </span><span class="n">AArch64</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Cortex</span><span class="o">-</span><span class="n">A53</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="nl">系统负载</span><span class="p">:</span><span class="w">  </span><span class="mf">0.02</span><span class="w"> </span><span class="mf">0.06</span><span class="w"> </span><span class="mf">0.11</span><span class="w">   </span><span class="n">运行时间</span><span class="o">:</span><span class="w">  </span><span class="mi">1</span><span class="n">小时</span><span class="w"> </span><span class="mi">7</span><span class="n">分钟</span><span class="w"> </span><span class="mi">1</span><span class="n">秒</span><span class="w">       </span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="nl">环境温度</span><span class="p">:</span><span class="w">  </span><span class="mf">38.6</span><span class="w"> </span><span class="err">°</span><span class="n">C</span><span class="w">              </span><span class="n">当前频率</span><span class="o">:</span><span class="w">  </span><span class="mi">1200</span><span class="w"> </span><span class="n">Mhz</span><span class="w"></span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="nl">内存已用</span><span class="p">:</span><span class="w">  </span><span class="mi">23</span><span class="o">%</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mi">859</span><span class="n">MB</span><span class="w">     </span><span class="n">IP</span><span class="w">  </span><span class="n">地址</span><span class="o">:</span><span class="w">  </span><span class="mf">192.168.0.6</span><span class="w"></span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="nl">系统存储</span><span class="p">:</span><span class="w">  </span><span class="mi">31</span><span class="o">%</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="mf">29.0</span><span class="n">G</span><span class="w">     </span>
+</code></pre></div>
+<h3 id="8关闭dhcp服务">8、关闭DHCP服务<a class="headerlink" href="#8关闭dhcp服务" title="Permanent link">🪁</a></h3>
+<p>在 <code>网络 -&gt; 接口 -&gt;  Lan -&gt; 修改</code>  界面中，勾选下方的 “<strong>忽略此接口（不在此接口提供 DHCP 服务）</strong>”，并“<strong>保存&amp;应用</strong>”</p>
+<h3 id="9主路由-dhcp-设置">9、主路由 DHCP 设置<a class="headerlink" href="#9主路由-dhcp-设置" title="Permanent link">🪁</a></h3>
+<blockquote>
+<p>如果想要局域网内所有的设备走树莓派这个网关，那么在路由器内设置：DHCP中的网关和DNS-&gt;刚刚容器内的IP地址。</p>
+<p>不想路由器下所有设备走openwrt，就不设置。那就单个设备指定网关</p>
+</blockquote>
+<h3 id="10单个设备指定网关">10、单个设备指定网关<a class="headerlink" href="#10单个设备指定网关" title="Permanent link">🪁</a></h3>
+<p>1）Windows平台：</p>
+<blockquote>
+<p>设置&rarr;网络和Internet&rarr;状态&rarr;更改适配器选项&rarr;"选择网络适配器WLAN"&rarr;属性&rarr;Internet协议 TCP/IPv4（设置手动IP地址、DNS服务器地址）</p>
+</blockquote>
+<p>2）安卓</p>
+<blockquote>
+<p>WLAN&rarr;IP设置(DHCP) 改 ”静态“ &rarr;DNS1、DNS2 改 容器内设置的IP</p>
+</blockquote>
+<h2 id="四科学上网">四、科学上网<a class="headerlink" href="#四科学上网" title="Permanent link">🪁</a></h2>
+<blockquote>
+<p>从机场获取订阅链接扔到Openwrt中的插件shadowsocksR-plus中</p>
+</blockquote>
+<p>最好使用clash：OpenWRT 可以使用 <a href="https://github.com/vernesong/OpenClash">OpenClash 插件</a></p>
+<hr />
+<h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link">🪁</a></h2>
+<ul>
+<li><a href="https://www.kejiwanjia.com/jiaocheng/57242.html">Docker安装OpenWRT做旁路由，魔法上网</a></li>
+<li><a href="https://www.cnblogs.com/mokou/p/16173553.html">在docker中搭建openwrt软路由系统，实现多网口以及主路由功能</a></li>
+<li><a href="https://www.treesir.pub/post/n1-docker/#%E7%8E%AF%E5%A2%83%E8%AF%B4%E6%98%8E">Docker 部署的 openWrt 软路由, 并解决无法与宿主机通信问题</a></li>
+</ul>
+
+  <!--
+  Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Source file information -->
+<hr />
+<div class="md-source-file">
+  <small>
+    <!-- mkdocs-git-revision-date-localized-plugin -->
+      
+        创建日期:
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 8, 2023 18:11:37</span>
+      
+      
+      <br />
+      最后更新:
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 8, 2023 18:11:37</span>
+    <!-- mkdocs-git-revision-date-plugin -->
+    
+  </small>
+</div>
+  <!-- cusdis评论位置 -->
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="12830b58-fda6-4135-99ce-e5f771bd3070"
+  data-page-id=""
+  data-page-url="https://121rh.com/about"
+  data-page-title="主页评论"
+  ></div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+  <script>
+  window.CUSDIS_LOCALE = {
+    "powered_by": "评论由 Cusdis 提供",
+    "post_comment": "发送",
+    "loading": "加载中",
+    "email": "邮箱地址 (可选)",
+    "nickname": "昵称",
+    "reply_placeholder": "回复内容...",
+    "reply_btn": "回复",
+    "sending": "发送中...",
+    "mod_badge": "管理员",
+    "content_is_required": "内容不能为空",
+    "nickname_is_required": "昵称不能为空",
+    "comment_has_been_sent": "评论已发送，管理员审核通过后会展示"
+  }
+  </script>
+<!--live2d 看板娘  -->
+<script src="https://cdn.jsdelivr.net/gh/msgrams/live2d-widget@main/autoload.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/msgrams/live2d-widget@main/waifu-tips.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/msgrams/live2d-widget@main/waifu-tips.json"></script>
+
+
+              
+
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022-2023  FYA·心愿所往 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">黑ICP备17009103号</a>
+    </a>
+    </div>
+  
+  
+<center id="siteTime">
+  <span id="timeDate">天</span><span id="times"></span>💓
+本站总访问量<span id="busuanzi_value_site_pv"></span>次💓
+本站访客数<span id="busuanzi_value_site_uv"></span>人次💓
+本文总阅读量<span id="busuanzi_value_page_pv"></span>次-_-
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://121rh.com/feed_rss_updated.xml" target="_blank" rel="noopener" title="RSS订阅" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M25.57 176.1C12.41 175.4.912 185.2.052 198.4s9.173 24.65 22.39 25.5c120.1 7.875 225.7 112.7 233.6 233.6C256.9 470.3 267.4 480 279.1 480c.531 0 1.062-.031 1.594-.063 13.22-.843 23.25-12.28 22.39-25.5C294.6 310.3 169.7 185.4 25.57 176.1zM32 32C14.33 32 0 46.31 0 64s14.33 32 32 32c194.1 0 352 157.9 352 352 0 17.69 14.33 32 32 32s32-14.31 32-32C448 218.6 261.4 32 32 32zm31.1 319.9C28.63 351.9 0 380.6 0 416s28.63 64 63.1 64 64.08-28.62 64.08-64-27.81-64.1-64.08-64.1z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:<fyabwz@126.com>" target="_blank" rel="noopener" title="发送邮件" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m511.6 36.86-64 415.1a32.008 32.008 0 0 1-31.65 27.147c-4.188 0-8.319-.815-12.29-2.472l-122.6-51.1-50.86 76.29C226.3 508.5 219.8 512 212.8 512c-11.5 0-20.8-9.3-20.8-20.8v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96 122.3 360.3 19.69 317.5C8.438 312.8.812 302.2.062 289.1s5.47-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://gitee.com/fya666" target="_blank" rel="noopener" title="Gitee地址" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://weibo.com/fyawbz" target="_blank" rel="noopener" title="微博联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg>
+    </a>
+  
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1434090053&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" rel="noopener" title="QQ联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg>
+    </a>
+  
+    
+    
+    <a href="/life/weixin/" target="_blank" rel="noopener" title="微信联系我哟" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+  
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/extra.js"></script>
+      
+        <script src="https://js.121rh.com/js/video.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/vue.js"></script>
+      
+        <script src="https://js.121rh.com/js/time.js"></script>
+      
+        <script src="https://js.121rh.com/js/console.js"></script>
+      
+        <script src="https://js.121rh.com/js/anime.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/jquery-3.3.1.min.js"></script>
+      
+        <script src="https://js.121rh.com/js/G-CHY1TBZZVW.js"></script>
+      
+        <script src="https://js.121rh.com/js/G-NRCPMZGDT9.js"></script>
+      
+        <script src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+
+  </body>
+</html>
