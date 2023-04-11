@@ -7,6 +7,8 @@ tags:
 
 ## 一、介绍OpenWrt
 
+<div style="position: relative; overflow: hidden; padding-top: 56.25%;"><iframe src="https://share.synthesia.io/embeds/videos/c82a0c12-e19d-406d-bb81-96aebeb56ac9" loading="lazy" title="Synthesia video player - Your AI video" allow="encrypted-media; fullscreen;" style="position: absolute; width: 90%; height: 90%; top: 0; left: 0; border: none; padding: 0; margin: 0; overflow:hidden;"></iframe></div>
+
 
 OpenWrt 是一个 Linux 操作系统，主要用于嵌入式设备如路由器、交换机等网络设备上。通过 OpenWrt，您可以将路由器升级为更强大、更灵活的设备，并添加额外的功能。
 
@@ -126,7 +128,7 @@ unifreq/openwrt-aarch64       latest    c4d047e9d49a   15 months ago   301MB
 ```c
 docker run --restart always --name openwrt -d -v /home/pi/soft/openwrt/network:/etc/config/network --cap-add NET_ADMIN --device /dev/net/tun \
 -p 192.168.0.6:80:80/tcp -p 192.168.0.6:443:443/tcp -p 192.168.0.6:22:22/tcp \
--e TZ=Asia/Shanghai --network mymacvlan unifreq/openwrt-aarch64:latest /sbin/init
+-e TZ=Asia/Shanghai --network mymacvlan --ip=192.168.0.6 unifreq/openwrt-aarch64:latest /sbin/init
 ```
 
 这段命令使用 Docker 运行一个名为 "openwrt" 的容器，具体内容如下：
@@ -300,6 +302,126 @@ CPU 型号:  AArch64 : Cortex-A53 x 4
 >从机场获取订阅链接扔到Openwrt中的插件shadowsocksR-plus中
 
 最好使用clash：OpenWRT 可以使用 [OpenClash 插件](https://github.com/vernesong/OpenClash)
+
+
+## 五、停电后docker容器异常
+
+前提：容器正常启动，无法访问openwrt Web端，同时无法进入SSH
+
+>使用命令`docker ps -a` 查询openwrt容器ID `305a3e652e6701b41`
+
+查看容器日志
+
+```c
+root@raspberrypi:/etc/selinux# docker logs 305a3e652e6701b41026
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+```
+
+根据 Docker 容器的日志信息，当前容器似乎出现了一些异常情况，导致在启动时出现了与输入设备相关的问题，并且需要通过按下“f”键和“1-4”键进行故障排除操作。
+
+针对这种情况，建议您按照以下几个步骤进行操作：
+
+1.  按下“f”键进入容器的故障安全模式。
+    
+2.  根据提示的信息，尝试按下“1-4”键来选择不同的调试级别，以便进行故障排查。
+    
+3.  在故障安全模式下，可以尝试检查容器内部的服务运行情况，以及处理掉一些可能导致容器异常的原因。
+    
+4.  修复完毕后，执行退出容器的命令，例如 Ctrl + P + Q 或者输入 exit 命令，并尝试重新启动该 Docker 容器。
+
+注：出现 Press the [f] key and hit [enter] to enter failsafe mode 的提示，可能是由于 Docker 容器镜像不完善或者配置文件不正确等原因导致容器启动异常。如果该容器有其他日志信息，可以根据日志信息定位到具体原因并尝试解决。
+
+>通过 `sudo systemctl status docker` 查看openwrt容器状态
+
+```c
+Apr 10 21:26:24 raspberrypi dockerd[692]: time="2023-04-10T21:26:24.799375352+08:00" level=info msg="Container failed to exit within 10s of signal 15 - using the force" container=305a3e652e
+Apr 10 21:26:25 raspberrypi dockerd[692]: time="2023-04-10T21:26:25.011846999+08:00" level=info msg="ignoring event" container=305a3e652e6701b41026bc74118b8c7be01493d81db3566c1728d3ee5b148b
+Apr 10 21:26:25 raspberrypi dockerd[692]: time="2023-04-10T21:26:25.059518878+08:00" level=warning msg="ShouldRestart failed, container will not be restarted" container=305a3e652e6701b41026
+```
+
+这是 Docker 容器的一段日志信息，提供了以下几个关键信息：
+
+1.  `Container failed to exit within 10s of signal 15`：Docker 容器无法在接收到信号 15 之后的 10 秒内正常退出。
+2.  `ignoring event`：Docker 引擎正在忽略一个事件。
+3.  `ShouldRestart failed, container will not be restarted`：Docker 容器重启失败，容器将不会重新启动。
+
+根据这些信息推测出可能的原因是 Docker 容器无法正常退出。可以尝试通过以下操作来解决问题：
+
+1.  停止 Docker 容器
+    
+    复制代码
+    
+    `$ docker stop CONTAINER_NAME_OR_ID`
+    
+    其中，`CONTAINER_NAME_OR_ID` 是需要停止的 Docker 容器的名称或 ID。
+    
+2.  使用 `docker ps -a` 命令查看所有已经停止的 Docker 容器，确认该容器是否已经完全退出。
+    
+3.  如果该容器没有完全退出，可尝试使用 `docker kill CONTAINER_NAME_OR_ID` 命令来强制结束该容器。
+    
+4.  删除 Docker 容器
+    
+    复制代码
+    
+    `$ docker rm CONTAINER_NAME_OR_ID`
+    
+    其中，`CONTAINER_NAME_OR_ID` 是需要删除的 Docker 容器的名称或 ID。
+    
+5.  根据需要重新创建 Docker 容器，并检查应用程序和配置文件是否正确。
+
+>其中关于网卡**macvlan**日志
+
+```c
+Apr 10 21:26:29 raspberrypi dockerd[692]: time="2023-04-10T21:26:29.904528386+08:00" level=warning msg="macvlan driver does not support port mappings"
+Apr 10 21:26:29 raspberrypi dockerd[692]: time="2023-04-10T21:26:29.904676458+08:00" level=warning msg="macvlan driver does not support port exposures"
+Apr 10 21:26:44 raspberrypi dockerd[692]: time="2023-04-10T21:26:44.278480425+08:00" level=warning msg="macvlan driver does not support port mappings"
+Apr 10 21:26:44 raspberrypi dockerd[692]: time="2023-04-10T21:26:44.278606935+08:00" level=warning msg="macvlan driver does not support port exposures"
+Apr 10 21:29:53 raspberrypi dockerd[692]: time="2023-04-10T21:29:53.565741176+08:00" level=warning msg="macvlan driver does not support port mappings"
+Apr 10 21:29:53 raspberrypi dockerd[692]: time="2023-04-10T21:29:53.565864457+08:00" level=warning msg="macvlan driver does not support port exposures"
+```
+
+根据 Docker 守护进程（dockerd）的日志信息，当前系统运行的 Docker 使用了 macvlan 网络驱动并且出现了警告信息，提示该网络驱动不支持端口映射和端口暴露等功能。
+
+macvlan 是一种网络虚拟化技术，可以让容器直接使用物理网络接口（NIC），因此具有很好的性能和可靠性。然而，由于这种技术的局限性，macvlan 不支持与主机或其他容器之间的端口映射和暴露等通信方式，这就是上述日志中出现的警告信息原因。
+
+如果您需要在 Docker 中使用端口映射和暴露等通信方式，建议使用其他的网络驱动，例如 bridge 驱动或者 overlay 驱动等。
+
+您可以通过以下命令查看当前 Docker 网络驱动的类型：
+
+复制代码
+
+`$ docker network ls`
+
+若您正在使用的是 macvlan 网络驱动，可以通过以下命令来切换到其他网络驱动：
+
+复制代码
+
+`$ docker network create --driver <network-driver> <network-name>`
+
+其中，”network-driver“ 可以设置为 bridge、overlay 或者其他支持端口映射和暴露的网络驱动名称，”network-name“ 为自定义的网络名称。切换网络驱动后，您需要重新启动相关的容器才能生效。
+
+注：更改 Docker 网络驱动可能会影响容器的网络访问和通信，并且会涉及到网络配置和路由等方面的问题，请谨慎操作。
+
+>最后解决办法：重新构建openwrt容器，警告：在容器内部配置的信息全部消失！
+
+```c
+docker run --restart always --name openwrt -d -v /home/pi/soft/openwrt/network:/etc/config/network --cap-add NET_ADMIN --device /dev/net/tun \
+-p 192.168.0.6:80:80/tcp -p 192.168.0.6:443:443/tcp -p 192.168.0.6:22:22/tcp \
+-e TZ=Asia/Shanghai --network mymacvlan unifreq/openwrt-aarch64:latest /sbin/init
+```
 
 ----
 

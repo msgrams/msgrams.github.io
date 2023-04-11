@@ -45,9 +45,9 @@ theme:
     - content.tooltips
     # - header.autohide
     # - navigation.expand
-    - navigation.indexes
+    - navigation.prune
+    # - navigation.indexes
     # - navigation.instant
-    # - navigation.prune
     - navigation.sections
     - navigation.tabs
     - navigation.tabs.sticky
@@ -211,6 +211,7 @@ markdown_extensions:
   - toc:
       permalink: 🪁 # ⚓︎ #🐟  # 显示锚点
       slugify: !!python/name:pymdownx.slugs.uslugify # 显示一些Unicode的标识符
+
   - pymdownx.tasklist:
       custom_checkbox: true
 
