@@ -134,20 +134,20 @@ extra:
       link: https://121rh.com/feed_rss_updated.xml
       name: RSS订阅
     - icon: fontawesome/solid/paper-plane
-      link: mailto:<fyabwz@126.com>
-      name: 发送邮件
-    - icon: fontawesome/brands/github
-      link: https://gitee.com/fya666
-      name: Gitee地址
-    - icon: fontawesome/brands/weibo
-      link: https://weibo.com/fyawbz
-      name: 微博联系我哟
+      link: mailto:<msgrams@163.com>
+      name: 发送163邮件
     - icon: fontawesome/brands/qq
       link: tencent://message/?Menu=yes&uin=1434090053&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45
       name: QQ联系我哟
-    - icon: fontawesome/brands/weixin
-      link: /life/weixin/
-      name: 微信联系我哟
+    # - icon: fontawesome/brands/github
+    #   link: https://gitee.com/fya666
+    #   name: Gitee地址
+    # - icon: fontawesome/brands/weibo
+    #   link: https://weibo.com/fyawbz
+    #   name: 微博联系我哟
+    # - icon: fontawesome/brands/weixin
+    #   link: /life/weixin/
+    #   name: 微信联系我哟
   #vssue: FYA
   #generator: false
 
@@ -211,6 +211,7 @@ markdown_extensions:
   - toc:
       permalink: 🪁 # ⚓︎ #🐟  # 显示锚点
       slugify: !!python/name:pymdownx.slugs.uslugify # 显示一些Unicode的标识符
+
 
   - pymdownx.tasklist:
       custom_checkbox: true
