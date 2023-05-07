@@ -1,6 +1,6 @@
 ---
 title: 树莓派自建Bitwarden
-description: Install RaspberrySystems & Bitwarden & Docker & Nginx & Deployment CloudfareTunnels
+description: 安装 RaspberrySystems & Bitwarden & Docker & Nginx & Deployment CloudfareTunnels
 tags:
   - Raspberry
 ---

@@ -7,13 +7,16 @@ comments: true
 >建议：在右上角搜索“关键词”，支持中文搜索(jieba搜索引擎)
 
 ??? success "本月最新笔记"
+    === "问题归纳"
+        - [归纳文档](app/wrong/problems)
+
+??? 2023年4月笔记
     === "树莓派"
         - [rclone+Webdav](pc/raspberry/rclone)
         - [clash](pc/raspberry/clash)
         - [openwrt](pc/raspberry/openwrt)
     === "软件"
         - [WARP无限流量](pc/software/CloudflareWarp)
-
 
 ??? 2023年3月笔记
     === "树莓派"
