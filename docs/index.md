@@ -8,7 +8,7 @@ comments: true
 
 ??? success "本月最新笔记"
     === "问题归纳"
-        - [归纳文档](app/wrong/problems)
+        - [归纳文档](app/wrong/CodeProblems)
 
 ??? 2023年4月笔记
     === "树莓派"
