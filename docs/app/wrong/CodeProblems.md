@@ -63,6 +63,7 @@ private RestTemplate restTemplate;
 
 [[2](https://docs.oracle.com/javase/10/docs/api/java/net/URI.html)]
 
+<<<<<<< HEAD
 ## MySQLGenerator自动生成代码工具类
 
 引入两个包：mybatis-plus-generator、freemarker
@@ -164,3 +165,5 @@ private RestTemplate restTemplate;
 
 总之，主键的唯一性是确保表中记录唯一正确的重要保证，需要根据具体的业务场景和需求来选择合适的主键设计方式，并严格按照设置的唯一性约束条件来进行数据操作。
 
+=======
+>>>>>>> 7831a453b494d706800c826bb21230eb4f4469d7
