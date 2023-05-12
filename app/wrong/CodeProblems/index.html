@@ -496,6 +496,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#mybatis-plus扫描不到xml文件常规问题" class="md-nav__link">
+    Mybatis-plus扫描不到xml文件(常规问题)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jsonobjectgetlong-desc损失精度" class="md-nav__link">
+    jsonObject.getLong( "desc")损失精度
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -543,6 +557,9 @@
 
 
 <h1 id="代码问题归纳">代码问题归纳<a class="headerlink" href="#代码问题归纳" title="Permanent link">🪁</a></h1>
+<blockquote>
+<p>出现的问题多数使用GPT进行解答！</p>
+</blockquote>
 <h2 id="nacos注册中心启动报错">Nacos注册中心启动报错<a class="headerlink" href="#nacos注册中心启动报错" title="Permanent link">🪁</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="mi">2023</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mo">05</span><span class="w"> </span><span class="mi">13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">38</span><span class="p">,</span><span class="mi">604</span><span class="w"> </span><span class="n">WARN</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">encountered</span><span class="w"> </span><span class="n">during</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="n">initialization</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cancelling</span><span class="w"> </span><span class="n">refresh</span><span class="w"> </span><span class="n">attempt</span><span class="p">:</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">beans</span><span class="p">.</span><span class="na">factory</span><span class="p">.</span><span class="na">UnsatisfiedDependencyException</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">creating</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="err">&#39;</span><span class="n">memoryMonitor</span><span class="err">&#39;</span><span class="w"> </span><span class="n">defined</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="o">[</span><span class="n">jar</span><span class="p">:</span><span class="n">file</span><span class="p">:</span><span class="o">/</span><span class="n">D</span><span class="p">:</span><span class="o">/</span><span class="n">Program1it</span><span class="o">/</span><span class="n">nacos</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">nacos</span><span class="o">-</span><span class="n">server</span><span class="p">.</span><span class="na">jar</span><span class="o">!/</span><span class="n">BOOT</span><span class="o">-</span><span class="n">INF</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">nacos</span><span class="o">-</span><span class="n">config</span><span class="o">-</span><span class="mf">2.0.3</span><span class="p">.</span><span class="na">jar</span><span class="o">!/</span><span class="n">com</span><span class="o">/</span><span class="n">alibaba</span><span class="o">/</span><span class="n">nacos</span><span class="o">/</span><span class="n">config</span><span class="o">/</span><span class="n">server</span><span class="o">/</span><span class="n">monitor</span><span class="o">/</span><span class="n">MemoryMonitor</span><span class="p">.</span><span class="na">class</span><span class="o">]</span><span class="p">:</span><span class="w"> </span><span class="n">Unsatisfied</span><span class="w"> </span><span class="n">dependency</span><span class="w"> </span><span class="n">expressed</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">constructor</span><span class="w"> </span><span class="n">parameter</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">nested</span><span class="w"> </span><span class="n">exception</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">beans</span><span class="p">.</span><span class="na">factory</span><span class="p">.</span><span class="na">UnsatisfiedDependencyException</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">creating</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="err">&#39;</span><span class="n">asyncNotifyService</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">Unsatisfied</span><span class="w"> </span><span class="n">dependency</span><span class="w"> </span><span class="n">expressed</span><span class="w"> </span><span class="n">through</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="err">&#39;</span><span class="n">dumpService</span><span class="err">&#39;</span><span class="p">;</span><span class="w"> </span><span class="n">nested</span><span class="w"> </span><span class="n">exception</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">beans</span><span class="p">.</span><span class="na">factory</span><span class="p">.</span><span class="na">BeanCreationException</span><span class="p">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">creating</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="err">&#39;</span><span class="n">externalDumpService</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">Invocation</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">init</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="n">failed</span><span class="p">;</span><span class="w"> </span><span class="n">nested</span><span class="w"> </span><span class="n">exception</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">ErrCode</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="n">ErrMsg</span><span class="p">:</span><span class="n">Nacos</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="n">did</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">because</span><span class="w"> </span><span class="n">dumpservice</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="n">construction</span><span class="w"> </span><span class="n">failure</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">No</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="n">set</span><span class="w"></span>
@@ -578,7 +595,6 @@
 <p>参考文献：</p>
 <p>[<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#postForEntity-java.net.URI-java.lang.Object-java.lang.Class-">1</a>]</p>
 <p>[<a href="https://docs.oracle.com/javase/10/docs/api/java/net/URI.html">2</a>]</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <h2 id="mysqlgenerator自动生成代码工具类">MySQLGenerator自动生成代码工具类<a class="headerlink" href="#mysqlgenerator自动生成代码工具类" title="Permanent link">🪁</a></h2>
 <p>引入两个包：mybatis-plus-generator、freemarker</p>
 <ul>
@@ -648,6 +664,63 @@
 <p>如果一个表中定义了两个主键，则这两个主键组成了一个复合主键，复合主键的唯一性要求是所有主键字段值的组合都不能重复。也就是说，只有当这两个主键的组合在表中都不存在时，才能插入新记录，否则将会产生唯一性冲突。</p>
 <p>而三个主键可以重复插入数据的情况，可能是因为在这种情况下，三个主键的组合不是唯一性约束条件，还有别的字段或条件在起作用。例如，在某些情况下可以使用复合主键加上一个唯一索引来实现该表的唯一性约束，即使是主键之间有重复数据，但只要其他唯一索引不冲突，仍然可以插入新数据。</p>
 <p>总之，主键的唯一性是确保表中记录唯一正确的重要保证，需要根据具体的业务场景和需求来选择合适的主键设计方式，并严格按照设置的唯一性约束条件来进行数据操作。</p>
+<h2 id="mybatis-plus扫描不到xml文件常规问题">Mybatis-plus扫描不到xml文件(常规问题)<a class="headerlink" href="#mybatis-plus扫描不到xml文件常规问题" title="Permanent link">🪁</a></h2>
+<p>报错信息</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">org</span><span class="p">.</span><span class="na">apache</span><span class="p">.</span><span class="na">ibatis</span><span class="p">.</span><span class="na">binding</span><span class="p">.</span><span class="na">BindingException</span><span class="p">:</span><span class="w"> </span><span class="n">Invalid</span><span class="w"> </span><span class="n">bound</span><span class="w"> </span><span class="nf">statement</span><span class="w"> </span><span class="p">(</span><span class="n">not</span><span class="w"> </span><span class="n">found</span><span class="p">):</span><span class="w"> </span>
+</code></pre></div>
+<p>Mybatis-plus与Mybatis使用不同，需要把.xml文件放到resource/mapper目录下，配置文件</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">mybatis-plus</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">mapper-locations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">classpath:/mapper/**/*.xml</span><span class="w"></span>
+</code></pre></div>
+<p>另外在application.yml中配置Mybatis-plus额外参数</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">mybatis-plus</span><span class="p">:</span><span class="w"> </span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">type-aliases-package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">com.fya.entity</span><span class="w"> </span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">mapper-locations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">classpath:mapper/*.xml</span><span class="w"></span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w">   </span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">log-impl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.apache.ibatis.logging.stdout.StdOutImpl</span><span class="w"></span>
+</code></pre></div>
+<p>这段代码是用于配置Mybatis-Plus框架的部分内容，其中包括了类型别名、Mapper的XML文件位置以及日志输出方式等。</p>
+<p>在这段配置中，<code>type-aliases-package</code>用于配置实体类的包路径，Mybatis-Plus会自动扫描这个包下的所有实体类，并将其与数据库表进行映射。这样，在进行CRUD操作时就可以直接引用实体类，而不用手动编写SQL语句。</p>
+<p><code>mapper-locations</code>用于配置Mapper的XML文件所在的位置，这里使用了通配符<code>*</code>来表示所有的XML文件都放置在<code>classpath:mapper/</code>目录下。</p>
+<p><code>configuration</code>用于配置Mybatis的其他属性，例如这里使用了<code>log-impl</code>属性来指定日志输出的方式为控制台打印。</p>
+<p>需要注意的是，在使用Mybatis-Plus框架前，需要首先对其进行配置。除了上述示例代码中的相关内容外，还需要配置数据源、事务管理器等内容，以确保应用程序能够正确地连接到数据库并执行CRUD操作。</p>
+<p>此外日志打印配置</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">logging</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">com.baomidou.mybatisplus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug</span><span class="w"></span>
+</code></pre></div>
+<p>这段配置是用于设置Mybatis-Plus的日志级别的，其中<code>com.baomidou.mybatisplus</code>表示要设置日志级别的包路径，<code>debug</code>表示设置为Debug级别。</p>
+<p>Mybatis-Plus使用Slf4j作为日志框架，并且提供了默认的日志实现方式，如果开启了日志输出，则可以在控制台或者日志文件中查看到相关的SQL执行信息。通过配置日志级别，我们可以控制日志输出的详细程度，例如只输出错误级别的日志或者输出全部的日志信息等。</p>
+<p>需要注意的是，在生产环境中通常会关闭日志输出或者只开启较低级别的日志输出，以避免过多的IO操作和资源消耗。在开发、测试环境中，可以根据需要调整日志输出的级别，以方便调试和排查问题。</p>
+<h2 id="jsonobjectgetlong-desc损失精度">jsonObject.getLong( "desc")损失精度<a class="headerlink" href="#jsonobjectgetlong-desc损失精度" title="Permanent link">🪁</a></h2>
+<p>处理精度</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">//Long carId = jsonObject.getLong(&quot;desc&quot;);</span><span class="w"></span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">String</span><span class="w"> </span><span class="n">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;desc&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kt">long</span><span class="w"> </span><span class="n">carId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">parseLong</span><span class="p">(</span><span class="n">desc</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>jsonObject.getLong源码</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getLong</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">verifyIsNull</span><span class="p">();</span><span class="w"></span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Number</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">((</span><span class="n">Number</span><span class="p">)</span><span class="n">o</span><span class="p">).</span><span class="na">longValue</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="k">this</span><span class="p">.</span><span class="na">getDouble</span><span class="p">(</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JSONException</span><span class="p">(</span><span class="s">&quot;JSONObject[&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">JSONUtils</span><span class="p">.</span><span class="na">quote</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;] is not a number.&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>这段代码是从一个JSONObject中获取名为<code>key</code>的属性值，并将其转换为long类型。</p>
+<p>在该方法中，首先使用<code>get</code>方法从JSONObject中获取名为<code>key</code>的属性值，并判断该值是否为null。如果不为null，则继续判断该值的类型。如果该值是Number类型，则直接返回其longValue；否则，调用<code>getDouble</code>方法将其转换成double类型后再进行强制类型转换。如果该值为null，则抛出JSONException异常。</p>
+<p>需要注意的是，在进行类型转换时，如果源数据类型无法转换为long类型，例如其值为字符串或者布尔类型，则会抛出异常。因此，在使用该方法时，应该保证待转换的值是数字类型。同时，如果待转换的值超出了long类型的取值范围，则也会抛出异常。在实际开发中，应该格外谨慎地处理类型转换问题，以避免因精度损失或者类型不匹配而引发的错误和异常。</p>
+<p>Long.parseLong源码</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">parseLong</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">NumberFormatException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">parseLong</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>这段代码是Java中的静态方法<code>parseLong</code>，用来将字符串参数解析为long类型的数值并返回。</p>
+<p>在该方法中，首先调用了重载的<code>parseLong</code>方法，并将进制参数设定为10。因此，该方法会将传入的字符串参数按照十进制解析为一个long类型的数值，并返回该数值。</p>
+<p>需要注意的是，在解析字符串时，如果该字符串不能表示一个合法的long类型的值，例如包含了非数字字符或者超出了long类型的取值范围，则会抛出<code>NumberFormatException</code>异常。因此，在使用该方法时，应该对可能抛出的异常进行适当的处理，以确保程序能够正确地处理异常情况。</p>
+<p>此外，在使用该方法时，应该考虑输入字符串的来源和格式，以避免由于格式不规范或者含有非数字字符而导致的解析错误。</p>
 
   <!--
   Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
