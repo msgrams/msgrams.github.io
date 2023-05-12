@@ -7,6 +7,8 @@ tags:
 
 # 代码问题归纳
 
+> 出现的问题多数使用GPT进行解答！
+
 ## Nacos注册中心启动报错
 
 ```java
@@ -63,7 +65,6 @@ private RestTemplate restTemplate;
 
 [[2](https://docs.oracle.com/javase/10/docs/api/java/net/URI.html)]
 
-<<<<<<< HEAD
 ## MySQLGenerator自动生成代码工具类
 
 引入两个包：mybatis-plus-generator、freemarker
@@ -165,5 +166,99 @@ private RestTemplate restTemplate;
 
 总之，主键的唯一性是确保表中记录唯一正确的重要保证，需要根据具体的业务场景和需求来选择合适的主键设计方式，并严格按照设置的唯一性约束条件来进行数据操作。
 
-=======
->>>>>>> 7831a453b494d706800c826bb21230eb4f4469d7
+## Mybatis-plus扫描不到xml文件(常规问题)
+
+
+报错信息
+
+```java
+org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): 
+```
+
+Mybatis-plus与Mybatis使用不同，需要把.xml文件放到resource/mapper目录下，配置文件
+
+```yaml
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+```
+
+另外在application.yml中配置Mybatis-plus额外参数
+
+```yaml
+mybatis-plus: 
+  type-aliases-package: com.fya.entity 
+  mapper-locations: classpath:mapper/*.xml
+  configuration:   
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+```
+
+这段代码是用于配置Mybatis-Plus框架的部分内容，其中包括了类型别名、Mapper的XML文件位置以及日志输出方式等。
+
+在这段配置中，`type-aliases-package`用于配置实体类的包路径，Mybatis-Plus会自动扫描这个包下的所有实体类，并将其与数据库表进行映射。这样，在进行CRUD操作时就可以直接引用实体类，而不用手动编写SQL语句。
+
+`mapper-locations`用于配置Mapper的XML文件所在的位置，这里使用了通配符`*`来表示所有的XML文件都放置在`classpath:mapper/`目录下。
+
+`configuration`用于配置Mybatis的其他属性，例如这里使用了`log-impl`属性来指定日志输出的方式为控制台打印。
+
+需要注意的是，在使用Mybatis-Plus框架前，需要首先对其进行配置。除了上述示例代码中的相关内容外，还需要配置数据源、事务管理器等内容，以确保应用程序能够正确地连接到数据库并执行CRUD操作。
+
+此外日志打印配置
+
+```yaml
+logging:
+  level:
+    com.baomidou.mybatisplus: debug
+```
+
+这段配置是用于设置Mybatis-Plus的日志级别的，其中`com.baomidou.mybatisplus`表示要设置日志级别的包路径，`debug`表示设置为Debug级别。
+
+Mybatis-Plus使用Slf4j作为日志框架，并且提供了默认的日志实现方式，如果开启了日志输出，则可以在控制台或者日志文件中查看到相关的SQL执行信息。通过配置日志级别，我们可以控制日志输出的详细程度，例如只输出错误级别的日志或者输出全部的日志信息等。
+
+需要注意的是，在生产环境中通常会关闭日志输出或者只开启较低级别的日志输出，以避免过多的IO操作和资源消耗。在开发、测试环境中，可以根据需要调整日志输出的级别，以方便调试和排查问题。
+
+## jsonObject.getLong( "desc")损失精度
+
+处理精度
+
+```java
+//Long carId = jsonObject.getLong("desc");
+String desc = jsonObject.getString("desc");
+long carId = Long.parseLong(desc);
+```
+
+jsonObject.getLong源码
+
+```java
+public long getLong(String key) {
+    this.verifyIsNull();
+    Object o = this.get(key);
+    if (o != null) {
+        return o instanceof Number ? ((Number)o).longValue() : (long)this.getDouble(key);
+    } else {
+        throw new JSONException("JSONObject[" + JSONUtils.quote(key) + "] is not a number.");
+    }
+}
+```
+
+这段代码是从一个JSONObject中获取名为`key`的属性值，并将其转换为long类型。
+
+在该方法中，首先使用`get`方法从JSONObject中获取名为`key`的属性值，并判断该值是否为null。如果不为null，则继续判断该值的类型。如果该值是Number类型，则直接返回其longValue；否则，调用`getDouble`方法将其转换成double类型后再进行强制类型转换。如果该值为null，则抛出JSONException异常。
+
+需要注意的是，在进行类型转换时，如果源数据类型无法转换为long类型，例如其值为字符串或者布尔类型，则会抛出异常。因此，在使用该方法时，应该保证待转换的值是数字类型。同时，如果待转换的值超出了long类型的取值范围，则也会抛出异常。在实际开发中，应该格外谨慎地处理类型转换问题，以避免因精度损失或者类型不匹配而引发的错误和异常。
+
+ Long.parseLong源码
+
+```java
+public static long parseLong(String s) throws NumberFormatException {
+    return parseLong(s, 10);
+}
+```
+
+这段代码是Java中的静态方法`parseLong`，用来将字符串参数解析为long类型的数值并返回。
+
+在该方法中，首先调用了重载的`parseLong`方法，并将进制参数设定为10。因此，该方法会将传入的字符串参数按照十进制解析为一个long类型的数值，并返回该数值。
+
+需要注意的是，在解析字符串时，如果该字符串不能表示一个合法的long类型的值，例如包含了非数字字符或者超出了long类型的取值范围，则会抛出`NumberFormatException`异常。因此，在使用该方法时，应该对可能抛出的异常进行适当的处理，以确保程序能够正确地处理异常情况。
+
+此外，在使用该方法时，应该考虑输入字符串的来源和格式，以避免由于格式不规范或者含有非数字字符而导致的解析错误。
+
