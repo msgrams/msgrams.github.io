@@ -5,7 +5,6 @@ site_keywords: Java开发、Redis缓存
 site_description: >-
   专注于Java程序开发、Redis缓存、SpringCloud、SpringCloud Alibaba...个人博客记录！
 copyright: Copyright &copy; 2022-2023  FYA·心愿所往 <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">黑ICP备17009103号</a>
-# 源码地址
 repo_url: https://github.com/msgrams/msgrams.github.io
 repo_name: msgrams
 edit_uri: edit/main/docs/
@@ -13,10 +12,8 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   custom_dir: overrides
-  # logo: assets/images/logo.png
   favicon: assets/images/favicon.png
   language: zh
-  # 网站字体
   icon:
     repo: fontawesome/brands/github
     tags:
@@ -41,13 +38,8 @@ theme:
         name: Switch to light mode
   features:
     - content.code.annotate
-    # - content.tabs.link
     - content.tooltips
-    # - header.autohide
-    # - navigation.expand
     - navigation.prune
-    # - navigation.indexes
-    # - navigation.instant
     - navigation.sections
     - navigation.tabs
     - navigation.tabs.sticky
@@ -57,7 +49,6 @@ theme:
     - search.share
     - search.suggest
     - toc.follow
-    # - toc.integrate
 
 plugins:
   - search:
@@ -66,7 +57,6 @@ plugins:
         - zh
         - ja
       separator: '[\s\-\.]+'
-      # separator: '[\s\u200b\-]'
   - autolinks #自动链接插件
   - tags:
       tags_file: tags.md #呈现标签指数
@@ -115,16 +105,6 @@ plugins:
         utm_campaign: "feed-syndication"
 
 extra:
-  consent:
-    title: Cookie consent
-    description: >-
-      We use cookies to recognize your repeated visits and preferences, as well
-      as to measure the effectiveness of our documentation and whether users
-      find what they're searching for. With your consent, you're helping us to
-      make our documentation better.
-    actions:
-      - accept
-      - reject
   tags:
     HTML5: html
     JavaScript: js
@@ -135,21 +115,10 @@ extra:
       name: RSS订阅
     - icon: fontawesome/solid/paper-plane
       link: mailto:<msgrams@163.com>
-      name: 发送163邮件
-    - icon: fontawesome/brands/qq
-      link: tencent://message/?Menu=yes&uin=1434090053&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45
-      name: QQ联系我哟
-    # - icon: fontawesome/brands/github
-    #   link: https://gitee.com/fya666
-    #   name: Gitee地址
-    # - icon: fontawesome/brands/weibo
-    #   link: https://weibo.com/fyawbz
-    #   name: 微博联系我哟
-    # - icon: fontawesome/brands/weixin
-    #   link: /life/weixin/
-    #   name: 微信联系我哟
-  #vssue: FYA
-  #generator: false
+      name: 发送邮件联系我哟!
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/Wish0580
+      name: Twitter联系我哟!
 
 extra_css:
   - https://qiniu.121rh.com/css/extra.css
@@ -163,15 +132,14 @@ extra_javascript:
   - https://js.121rh.com/js/video.min.js
   - https://js.121rh.com/js/vue.js
   - https://js.121rh.com/js/time.js
-  #- https://js.121rh.com/js/mouse.js
   - https://js.121rh.com/js/console.js
-  #- https://js.121rh.com/js/fireworks.js
   - https://js.121rh.com/js/anime.min.js
   - https://js.121rh.com/js/jquery-3.3.1.min.js
   - https://js.121rh.com/js/G-CHY1TBZZVW.js
   - https://js.121rh.com/js/G-NRCPMZGDT9.js
   - http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
-
+  #- https://js.121rh.com/js/mouse.js
+  #- https://js.121rh.com/js/fireworks.js
 markdown_extensions:
   - abbr
   - attr_list
