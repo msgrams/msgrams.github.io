@@ -32,7 +32,8 @@
 
 ## 推
 
-荐一位历史学者，[秦晖教授](recommend/)一口气讲近三小时，纯干货听起来很爽。
+- [秦晖教授](https://www.thepaper.cn/newsDetail_forward_22319463)是一位历史学者，秦老师讲课生动，历史不好的同学可以补补课！
+- [30岁从大厂裸辞全家搬往英国的故事(上)](https://joohnsmith.com/fromchinatouk1.html)
 
 ## 抓
 
