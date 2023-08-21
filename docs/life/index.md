@@ -29,6 +29,8 @@
 - 【2023年4月11日】新增AI文本转视频工具，免费版有水印，不过用起来效果看起来挺好的，等一小会儿视频就生成了！
 	- [HeyGen - Al Spokesperson Video Generator](https://app.heygen.com/home)
 	- [**Synthesia** AI video creation](https://www.synthesia.io/)
+- 【2023年8月21日】本来以为公网安备要审核一段时间，就一直没有去提交，结果上午提交,下午三点就通过了，挺快的哈！
+
 
 ## 推
 
