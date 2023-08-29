@@ -14,12 +14,15 @@
 
 ## 附
 
-上自己用Cloudflare搭建的TG图床、Github加速器、GD网盘、Bitwarden自建密码库
+上自己用Cloudflare搭建的TG图床、GitHub加速器、Bitwarden密码库、Google网盘
 
-- [TG免费图床](https://tgimg.121rh.com/)
-- [Github加速器](https://github.121rh.com/)
-- [GD网盘](https://drive.121rh.com/)  `用户名&密码 = admin`
-- [Bitwarden自建密码库](https://bitwdemo.121rh.com/)
+   1. [Telegram免费图床](https://tgimg.121rh.com/)
+   2. [GitHub 文件加速](https://github.121rh.com/)
+   3. [Bitwarden密码库](https://bitwarden.121rh.com/)【树莓派存储数据】
+   4. [Google网盘](https://drive.121rh.com/)【谷歌网盘小清新】  `用户名&密码 = 121rh.com`
+   5. [移动硬盘文件管理](https://filebrowser.121rh.com/login)【树莓派挂载SMB(自用+共享)】`用户名&密码 = 121rh.com`
+
+---- 
 
 - 【2023年1月11日】发现留言板**Livere**(来必力)显示不出来，不知道被墙了还是DNS被污染了，总之不好使了。
 - 【2023年1月13日】撤掉**Livere**换[Cusdis评论系统](https://cusdis.com/doc#/integration/mkdocs)，评论不需登入即可留言。
@@ -35,7 +38,8 @@
 ## 推
 
 - [秦晖教授](https://www.thepaper.cn/newsDetail_forward_22319463)是一位历史学者，秦老师讲课生动，历史不好的同学可以补补课！
-- [30岁从大厂裸辞全家搬往英国的故事(上)](https://joohnsmith.com/fromchinatouk1.html)
+- [30岁从大厂裸辞全家搬往英国的故事(上)](https://joohnsmith.com/fromchinatouk1.html) [(中篇)](https://joohnsmith.com/fromchinatouk2.html) [(下篇)](https://joohnsmith.com/fromchinatouk3.html)  [(结篇)](https://joohnsmith.com/fromchinatouk4.html)
+
 
 ## 抓
 
