@@ -4,7 +4,7 @@ site_author: FYA
 site_keywords: Java开发、Redis缓存
 site_description: >-
   专注于Java程序开发、Redis缓存、SpringCloud、SpringCloud Alibaba...个人博客记录！
-copyright: Copyright ©️ 2022-2023 FYA·心愿所往  <a href="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank" rel="noopener">黑ICP备17009103号</a>
+copyright: Copyright ©️ 2022-2024 FYA·心愿所往  <a href="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank" rel="noopener">黑ICP备17009103号</a>
 repo_url: https://github.com/msgrams/msgrams.github.io
 repo_name: msgrams
 edit_uri: edit/main/docs/
