@@ -2,9 +2,11 @@
 comments: true
 ---
  
-# Home
+# Living In Truth
 
->建议：在右上角搜索“关键词”，支持中文搜索(jieba搜索引擎)
+## 好朋友们, 新年快乐！即将到来的龙年，意味着要成长呀！
+
+>## 笔记
 
 ??? success "本月·最新笔记🐹"
 
@@ -28,4 +30,17 @@ comments: true
         - [扩容C盘空间](pc/computer/capacity)
         - [模块错误,模块名称“KERNELBASE.dll”](pc/computer/kernelbase)
 
-<img src=https://api.yimian.xyz/img?type=wallpaper>
+
+>## 善用快捷键
+
+```sql
+在页面上打开查找：Ctrl + F 
+
+复制：Ctrl + C
+剪切：Ctrl + X
+粘贴：Ctrl + V
+
+```
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=850 height=260 src="//music.163.com/outchain/player?type=0&id=9258578171&auto=1&height=430">
+</iframe>
+
