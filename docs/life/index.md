@@ -2,9 +2,7 @@
 # About FYA
   
 <p style="text-align:center">
-
-<img src=https://api.yimian.xyz/img?type=head  width="20%" height="20%" >
-
+<img src=https://pics.121rh.com/raw/AI-Me02.png   width="10%" height="10%" >
 </p>
 
 我的网站是为了记录个人技术内容而创建的，真名李志，专注于Java编程开发。我使用Mkdocs工具来快速生成静态页面，将博客托管在全球最大的同性交友网站Github上，并通过Cloudflare CDN进行网站加速，以提高网站打开速度。除了Java开发，我也对树莓派感兴趣，并在树莓派上尝试了开源的OMV系统，它对Docker有很好的支持。
@@ -42,11 +40,11 @@
 	- [HeyGen - Al Spokesperson Video Generator](https://app.heygen.com/home)
 	- [**Synthesia** AI video creation](https://www.synthesia.io/)
 - 【2023年8月21日】本来以为公网安备要审核一段时间，就一直没有去提交，结果上午提交,下午三点就通过了，挺快的哈！
-
+- 【2024年2月5日】好朋友们, 新年快乐！即将到来的龙年，意味着要成长呀！
 
 ## Catch
 
 ### [逮只小猫玩吧!](catchCat/)
 
 
-<img src=https://api.yimian.xyz/img?size=1920x*>
+<img src=https://api.ayao.ltd/Mobile/api.php >

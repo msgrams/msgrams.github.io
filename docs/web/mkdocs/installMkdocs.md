@@ -160,11 +160,11 @@ docs/
 ```
 通常，如果您想git_flow.md从 inside创建一个链接onboarding.md，您需要提供相对路径：
  onboarding.md
-[Git Flow](../software/git_flow.md)
+`[Git Flow](../software/git_flow.md)`
 这个链接很脆弱；如果有人决定重新安排站点结构，所有这些相关链接都会中断。更不用说必须弄清楚相对路径。
 使用 Autolinks 插件，您只需要提供您希望链接到的文件名。假设文件存在于您的文档结构中，该插件将预处理您的所有降价文件并将文件名替换为正确的相对路径
  onboarding.md
-[Git Flow](git_flow.md)
+`[Git Flow](git_flow.md)`
 Autolinks 插件适用于以下扩展类型：
 MD、PNG、jpg、JPEG、bmp、gif、svg、网页
 

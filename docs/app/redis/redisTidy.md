@@ -38,7 +38,6 @@ Redis内置 replication、LuaScripting、Transaction、persistence(磁盘持久�
 技术选型、对比：[db-engines](https://db-engines.com/en/)
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230209222723.png)
-![](Redis整理_20230209222722114.png)
 
 
 ## 二、安装
@@ -128,7 +127,3 @@ ps -ef | grep redis
 ```
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230209235747.png)
-
-
-
-

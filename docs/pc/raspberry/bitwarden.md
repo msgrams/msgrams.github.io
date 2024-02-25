@@ -12,7 +12,6 @@ tags:
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230215214204.png)
 
-![](安装Systems_20230215214203311.png)
   
 2.下载系统 [2022-09-22-raspios-bullseye-arm64-lite.img](https://www.raspberrypi.com/software/operating-systems/)
 
@@ -462,7 +461,6 @@ sudo cloudflared service install eyJhIjoiMDJmODVlXXXXXXXXXXXXXXXXXXXXXX
 编辑演示隧道的公共主机名
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230216230532.png)
-![](安装bitwarden_20230216230531660.png)
 
 
 ## 七、Chrome插件无法登陆等问题
@@ -482,16 +480,13 @@ sudo cloudflared service install eyJhIjoiMDJmODVlXXXXXXXXXXXXXXXXXXXXXX
 注册并登入
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230218214619.png)
-![](bitwarden密码管理程序_20230218214618957.png)
 
 Chrome浏览器利用[bitwarden插件](https://github.121rh.com/https://github.com/bitwarden/clients/releases/download/browser-v2023.2.1/dist-chrome-2023.2.1.zip)自动填充CSDN账号密码
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230218214523.png)
-![](bitwarden密码管理程序_20230218214521816.png)
 
 [Windows平台](https://github.com/bitwarden/clients/releases/download/desktop-v2023.2.0/Bitwarden-Installer-2023.2.0.exe)
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230218214906.png)
-![](bitwarden密码管理程序_20230218214905349.png)
 
 

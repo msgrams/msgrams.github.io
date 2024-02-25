@@ -19,7 +19,6 @@ tags:
 4，授权客户端加入网络
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230216082643.png)
-![](zerotier_20230216082642240.png)
 
 
 ## 一、创建网络
@@ -37,7 +36,6 @@ tags:
 然后到zerotier后台，对刚开的设备进行授权，允许它加入局域网中，红色虚线的是没有网络授权的设备，蓝色的表示授权了，只需要勾选上，此设备就可以加入网里面了
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230216074807.png)
-![](zerotier_20230216074805762.png)
 
 ## 三、开始各个设备互通
 
@@ -46,7 +44,6 @@ tags:
 Managed IPs
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230216074922.png)
-![](zerotier_20230216074921261.png)
 
 组网成功后，直接通过IP访问该设备的共享文件或者访问nas设备
 
@@ -76,8 +73,6 @@ sudo zerotier-cli listnetworks
 ```
 
 ![image.png](https://qiniu.121rh.com/obsidian/img/20230216083345.png)
-![](zerotier_20230216083344046.png)
-
 
 ## 文章来源
 - [zeroTier文档](https://docs.zerotier.com/getting-started/getting-started)
