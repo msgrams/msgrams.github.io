@@ -192,7 +192,7 @@ markdown_extensions:
 
 nav:
   - 主页: index.md
-  - 生活: life/index.md
+  - 关于我: life/index.md
   - 时间线: timeline.md
   - 打标签: tags.md
   - 算法: algs/index.md

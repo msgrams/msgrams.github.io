@@ -5,10 +5,13 @@
 <img src=https://pics.121rh.com/raw/AI-Me02.png   width="10%" height="10%" >
 </p>
 
-我的网站是为了记录个人技术内容而创建的，真名李志，专注于Java编程开发。我使用Mkdocs工具来快速生成静态页面，将博客托管在全球最大的同性交友网站Github上，并通过Cloudflare CDN进行网站加速，以提高网站打开速度。除了Java开发，我也对树莓派感兴趣，并在树莓派上尝试了开源的OMV系统，它对Docker有很好的支持。
+我的网站是为了_记录技术内容_而创建的，真名李志|黑龙江人(本科CS)，从事Java编程开发。我使用Mkdocs工具来快速生成静态页面，将博客托管在GitHub Page上，并通过Cloudflare CDN进行网站加速，以提高网站打开速度。除了Java开发，我也对树莓派感兴趣，尝试折腾过开源OMV系统、青龙面板、VoceChat、Vaultwarden....
 
 如果你有任何问题或想交流技术，请在本站主页中留言，我会很高兴与你互动！你可以在右下角找到我的联系方式。
 
+- [MkDocs 中文文档](https://markdown-docs-zh.readthedocs.io/zh_CN/latest/)
+
+- [MkDocs 入门](https://www.mkdocs.org/getting-started/)
 
 ## Push
 
@@ -18,7 +21,7 @@
 
 ## Append
 
-自己用Cloudflare Workers搭建的TG图床、GitHub加速器、Google网盘，Tunnels内网穿透：Bitwarden密码库、Filebrowser文件管理
+自己用Cloudflare Workers搭建的 TG图床、GitHub加速器、Google网盘，Tunnels内网穿透(挺好用)：Bitwarden密码库、Filebrowser文件管理
 
 >请牢记：数据是至关重要的，代表着站长的全部财富和努力。所以请务必定期备份数据！无论经营什么样的业务都存在风险，为了保障自己的利益，请时刻记得备份数据！
 
