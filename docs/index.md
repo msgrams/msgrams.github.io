@@ -4,6 +4,8 @@ comments: true
 
 # Living In Truth
 
+https://vocechat.121rh.com/#/chat/channel/1
+
 ??? success "本月·最新笔记🐉"
 
 ??? success "2023年·上半年🐇"
@@ -45,3 +47,25 @@ comments: true
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=850 height=260 src="//music.163.com/outchain/player?type=0&id=9258578171&auto=1&height=430">
 </iframe>
 
+
+<!-- vocechat put this code snippet into your html file -->
+<script 
+  data-host-id="1" 
+  data-auto-reg="true" 
+  data-login-token="" 
+  data-theme-color="#1fe1f9" 
+  data-close-width="48" 
+  data-close-height="48" 
+  data-open-width="380" 
+  data-open-height="580" 
+  data-welcome="Your custom welcome text" 
+  src="https://vocechat.121rh.com/widget.js" 
+  async 
+></script>
+
+<style>
+  #VOCECHAT_WIDGET {
+    right:10px  /* left position */
+    bottom: 5px /* bottom position */
+  }
+</style>
